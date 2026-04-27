@@ -28,12 +28,15 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
   - [ ] `nda-fornecedor.pdf` — 2-4 páginas, contém "Bandeirantes"
   - [ ] `contrato-locacao.pdf` — 4-6 páginas, **cláusula 12** sobre materiais inflamáveis aparece com destaque
 
-### Conta Outlook dedicada
+### Workspace Slack dedicado
 
-- [x] Criar `demo-aurora-quick@outlook.com` em signup.live.com
-- [ ] Anotar senha em gerenciador de senhas seguro
-- [ ] Habilitar 2FA (Authenticator App, não SMS)
-- [ ] Login no Outlook e enviar 1 email de teste pra você mesmo (validar que a conta funciona)
+> Como Outlook exige Azure AD app registration (impossível com conta pessoal Outlook.com), pivotamos para Slack como action connector — OAuth nativo, setup trivial.
+
+- [ ] Criar workspace Slack gratuito em https://slack.com/get-started → **Create a workspace**
+  - Sugestão de nome: `aurora-construtora-demo` (ou similar)
+- [ ] Criar canal **`#juridico-aurora`** (público dentro do workspace)
+- [ ] Adicionar 2-3 membros fictícios (pode ser você mesmo com aliases ou só você sozinho — basta pra demo)
+- [ ] Login confirmado e canal aparece na sidebar
 
 ---
 
@@ -127,22 +130,30 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
   Nunca invente informação. Se não encontrar nos documentos, diga "não consta no contrato analisado".
   ```
 - [ ] **Knowledge:** vincular ao Space `Jurídico Aurora`
-- [ ] **Actions:** deixar pendente até OAuth Outlook (próximo passo)
+- [ ] **Actions:** deixar pendente até OAuth Slack (próximo passo)
 
-### Conector Outlook
+### Conector Slack
 
-- [ ] Quick Suite → **Settings** → **Actions & Integrations** → **Outlook** → **Connect**
-- [ ] Browser abre janela da Microsoft → fazer login com `demo-aurora-quick@outlook.com`
-- [ ] Aceitar permissão `Mail.Send`
+- [ ] Quick Suite → **Integrations** → aba **Actions** → **Slack** → **Connect**
+- [ ] Browser abre página do Slack → escolher workspace `aurora-construtora-demo`
+- [ ] Autorizar app Quick Suite (permissões: postar em canais, ler workspace)
 - [ ] Voltar ao Quick Suite, confirmar status `Connected`
-- [ ] No Agent `Assistente Jurídico Aurora` → **Actions** → habilitar Outlook
+- [ ] No Agent `Assistente Jurídico Aurora` → **Actions** → habilitar Slack
+- [ ] Convidar o bot Quick Suite no canal `#juridico-aurora` (no Slack: `/invite @Quick`)
 
 ### Quick Flow
 
 - [ ] **Flows** → **Create flow** → **From chat**
 - [ ] Prompt:
   ```
-  Quando eu pedir um resumo executivo de contrato, gere o resumo seguindo o formato padrão e envie por email para juridico-time@aurora-construtora.com.br com assunto "Resumo: [nome do contrato]". Use minha conta Outlook conectada.
+  Quando eu pedir um resumo executivo de contrato, gere o resumo seguindo o formato padrão e poste no canal #juridico-aurora do workspace Slack conectado. Formato da mensagem:
+
+  📄 *Novo resumo executivo de contrato*
+  *Contrato:* [nome do contrato]
+
+  [conteúdo do resumo executivo]
+
+  _Gerado pelo Assistente Jurídico Aurora_
   ```
 - [ ] Salvar como `Resumo Executivo de Contrato`
 - [ ] Vincular ao Agent `Assistente Jurídico Aurora` em **Flows**
@@ -162,9 +173,9 @@ Validar que tudo funciona antes de gravar. Use o agente `Assistente Jurídico Au
   - Se falhar: ver troubleshooting abaixo
 - [ ] **P4.** `Gere um resumo executivo do contrato de prestação de serviços com a TechFlow no formato padrão da Aurora.`
   - Esperado: output no formato instruído (Partes, Objeto, Vigência, Valor, Riscos, Recomendação)
-- [ ] **P5.** `Envie esse resumo por email pro time jurídico.`
-  - Esperado: Quick Flow dispara, email chega em `demo-aurora-quick@outlook.com` em <30s
-  - Verificar conteúdo do email
+- [ ] **P5.** `Posta esse resumo no canal do time jurídico no Slack.`
+  - Esperado: Quick Flow dispara, mensagem aparece em `#juridico-aurora` em <30s
+  - Verificar formatação da mensagem
 
 ### Troubleshooting do P3
 
@@ -191,7 +202,7 @@ Se o agente não pegar a Cláusula 12:
   - Bloco 2 — Tour do Space (2 min)
   - Bloco 3 — Q&A (4 min) — perguntas P1, P2, P3
   - Bloco 4 — Resumo executivo (3 min) — P4
-  - Bloco 5 — Quick Flow (3 min) — P5 + abrir Outlook mostrando o email
+  - Bloco 5 — Quick Flow (3 min) — P5 + abrir Slack mostrando o post no canal
   - Bloco 6 — Encerramento (1 min)
 - [ ] Tempo total: anotar __ min __ seg
   - Se >15 min: cortar narração de tour ou encerramento
@@ -216,7 +227,7 @@ Se o agente não pegar a Cláusula 12:
 ### Gravação
 
 - [ ] Quick chat aberto, agente `Assistente Jurídico Aurora` ativo
-- [ ] Outlook aberto em outra aba/janela (pra mostrar email após Quick Flow)
+- [ ] Slack aberto em outra aba/janela no canal `#juridico-aurora` (pra mostrar a mensagem após Quick Flow)
 - [ ] Cronômetro fora do quadro
 - [ ] Take 1 — gravar fim-a-fim sem cortes
 - [ ] Revisar — se >15 min ou erro grave, refazer
@@ -238,13 +249,13 @@ Se o agente não pegar a Cláusula 12:
 - [ ] Login no Quick Suite em janela anônima
 - [ ] Pré-abrir abas:
   - Tab 1: Quick chat com agente `Assistente Jurídico Aurora`
-  - Tab 2: Outlook `demo-aurora-quick@outlook.com` (lista de emails recebidos)
+  - Tab 2: Slack workspace `aurora-construtora-demo` no canal `#juridico-aurora`
   - Tab 3: dashboard Quick Sight do Space (opcional, pra mostrar "PDFs indexados")
 - [ ] Pergunta-zero de aquecimento (não no roteiro): `Olá, você está pronto?` — apenas pra validar que sessão tá ativa
 - [ ] Cronômetro em segundo monitor
 - [ ] Notificações OFF
 - [ ] Vídeo backup pré-aberto em pasta separada (caso de queda)
-- [ ] Senha do Outlook aurora.demo no gerenciador, pronta caso solicitem re-login
+- [ ] Sessão Slack ainda ativa (testar com refresh)
 
 ### Durante a demo
 
@@ -252,7 +263,7 @@ Se o agente não pegar a Cláusula 12:
 - [ ] Bloco 2: tour do Space (2 min)
 - [ ] Bloco 3: P1 → P2 → P3 (4 min)
 - [ ] Bloco 4: P4 resumo executivo (3 min)
-- [ ] Bloco 5: P5 + abrir Outlook (3 min)
+- [ ] Bloco 5: P5 + abrir Slack (3 min)
 - [ ] Bloco 6: encerramento (1 min)
 
 ### Plano B se algo falhar ao vivo
@@ -261,7 +272,7 @@ Se o agente não pegar a Cláusula 12:
 |---|---|
 | Quick chat trava | Aba 2 do navegador (já pré-aberta com agente) |
 | Indexação sumiu | Mudar pra vídeo backup, pular pra Bloco 6 |
-| OAuth Outlook expirou | Pular Bloco 5, dizer "no setup real, dispararia o email" |
+| OAuth Slack expirou | Pular Bloco 5, dizer "no setup real, postaria automaticamente no canal" |
 | Internet caiu | Vídeo backup |
 | Pergunta P3 não pega cláusula 12 | Reformular: "Existe cláusula sobre armazenamento de materiais inflamáveis?" |
 

@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-Advogado interno recebe um contrato novo. Em vez de ler 8 páginas, ele faz upload no Quick Suite, pergunta em linguagem natural sobre vigência, multas e riscos, e o agente entrega um **resumo executivo + flags de risco + email pronto para o time** em 2 minutos.
+Advogado interno recebe um contrato novo. Em vez de ler 8 páginas, ele faz upload no Quick Suite, pergunta em linguagem natural sobre vigência, multas e riscos, e o agente entrega um **resumo executivo + flags de risco + post automático no canal do time jurídico no Slack** em 2 minutos.
 
 ## Persona alvo
 
@@ -14,12 +14,12 @@ Advogado interno recebe um contrato novo. Em vez de ler 8 páginas, ele faz uplo
 
 - **Quick Index** + **Space "Jurídico Aurora"**
 - **Custom Chat Agent** "Assistente Jurídico"
-- **Quick Flow** "Resumo Executivo de Contrato" (envia email via Outlook)
+- **Quick Flow** "Resumo Executivo de Contrato" (posta no canal Slack `#juridico-aurora`)
 
 ## Pré-requisitos
 
 - 3 PDFs em `s3://quick-demo-{conta}/juridico/` (ver [01-dados-sinteticos.md](../setup/01-dados-sinteticos.md))
-- Conector Outlook ativo
+- Conector Slack ativo (workspace e canal `#juridico-aurora` criados)
 - Chat Agent já criado e testado com as 3 perguntas-âncora
 
 ## Setup (1 vez antes do webinar)
@@ -58,12 +58,12 @@ Nunca invente informação. Se não encontrar nos documentos, diga "não consta 
 ```
 
 4. **Knowledge:** vincular ao Space "Jurídico Aurora"
-5. **Actions:** ativar Outlook (para a Flow conseguir enviar email no final)
+5. **Actions:** ativar Slack (para a Flow conseguir postar no canal no final)
 
 ### 3. Criar Quick Flow "Resumo Executivo de Contrato"
 
 1. **Flows** → **Create flow** → **From chat**
-2. Prompt: `Quando eu pedir, gere um resumo executivo do contrato selecionado e envie por email para juridico-time@aurora.com.br com assunto "Resumo: [nome do contrato]"`
+2. Prompt: `Quando eu pedir, gere um resumo executivo do contrato selecionado e poste no canal Slack #juridico-aurora começando com "📄 Novo resumo executivo:" seguido do nome do contrato e do conteúdo do resumo formatado.`
 3. Salvar como `Resumo Executivo de Contrato`
 
 ## Roteiro do webinar (~14 min)
@@ -118,12 +118,12 @@ Recomendação: Atenção à multa de rescisão. Considerar negociar gatilho de 
 
 ### Bloco 5 — Acionar Quick Flow (3 min)
 
-**P5.** `Envie esse resumo por email pro time jurídico.`
+**P5.** `Posta esse resumo no canal do time jurídico no Slack.`
 
 - Quick Flow é acionado
-- Mostrar a confirmação ("Email enviado para juridico-time@aurora.com.br")
-- Abrir Outlook ao vivo e mostrar o email que chegou
-- **Wow moment 2:** "isso aqui é trabalho que tomava 2h, em 4 minutos."
+- Mostrar a confirmação ("Mensagem postada em #juridico-aurora")
+- Abrir Slack ao vivo e mostrar o post no canal
+- **Wow moment 2:** "isso aqui é trabalho que tomava 2h, em 4 minutos. E o time inteiro vê em tempo real."
 
 ### Bloco 6 — Encerramento da demo (1 min)
 
@@ -136,7 +136,7 @@ Recomendação: Atenção à multa de rescisão. Considerar negociar gatilho de 
 2. No contrato com a TechFlow, qual a multa por rescisão antecipada?
 3. Existe cláusula de risco no contrato de locação que eu deveria revisar?
 4. Gere um resumo executivo do contrato com a TechFlow.
-5. Envie esse resumo por email pro time jurídico.
+5. Posta esse resumo no canal do time jurídico no Slack.
 ```
 
 ## Fallback / troubleshooting
@@ -144,7 +144,7 @@ Recomendação: Atenção à multa de rescisão. Considerar negociar gatilho de 
 | Problema | Plano B |
 |---|---|
 | Agente não encontra cláusula 12 | Reformular: "Existe alguma cláusula sobre materiais inflamáveis ou armazenamento de risco?" |
-| Quick Flow falha (Outlook OAuth expirado) | Pular o envio, mostrar copy/paste do resumo |
+| Quick Flow falha (Slack OAuth expirado) | Pular o post, mostrar copy/paste do resumo |
 | PDF não indexou | Ter screenshot do Space populado pronto pra colar |
 | Internet cai | Vídeo gravado de 90s da demo completa pré-renderizado |
 
