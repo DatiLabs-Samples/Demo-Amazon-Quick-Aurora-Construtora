@@ -9,7 +9,7 @@
 
 set -euo pipefail
 
-PROFILE="aurora-demo"
+PROFILE="quick-dev"
 ACCOUNT_ID="913567437118"
 BUCKET="qx3vp-aurora-demo-${ACCOUNT_ID}"
 

@@ -30,7 +30,7 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 
 ### Conta Gmail dedicada
 
-- [ ] Criar `aurora.demo@gmail.com` (ou `aurora-demo@gmail.com`, `aurora.construtora.demo@gmail.com` — qualquer disponível) em accounts.google.com
+- [ ] Criar `aurora.demo@gmail.com` (ou `quick-dev@gmail.com`, `aurora.construtora.demo@gmail.com` — qualquer disponível) em accounts.google.com
 - [ ] Anotar senha em gerenciador de senhas seguro
 - [ ] Habilitar 2FA (Authenticator App, não SMS)
 - [ ] Login no Gmail e enviar 1 email de teste pra você mesmo (validar que a conta funciona)
@@ -41,32 +41,29 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 
 ### Configurar profile SSO
 
-- [ ] Pegar SSO start URL do portal AWS Identity Center que você usa (ex.: `https://dati.awsapps.com/start`)
-- [ ] Rodar configuração interativa
-  ```bash
-  aws configure sso
-  ```
-  Respostas:
-  - SSO session name: `dati`
-  - SSO start URL: `<sua URL>`
+- [ ] Profile SSO entrada (identidade) `quick-account` (já configurado via `aws configure sso`)
+  - SSO session: `quick`
+  - SSO start URL: `https://daticloud.awsapps.com/start`
   - SSO region: `us-east-1`
-  - SSO registration scopes: `sso:account:access` (default OK)
-  - Browser abre — autoriza no portal SSO
-  - Conta listada: selecione `913567437118`
-  - Role listada: selecione `IAM-Dati-Acc-bruno.vilardi`
-  - CLI default region: `us-east-1`
-  - CLI default output format: `json`
-  - CLI profile name: `aurora-demo`
+  - SSO account: `924357458451` (identity account)
+  - SSO role: `IAM-Dati-Acc-bruno.vilardi`
+- [ ] Profile workload `quick-dev` (assume role na conta de dev) — adicionar a `~/.aws/config`:
+  ```ini
+  [profile quick-dev]
+  role_arn = arn:aws:iam::913567437118:role/Dati-operator
+  source_profile = quick-account
+  region = us-east-1
+  ```
 - [ ] Validar identidade
   ```bash
-  aws sts get-caller-identity --profile aurora-demo
+  aws sts get-caller-identity --profile quick-dev
   ```
   Esperado: `"Account": "913567437118"`
 - [ ] Validar Quick Suite ativo
   ```bash
   aws quicksight describe-account-subscription \
       --aws-account-id 913567437118 \
-      --profile aurora-demo
+      --profile quick-dev
   ```
   Esperado: `"AccountSubscriptionStatus": "ACCOUNT_CREATED"` ou similar.
 
@@ -76,10 +73,10 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
   ```bash
   ./demos/01-juridico/scripts/setup-aws.sh
   ```
-- [ ] Anotar URI impressa: `s3://qx3vp-aurora-demo-913567437118/juridico/`
+- [ ] Anotar URI impressa: `s3://qx3vp-quick-dev-913567437118/juridico/`
 - [ ] Verificar upload
   ```bash
-  aws s3 ls s3://qx3vp-aurora-demo-913567437118/juridico/ --profile aurora-demo
+  aws s3 ls s3://qx3vp-quick-dev-913567437118/juridico/ --profile quick-dev
   ```
   Esperado: 3 PDFs listados.
 
@@ -100,7 +97,7 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 - [ ] Descrição: `Contratos, NDAs e documentos jurídicos da Aurora Construtora`
 - [ ] Members: deixar só `bruno.vilardi@dati.com.br` por enquanto
 - [ ] **Knowledge sources** → **Add S3**
-  - Bucket: `qx3vp-aurora-demo-913567437118`
+  - Bucket: `qx3vp-quick-dev-913567437118`
   - Prefix: `juridico/`
   - Confirmar
 - [ ] Aguardar status mudar de `Indexing` para `Ready` (~3-5 min para 3 PDFs)

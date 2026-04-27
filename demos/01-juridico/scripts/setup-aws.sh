@@ -18,7 +18,7 @@
 set -euo pipefail
 
 # Configuração
-PROFILE="aurora-demo"
+PROFILE="quick-dev"
 ACCOUNT_ID="913567437118"
 REGION="us-east-1"
 BUCKET="qx3vp-aurora-demo-${ACCOUNT_ID}"
