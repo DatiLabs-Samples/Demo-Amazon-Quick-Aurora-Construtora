@@ -1,0 +1,20 @@
+# Vídeos de gravação são grandes — não versionar
+demos/*/recordings/*.mp4
+demos/*/recordings/*.mov
+
+# PDFs gerados pelos scripts (regerar a partir do .md)
+demos/*/contratos/*.pdf
+
+# macOS
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Credenciais — nunca commitar
+*.pem
+.env
+.env.local
+aws-credentials*
