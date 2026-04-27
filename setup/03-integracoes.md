@@ -7,7 +7,7 @@ O Quick Suite distingue duas categorias:
 | Tipo | Função | Exemplos |
 |---|---|---|
 | **Knowledge sources** | Indexar conteúdo no Quick Index para o agente *ler* e responder | S3, SharePoint, Google Drive, Confluence, Notion, HubSpot |
-| **Action connectors** | Permitir o agente *executar* ações em sistemas externos | Gmail, HubSpot, Slack, ServiceNow, ClickUp |
+| **Action connectors** | Permitir o agente *executar* ações em sistemas externos | Outlook, HubSpot, Slack, ServiceNow, ClickUp |
 
 Vários conectores são **dual-purpose** (lêem e escrevem), ex.: ClickUp, ServiceNow, SharePoint.
 
@@ -17,7 +17,7 @@ Vários conectores são **dual-purpose** (lêem e escrevem), ex.: ClickUp, Servi
 |---|---|:---:|:---:|:---:|:---:|
 | **S3** | Knowledge | ✅ obrig. | ⚪ opcional* | ✅ obrig. | ✅ obrig. |
 | **HubSpot** | Knowledge + Action | ⬜ | ✅ obrig. | ⬜ | ⬜ |
-| **Gmail** | Action | ✅ envio email | ✅ alert AE | ✅ email gestor | ✅ envio brief |
+| **Outlook** | Action | ✅ envio email | ✅ alert AE | ✅ email gestor | ✅ envio brief |
 | **Slack** | Action | ⬜ | ✅ alerta deal | ⬜ | ✅ post leadership |
 | **ClickUp** | Action | ⬜ | ⬜ | ✅ criar task | ⬜ |
 | **IAM Identity Center** | Auth | ✅ recomendado | ✅ recomendado | ✅ recomendado | ✅ recomendado |
@@ -38,20 +38,20 @@ Vários conectores são **dual-purpose** (lêem e escrevem), ex.: ClickUp, Servi
 
 | Integração | Para quê | Permissões |
 |---|---|---|
-| **Gmail** | Quick Flow envia resumo executivo pro time jurídico | OAuth Google com escopo `gmail.send` |
+| **Outlook** | Quick Flow envia resumo executivo pro time jurídico | OAuth Microsoft com escopo `Mail.Send` |
 
 ### Alternativas
 
 | Em vez de | Use |
 |---|---|
 | S3 | **SharePoint, Google Drive, Box, Dropbox Business** |
-| Gmail | **Outlook (M365)** se cliente é Microsoft-centric |
+| Outlook | **Outlook (M365)** se cliente é Microsoft-centric |
 
 ### Setup mínimo
 
 1. Bucket `quick-demo-{conta}` com pasta `juridico/`
 2. 3 PDFs subidos
-3. Gmail conectado via OAuth (5 min)
+3. Outlook conectado via OAuth (5 min)
 
 **Custo extra de licenças externas:** zero.
 
@@ -70,7 +70,7 @@ Vários conectores são **dual-purpose** (lêem e escrevem), ex.: ClickUp, Servi
 
 | Integração | Para quê |
 |---|---|
-| **Gmail** | Email pro AE responsável |
+| **Outlook** | Email pro AE responsável |
 | **Slack** | Alerta no canal `#sales-alerts` |
 | **S3** (opcional) | Snapshot CSV de pipeline para alimentar Quick Sight com dado estável | `s3:GetObject` |
 
@@ -109,7 +109,7 @@ Sem MCP, sem OpenAPI custom — listado em [aws.amazon.com/quick/sales](https://
 |---|---|---|
 | **S3** | 4 PDFs de políticas | `s3:GetObject` |
 | **ClickUp** | Quick Flow cria task de equipamento | Personal Token ClickUp |
-| **Gmail** | Quick Flow envia email pro gestor | OAuth com `gmail.send` |
+| **Outlook** | Quick Flow envia email pro gestor | OAuth com `Mail.Send` |
 
 ### Alternativas
 
@@ -119,15 +119,15 @@ Sem MCP, sem OpenAPI custom — listado em [aws.amazon.com/quick/sales](https://
 | ClickUp | **ServiceNow** | Conector nativo Quick |
 | ClickUp | **Asana, Linear, Monday** | Conectores disponíveis |
 | ClickUp | **Jira Cloud** | Conector nativo (alternativa anterior) |
-| Gmail | **Outlook (M365)** | Se cliente em Microsoft |
-| Gmail | **Slack DM** | Alternativa de notificação |
+| Outlook | **Outlook (M365)** | Se cliente em Microsoft |
+| Outlook | **Slack DM** | Alternativa de notificação |
 
 ### Setup mínimo
 
 1. Bucket S3 com 4 PDFs (10 min)
 2. ClickUp Workspace + List "Onboarding TI" com custom fields (15 min)
 3. Conector ClickUp configurado (compartilhado com Demo 02)
-4. Gmail conectado
+4. Outlook conectado
 
 **Custo extra de licenças externas:** zero (ClickUp Free serve até 5 membros).
 
@@ -153,7 +153,7 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 
 | Integração | Para quê | Permissões |
 |---|---|---|
-| **Gmail** | Email do brief executivo pro CFO | OAuth com `gmail.send` |
+| **Outlook** | Email do brief executivo pro CFO | OAuth com `Mail.Send` |
 | **Slack** | Post no canal `#financeiro-leadership` | OAuth |
 
 ### Alternativas
@@ -161,13 +161,13 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 | Em vez de | Use |
 |---|---|
 | S3 (PDFs apoio) | **SharePoint, Google Drive** |
-| Gmail | **Outlook** |
+| Outlook | **Outlook** |
 | Slack | **Teams** |
 
 ### Setup mínimo
 
 1. Bucket S3 com 2 CSVs + 2 PDFs (15 min)
-2. Gmail + Slack conectados
+2. Outlook + Slack conectados
 3. Dataset Quick Sight com calculated fields (`desvio_abs`, `desvio_pct`)
 4. Dashboard via NL prompt
 5. Chat Agent com **Research tool habilitada** (importante — esquecer este passo é a falha mais comum)
@@ -182,7 +182,7 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 
 - **Repositórios de arquivo:** Amazon S3, SharePoint Online, OneDrive, Google Drive, Box, Dropbox Business
 - **Wikis:** Confluence, Notion, Coda, Quip
-- **Comunicação:** Gmail, Outlook, Slack, Teams (mensagens indexáveis)
+- **Comunicação:** Outlook, Outlook, Slack, Teams (mensagens indexáveis)
 - **CRM/ERP:** Salesforce, HubSpot, Dynamics 365, SAP, ServiceNow, Workday
 - **Data warehouses:** Redshift, Snowflake, Databricks, BigQuery
 - **Marketing/Analytics:** Adobe Analytics, Google Analytics
@@ -191,7 +191,7 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 ### Action connectors
 
 - **Tickets/PM:** ServiceNow, Asana, Linear, Monday, Jira Cloud (nativo) | ClickUp (via MCP)
-- **Email:** Gmail, Outlook
+- **Email:** Outlook, Outlook
 - **Mensageria:** Slack, Teams, Webex
 - **CRM (write):** Salesforce, HubSpot, Pipedrive
 - **HR:** Workday, BambooHR, ADP
@@ -210,17 +210,17 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 ### Antes de começar setup (D-14)
 
 - [ ] Conta AWS com permissão de admin
-- [ ] Conta Google (Gmail) — pessoal ou Workspace
+- [ ] Conta Microsoft (Outlook.com) — pessoal ou M365
 - [ ] Workspace Slack (free tier OK) com canais `#sales-alerts` e `#financeiro-leadership`
 - [ ] Conta HubSpot Free (Demo 02)
 - [ ] Conta ClickUp Free Forever (Demo 03)
-- [ ] Domínio fictício para emails (ex.: `aurora-demo.com.br` — pode ser apenas alias do Gmail)
+- [ ] Domínio fictício para emails (ex.: `aurora-demo.com.br` — pode ser apenas alias do Outlook)
 
 ### Setup de conectores (D-12 a D-7)
 
 - [ ] S3 bucket criado com 4 pastas e arquivos sintéticos
 - [ ] IAM Identity Center habilitado, 4 usuários demo criados
-- [ ] OAuth Gmail autorizado e testado (enviar email manualmente via Quick chat)
+- [ ] OAuth Outlook autorizado e testado (enviar email manualmente via Quick chat)
 - [ ] OAuth Slack autorizado e bot adicionado nos canais
 - [ ] HubSpot configurado com pipeline + custom properties + 8 deals/companies importados
 - [ ] OAuth HubSpot autorizado no Quick Suite e custom properties visíveis no agente
@@ -234,7 +234,7 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 - [ ] Cada conector retesta login (OAuth não expirou)
 - [ ] 1 deal de teste no HubSpot recebe note via Quick chat
 - [ ] 1 task de teste em ClickUp é criada e deletada
-- [ ] 1 email de teste em Gmail é enviado
+- [ ] 1 email de teste em Outlook é enviado
 - [ ] 1 mensagem de teste em Slack é postada
 - [ ] Dashboard Quick Sight renderiza
 - [ ] Cada Chat Agent responde 3 perguntas-âncora
@@ -245,19 +245,19 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 
 ```
 Demo 01 — Jurídico
-S3 (PDFs) ──► Quick Index ──► Chat Agent ──► Quick Flow ──► Gmail
+S3 (PDFs) ──► Quick Index ──► Chat Agent ──► Quick Flow ──► Outlook
 
 Demo 02 — Comercial (HubSpot CRM real)
 HubSpot (deals+companies) ──► Quick Index ──► Chat Agent ──► Quick Flow ──┬─► HubSpot (note + task + property)
-S3 snapshot (opcional) ──► Quick Sight ──┘                                  ├─► Gmail
+S3 snapshot (opcional) ──► Quick Sight ──┘                                  ├─► Outlook
                                                                               └─► Slack
 
 Demo 03 — RH
 S3 (PDFs) ──► Quick Index ──► Chat Agent ──► Quick Flow ──┬─► ClickUp (criar task)
-                                                            └─► Gmail
+                                                            └─► Outlook
 
 Demo 04 — Financeiro
 S3 (CSVs+PDFs) ──► Quick Sight + Quick Index ──► Chat Agent ──┬─► Quick Research
-                                                                ├─► Quick Flow ──► Gmail
+                                                                ├─► Quick Flow ──► Outlook
                                                                 └─► Quick Flow ──► Slack
 ```

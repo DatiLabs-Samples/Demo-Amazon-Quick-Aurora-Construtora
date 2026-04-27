@@ -22,7 +22,7 @@ Controller pergunta "como fechou o Q1?" e em 3 minutos tem: dashboard de orçado
 
 - 2 CSVs em `s3://quick-demo-{conta}/financeiro/`
 - 2 PDFs de apoio (`relatorio-mercado-construcao-q1-2026.pdf`, `ata-comite-financeiro-mar-2026.pdf`)
-- Conector Gmail ativo
+- Conector Outlook ativo
 - Quick Research habilitado (Enterprise plan)
 
 ## Setup (1 vez antes do webinar)
@@ -79,7 +79,7 @@ Formato narrativo padrão para CFO:
 ```
 
 Knowledge: Space "Financeiro Aurora".
-Actions: Gmail.
+Actions: Outlook.
 
 ### 5. Habilitar Quick Research neste agente
 
@@ -168,7 +168,7 @@ Ação recomendada para o comitê:
 **P4.** `Manda esse brief pro CFO e pro time de leadership.`
 
 - Quick Flow dispara
-- Email aparece no Gmail ao vivo
+- Email aparece no Outlook ao vivo
 - Slack: post em `#financeiro-leadership` com resumo de 4 bullets
 
 > "Em produção, isso roda toda segunda-feira de manhã, antes do CFO chegar."
@@ -189,7 +189,7 @@ Ação recomendada para o comitê:
 | Quick Research não cita fontes | Repetir prompt adicionando "cite a página exata do PDF" |
 | Dashboard demora | Ter print pronto, dizer "vou usar o cache pra não esperar" |
 | Números não batem com o setup | Não brigar com o agente — dizer "o número é ilustrativo, regra de cálculo é a do seu time" |
-| Gmail OAuth expirado | Mostrar texto do email gerado, pular envio |
+| Outlook OAuth expirado | Mostrar texto do email gerado, pular envio |
 
 ## Por que essa demo é forte
 

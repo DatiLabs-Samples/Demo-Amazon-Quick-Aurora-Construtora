@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, home office, plano de saúde — recebe respostas com citação direta da política. Depois pede pra solicitar equipamento e o agente abre **task no ClickUp automaticamente** + envia email pro gestor via Gmail. RH economiza 5h/funcionário no onboarding.
+Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, home office, plano de saúde — recebe respostas com citação direta da política. Depois pede pra solicitar equipamento e o agente abre **task no ClickUp automaticamente** + envia email pro gestor via Outlook. RH economiza 5h/funcionário no onboarding.
 
 ## Persona alvo
 
@@ -14,14 +14,14 @@ Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, h
 
 - **Quick Index** + **Space "RH Aurora"**
 - **Custom Chat Agent** "Assistente RH Aurora"
-- **Action Connectors:** ClickUp (task de equipamento) + Gmail (email gestor)
-- **Quick Flow** "Onboarding Equipamento" (orquestra ClickUp + Gmail)
+- **Action Connectors:** ClickUp (task de equipamento) + Outlook (email gestor)
+- **Quick Flow** "Onboarding Equipamento" (orquestra ClickUp + Outlook)
 
 ## Pré-requisitos
 
 - 4 PDFs em `s3://quick-demo-{conta}/rh/` (ver dados sintéticos)
 - Conta ClickUp com Workspace "Aurora Demo" e List "Onboarding TI" criada
-- Conta Gmail ativa (gestor fictício: `gestor-demo@aurora-demo.com`)
+- Conta Outlook ativa (gestor fictício: `gestor-demo@aurora-demo.com`)
 
 ## Setup (1 vez antes do webinar)
 
@@ -64,11 +64,11 @@ ClickUp não está na lista de conectores nativos. Usar uma das duas opções:
 3. Auth: Bearer token (Personal Token)
 4. Habilitar endpoint `POST /list/{list_id}/task`
 
-### 4. Conectar Gmail
+### 4. Conectar Outlook
 
-1. **Actions & Integrations** → **Gmail** → **Connect**
-2. OAuth com conta Google (pessoal serve para teste)
-3. Escopo necessário: `gmail.send`
+1. **Actions & Integrations** → **Outlook** → **Connect**
+2. OAuth com conta Microsoft (pessoal Outlook.com serve para teste)
+3. Escopo necessário: `Mail.Send`
 
 ### 5. Criar Custom Chat Agent "Assistente RH Aurora"
 
@@ -81,7 +81,7 @@ Princípios:
 1. Sempre responda em português brasileiro, tom acolhedor mas objetivo
 2. Sempre cite a política ou manual de origem (ex.: "conforme Política de Férias, página 3")
 3. Se a pergunta não tiver resposta nos documentos indexados, diga claramente "essa informação não está nas políticas que tenho acesso, vou conectar você com o RH humano"
-4. Para ações concretas (solicitar equipamento, abrir chamado, alterar dados), use as Actions disponíveis (ClickUp, Gmail)
+4. Para ações concretas (solicitar equipamento, abrir chamado, alterar dados), use as Actions disponíveis (ClickUp, Outlook)
 5. Nunca invente valores, datas, prazos ou benefícios
 
 Tópicos cobertos:
@@ -96,7 +96,7 @@ Quando o usuário pedir equipamento ou onboarding de novo funcionário, dispare 
 ```
 
 Knowledge: Space "RH Aurora".
-Actions: ClickUp + Gmail.
+Actions: ClickUp + Outlook.
 
 ### 6. Criar Quick Flow "Onboarding Equipamento"
 
@@ -108,7 +108,7 @@ Visual editor:
    - Custom fields preenchidos
    - Due date: hoje + 3 dias úteis
    - Status: `Solicitado`
-3. **Step 2 — Gmail:** enviar email para `gestor_email`
+3. **Step 2 — Outlook:** enviar email para `gestor_email`
    - Subject: `Onboarding em andamento: {nome}`
    - Body: link da task ClickUp + checklist do dia 1
 4. **Step 3 — retorna ID da task pro agente**
@@ -193,7 +193,7 @@ Quick Flow dispara:
 
 **Mostrar ao vivo:**
 1. Aba ClickUp → task aparecendo na list `Onboarding TI` com custom fields preenchidos
-2. Aba Gmail → email do gestor com link da task
+2. Aba Outlook → email do gestor com link da task
 
 **Wow moment:** "isso aconteceu em 30 segundos. Hoje, esse processo passa por 4 sistemas e leva 2-3 dias."
 
@@ -228,8 +228,8 @@ Essa informação não está nas políticas que tenho acesso. O reajuste salaria
 | Problema | Plano B |
 |---|---|
 | ClickUp MCP server falha | Trocar pra OpenAPI connector (Opção B) |
-| Ambas integrações ClickUp falham | Pular criação de task, mostrar Gmail só, dizer "no setup real, abre task também" |
-| Gmail OAuth expirou | Mostrar texto do email gerado |
+| Ambas integrações ClickUp falham | Pular criação de task, mostrar Outlook só, dizer "no setup real, abre task também" |
+| Outlook OAuth expirou | Mostrar texto do email gerado |
 | Personal Token ClickUp revogado | Re-gerar (1 min) — sempre testar D-1 |
 | Indexação não pegou um PDF | Pular pergunta correspondente — sempre tenha 2 perguntas reserva |
 | Indexação retorna trecho errado | Reformular: "Conforme política de férias, posso..." |

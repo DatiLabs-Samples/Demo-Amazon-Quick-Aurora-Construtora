@@ -27,10 +27,10 @@ Setup mínimo:
 
 | Demo | Knowledge | Action |
 |---|---|---|
-| **01 Jurídico** | S3 (PDFs de contratos) | Gmail (envio de resumo) |
-| **02 Comercial** | HubSpot (deals + companies) + S3 (snapshot pipeline opcional) | HubSpot (note/task no deal) + Gmail + Slack |
-| **03 RH** | S3 (PDFs de políticas) | ClickUp (criar task) + Gmail |
-| **04 Financeiro** | S3 (CSVs + PDFs apoio) | Gmail + Slack |
+| **01 Jurídico** | S3 (PDFs de contratos) | Outlook (envio de resumo) |
+| **02 Comercial** | HubSpot (deals + companies) + S3 (snapshot pipeline opcional) | HubSpot (note/task no deal) + Outlook + Slack |
+| **03 RH** | S3 (PDFs de políticas) | ClickUp (criar task) + Outlook |
+| **04 Financeiro** | S3 (CSVs + PDFs apoio) | Outlook + Slack |
 
 ### Como adicionar conector S3 (todas as demos precisam)
 
@@ -72,11 +72,11 @@ ClickUp **não está na lista de conectores nativos** do Quick Suite. Duas opç�
    - `POST /task/{task_id}/comment` — criar comment
    - `PUT /task/{task_id}` — atualizar custom field
 
-### Conector Gmail (todas que enviam email)
+### Conector Outlook (todas que enviam email)
 
-1. **Actions & Integrations** → **Gmail** → **Connect**
-2. OAuth com conta Google (pessoal ou Workspace)
-3. Permissão necessária: `gmail.send`
+1. **Actions & Integrations** → **Outlook** → **Connect**
+2. OAuth com conta Microsoft (Outlook.com pessoal ou M365)
+3. Permissão necessária: `Mail.Send`
 
 ### Conector Slack (Demo 02 e 04)
 
@@ -131,7 +131,7 @@ Conteúdo dos arquivos: ver [01-dados-sinteticos.md](01-dados-sinteticos.md).
 - [ ] Login funciona em conta limpa (testar em janela anônima)
 - [ ] Cada Space carrega documentos sem erro
 - [ ] Cada Chat Agent responde 3 perguntas-âncora do roteiro corretamente
-- [ ] Conectores Gmail/Slack/HubSpot ainda autorizados (OAuth tokens não expirados)
+- [ ] Conectores Outlook/Slack/HubSpot ainda autorizados (OAuth tokens não expirados)
 - [ ] HubSpot custom properties ainda visíveis no agente (testar `liste health score do deal X`)
 - [ ] ClickUp Personal Token ainda válido (testar criando 1 task via Quick chat)
 - [ ] Quick Flow de cada demo executa end-to-end em <30s
@@ -146,7 +146,7 @@ Conteúdo dos arquivos: ver [01-dados-sinteticos.md](01-dados-sinteticos.md).
 | D-12 | Criar conta HubSpot Free, customizar pipeline, importar deals/companies |
 | D-12 | Criar conta ClickUp Free, montar List "Onboarding TI" |
 | D-10 | Configurar IAM Identity Center, criar usuários demo |
-| D-7 | Conectar Gmail/Slack/HubSpot/ClickUp, testar conectores |
+| D-7 | Conectar Outlook/Slack/HubSpot/ClickUp, testar conectores |
 | D-5 | Construir Spaces, Chat Agents, Flows de cada demo |
 | D-3 | Ensaio completo cronometrado |
 | D-1 | Checklist final + gravação backup de cada demo |

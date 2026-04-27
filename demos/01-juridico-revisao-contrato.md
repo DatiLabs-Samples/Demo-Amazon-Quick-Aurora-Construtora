@@ -14,12 +14,12 @@ Advogado interno recebe um contrato novo. Em vez de ler 8 páginas, ele faz uplo
 
 - **Quick Index** + **Space "Jurídico Aurora"**
 - **Custom Chat Agent** "Assistente Jurídico"
-- **Quick Flow** "Resumo Executivo de Contrato" (envia email via Gmail)
+- **Quick Flow** "Resumo Executivo de Contrato" (envia email via Outlook)
 
 ## Pré-requisitos
 
 - 3 PDFs em `s3://quick-demo-{conta}/juridico/` (ver [01-dados-sinteticos.md](../setup/01-dados-sinteticos.md))
-- Conector Gmail ativo
+- Conector Outlook ativo
 - Chat Agent já criado e testado com as 3 perguntas-âncora
 
 ## Setup (1 vez antes do webinar)
@@ -58,7 +58,7 @@ Nunca invente informação. Se não encontrar nos documentos, diga "não consta 
 ```
 
 4. **Knowledge:** vincular ao Space "Jurídico Aurora"
-5. **Actions:** ativar Gmail (para a Flow conseguir enviar email no final)
+5. **Actions:** ativar Outlook (para a Flow conseguir enviar email no final)
 
 ### 3. Criar Quick Flow "Resumo Executivo de Contrato"
 
@@ -122,7 +122,7 @@ Recomendação: Atenção à multa de rescisão. Considerar negociar gatilho de 
 
 - Quick Flow é acionado
 - Mostrar a confirmação ("Email enviado para juridico-time@aurora.com.br")
-- Abrir Gmail ao vivo e mostrar o email que chegou
+- Abrir Outlook ao vivo e mostrar o email que chegou
 - **Wow moment 2:** "isso aqui é trabalho que tomava 2h, em 4 minutos."
 
 ### Bloco 6 — Encerramento da demo (1 min)
@@ -144,7 +144,7 @@ Recomendação: Atenção à multa de rescisão. Considerar negociar gatilho de 
 | Problema | Plano B |
 |---|---|
 | Agente não encontra cláusula 12 | Reformular: "Existe alguma cláusula sobre materiais inflamáveis ou armazenamento de risco?" |
-| Quick Flow falha (Gmail OAuth expirado) | Pular o envio, mostrar copy/paste do resumo |
+| Quick Flow falha (Outlook OAuth expirado) | Pular o envio, mostrar copy/paste do resumo |
 | PDF não indexou | Ter screenshot do Space populado pronto pra colar |
 | Internet cai | Vídeo gravado de 90s da demo completa pré-renderizado |
 

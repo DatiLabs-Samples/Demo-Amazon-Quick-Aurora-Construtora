@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-VP de Vendas pergunta "quais deals do Q2 estão em risco e por quê?" e em segundos recebe lista priorizada com diagnóstico (CSAT baixo, tickets abertos, dias sem atividade), sugestão de próximo passo por conta, e narrativa de forecast atualizada. O agente **cria nota direto no deal do HubSpot**, atualiza o health score como custom property, dispara Gmail pro AE e alerta no Slack — pronto pra reunião com CEO.
+VP de Vendas pergunta "quais deals do Q2 estão em risco e por quê?" e em segundos recebe lista priorizada com diagnóstico (CSAT baixo, tickets abertos, dias sem atividade), sugestão de próximo passo por conta, e narrativa de forecast atualizada. O agente **cria nota direto no deal do HubSpot**, atualiza o health score como custom property, dispara Outlook pro AE e alerta no Slack — pronto pra reunião com CEO.
 
 ## Persona alvo
 
@@ -15,7 +15,7 @@ VP de Vendas pergunta "quais deals do Q2 estão em risco e por quê?" e em segun
 - **Quick Sight** (dashboard de pipeline, opcionalmente lendo HubSpot direto ou snapshot S3)
 - **Quick Index** (HubSpot deals + companies)
 - **Custom Chat Agent** "Sales Copilot"
-- **Quick Flow** "Follow-up de deal em risco" (atualiza HubSpot + Gmail + Slack)
+- **Quick Flow** "Follow-up de deal em risco" (atualiza HubSpot + Outlook + Slack)
 
 ## Por que HubSpot Free CRM
 
@@ -34,7 +34,7 @@ VP de Vendas pergunta "quais deals do Q2 estão em risco e por quê?" e em segun
 - 8 deals + 8 companies importados (ver setup)
 - Custom properties: `Health Score` (deal), `Last Activity Days` (deal), `CSAT Score` (company), `Open Tickets` (company), `Industry` (company)
 - Conector HubSpot ativo no Quick Suite
-- Conector Gmail ativo
+- Conector Outlook ativo
 - Slack workspace com canal `#sales-alerts`
 
 ## Setup (1 vez antes do webinar)
@@ -172,7 +172,7 @@ Quando solicitado, dispare o Quick Flow "Follow-up de deal em risco" passando: d
 ```
 
 Knowledge: Space "Comercial Aurora".
-Actions: HubSpot + Gmail + Slack.
+Actions: HubSpot + Outlook + Slack.
 
 ### 7. Criar Quick Flow "Follow-up de deal em risco"
 
@@ -191,7 +191,7 @@ Steps:
    - Title: `Follow-up urgente: {next_step}`
    - Due date: hoje + 1 dia útil
    - Owner: `{owner_email}`
-5. **Gmail** — enviar email para owner:
+5. **Outlook** — enviar email para owner:
    ```
    Assunto: Atenção — deal {deal_name} em risco
    Body: {analysis_summary} + link do deal no HubSpot
@@ -275,7 +275,7 @@ Quick Flow dispara, **4 ações em sequência:**
      ```
    - **Task** nova: "Follow-up urgente: chamada com C-level" — Due tomorrow
    - **Health Score** atualizado (se aplicável)
-2. **Abrir Gmail** → email recebido por Rodrigo
+2. **Abrir Outlook** → email recebido por Rodrigo
 3. **Abrir Slack** → mensagem em `#sales-alerts`
 
 **Falar:** "isso é Sales Ops em tempo real. O agente registra a análise no CRM como note, abre task pro responsável, avisa por email, dá visibilidade pro time. Tudo a partir de uma frase."
@@ -304,7 +304,7 @@ Resposta esperada — bullets curtos, prontos pra colar em slide.
 | HubSpot OAuth expirou | Re-autenticar (2 min); ter screenshot do Kanban se urgente |
 | Note não aparece no HubSpot na hora | Refresh da página; mostrar a Activity timeline com filtro "Notes" |
 | Quick Sight não pega dado novo do HubSpot | Usar Opção B do setup (snapshot CSV) — dado é estático mas previsível |
-| Gmail/Slack OAuth expirou | Mostrar texto do que iria mandar |
+| Outlook/Slack OAuth expirou | Mostrar texto do que iria mandar |
 | Forecast com número diferente | Não brigar com o número, dizer "depende dos pesos do agente — você ajusta as regras" |
 
 ## Por que essa demo funciona bem ao vivo

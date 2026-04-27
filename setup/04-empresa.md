@@ -81,11 +81,11 @@ Ser, até 2030, a construtora referência em projetos público-privados de médi
 | CRM | HubSpot Sales Hub Starter (em avaliação de upgrade) |
 | PM / Operações / Onboarding TI | ClickUp |
 | App de RH proprietário | **Aurora People** — ponto, férias, banco de horas, contracheque |
-| Produtividade | **Migrando do Microsoft 365 para Google Workspace** ⚠️ |
+| Produtividade | Microsoft 365 (Outlook, Teams, OneDrive, SharePoint) — padrão corporativo desde 2019 |
 | Gestão de obras | TechFlow (sistema fornecido pela TechFlow Sistemas Ltda — vide contrato) |
 | Cloud | AWS (em adoção desde 2024) |
 
-> A migração para Google Workspace é o pretexto narrativo de por que as demos usam Gmail em vez de Outlook.
+> Stack Microsoft é o que justifica naturalmente o uso de Outlook como conector de email nas demos.
 
 ## Compliance e certificações
 
