@@ -30,7 +30,7 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 
 ### Conta Gmail dedicada
 
-- [ ] Criar `aurora.demo@gmail.com` (ou `quick-dev@gmail.com`, `aurora.construtora.demo@gmail.com` — qualquer disponível) em accounts.google.com
+- [x] Criar `aurorademoquick@gmail.com` em accounts.google.com
 - [ ] Anotar senha em gerenciador de senhas seguro
 - [ ] Habilitar 2FA (Authenticator App, não SMS)
 - [ ] Login no Gmail e enviar 1 email de teste pra você mesmo (validar que a conta funciona)
@@ -132,7 +132,7 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 ### Conector Gmail
 
 - [ ] Quick Suite → **Settings** → **Actions & Integrations** → **Gmail** → **Connect**
-- [ ] Browser abre janela do Google → fazer login com `aurora.demo@gmail.com`
+- [ ] Browser abre janela do Google → fazer login com `aurorademoquick@gmail.com`
 - [ ] Aceitar permissão `gmail.send`
 - [ ] Voltar ao Quick Suite, confirmar status `Connected`
 - [ ] No Agent `Assistente Jurídico Aurora` → **Actions** → habilitar Gmail
@@ -163,7 +163,7 @@ Validar que tudo funciona antes de gravar. Use o agente `Assistente Jurídico Au
 - [ ] **P4.** `Gere um resumo executivo do contrato de prestação de serviços com a TechFlow no formato padrão da Aurora.`
   - Esperado: output no formato instruído (Partes, Objeto, Vigência, Valor, Riscos, Recomendação)
 - [ ] **P5.** `Envie esse resumo por email pro time jurídico.`
-  - Esperado: Quick Flow dispara, email chega em `aurora.demo@gmail.com` em <30s
+  - Esperado: Quick Flow dispara, email chega em `aurorademoquick@gmail.com` em <30s
   - Verificar conteúdo do email
 
 ### Troubleshooting do P3
@@ -238,7 +238,7 @@ Se o agente não pegar a Cláusula 12:
 - [ ] Login no Quick Suite em janela anônima
 - [ ] Pré-abrir abas:
   - Tab 1: Quick chat com agente `Assistente Jurídico Aurora`
-  - Tab 2: Gmail `aurora.demo@gmail.com` (lista de emails recebidos)
+  - Tab 2: Gmail `aurorademoquick@gmail.com` (lista de emails recebidos)
   - Tab 3: dashboard Quick Sight do Space (opcional, pra mostrar "PDFs indexados")
 - [ ] Pergunta-zero de aquecimento (não no roteiro): `Olá, você está pronto?` — apenas pra validar que sessão tá ativa
 - [ ] Cronômetro em segundo monitor
