@@ -87,24 +87,29 @@ aws s3api put-bucket-encryption \
     }'
 echo "   ✅ Criptografia habilitada"
 
-# 5. Bucket policy — permitir leitura pelo Quick Suite
+# 5. Bucket policy — template oficial Quick Suite (docs.aws.amazon.com/quick/latest/userguide/s3-admin-setup.html)
 echo "📜 Aplicando bucket policy para Quick Suite..."
 POLICY=$(cat <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "AllowQuickSuiteRead",
+      "Sid": "AllowQuickSuiteS3Access",
       "Effect": "Allow",
-      "Principal": {"Service": "quicksight.amazonaws.com"},
-      "Action": ["s3:GetObject", "s3:ListBucket"],
+      "Principal": {
+        "AWS": "arn:aws:iam::${ACCOUNT_ID}:role/service-role/aws-quicksight-service-role-v0"
+      },
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "s3:GetObjectVersion",
+        "s3:ListBucketVersions"
+      ],
       "Resource": [
         "arn:aws:s3:::${BUCKET}",
         "arn:aws:s3:::${BUCKET}/*"
-      ],
-      "Condition": {
-        "StringEquals": {"aws:SourceAccount": "${ACCOUNT_ID}"}
-      }
+      ]
     }
   ]
 }
@@ -116,6 +121,35 @@ aws s3api put-bucket-policy \
     --profile "${PROFILE}" \
     --policy "${POLICY}"
 echo "   ✅ Bucket policy aplicada"
+
+# 5b. Inline policy no service role do Quick Suite (sem mexer em policies de outros times)
+echo "🔧 Anexando inline policy AuroraDemoQuickAccess em aws-quicksight-service-role-v0..."
+ROLE_POLICY=$(cat <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AuroraDemoBucketAccess",
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket", "s3:GetBucketLocation", "s3:ListBucketMultipartUploads", "s3:ListBucketVersions"],
+      "Resource": "arn:aws:s3:::${BUCKET}"
+    },
+    {
+      "Sid": "AuroraDemoObjectAccess",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:GetObjectVersion"],
+      "Resource": "arn:aws:s3:::${BUCKET}/*"
+    }
+  ]
+}
+EOF
+)
+aws iam put-role-policy \
+    --role-name aws-quicksight-service-role-v0 \
+    --policy-name AuroraDemoQuickAccess \
+    --policy-document "${ROLE_POLICY}" \
+    --profile "${PROFILE}"
+echo "   ✅ Inline policy aplicada"
 
 # 6. Upload dos PDFs
 echo ""

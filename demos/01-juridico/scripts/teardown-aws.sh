@@ -67,6 +67,12 @@ if [[ "$(echo "${MARKERS}" | grep -c '"Key"' || true)" -gt 0 ]]; then
     rm -f /tmp/quick-demo-markers.json
 fi
 
+echo "🗑️  Removendo inline policy do service role..."
+aws iam delete-role-policy \
+    --role-name aws-quicksight-service-role-v0 \
+    --policy-name AuroraDemoQuickAccess \
+    --profile "${PROFILE}" 2>/dev/null || true
+
 echo "🗑️  Apagando bucket policy..."
 aws s3api delete-bucket-policy --bucket "${BUCKET}" --profile "${PROFILE}" 2>/dev/null || true
 
