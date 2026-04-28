@@ -209,7 +209,9 @@ Steps:
 
 ### Bloco 1 — Contexto (1 min)
 
-> "Você é VP de vendas. Segunda-feira de manhã. Reunião com o CEO em 1h. Pergunta clássica: 'me mostra o pipeline e o que tá em risco'. Hoje você abre 3 abas: HubSpot, planilha de forecast, painel do CSAT. Vamos fazer em uma."
+> "Você é VP de vendas. Segunda-feira 8h. **Antes mesmo de você abrir o computador, o app desktop do Quick já te enviou um pre-meeting briefing**: dois deals do pipeline mudaram de status no fim de semana, o Frigorífico Pampa segue 21 dias sem atividade, e o CEO marcou reunião pra daqui a 1h. Hoje sem Quick: você abriria HubSpot, planilha de forecast e painel CSAT em 3 abas. Hoje com Quick: tudo em uma só."
+
+> *Talking point opcional:* o **app desktop foi anunciado em 28/04/2026** — roda em background, monitora apps abertos, e tem integração nativa com Salesforce/HubSpot/Google Workspace/M365.
 
 ### Bloco 2 — Tour HubSpot + Dashboard (3 min)
 

@@ -212,6 +212,9 @@ Essa informação não está nas políticas que tenho acesso. O reajuste salaria
 
 > "Mesmo agente, conectado no SharePoint, no Workday, no SAP HR. Cada nova política que você publicar é absorvida automaticamente. RH humano vira consultor, não call center."
 
+**Talking point opcional sobre Visier Vee** (~30s extra):
+> "Pra clientes que já usam **Visier** — workforce analytics, gestão de headcount, comp benchmarks — o Quick agora integra com o Vee, o agente do Visier, via MCP. Em 14/04/2026 a AWS anunciou essa integração nativa. O HRBP pergunta no Quick chat 'qual o turnover voluntário do Q1 na regional Nordeste?' e o Vee responde com dados governados, dentro da experiência do Quick. Workforce intelligence ao vivo, sem trocar de ferramenta."
+
 ## Prompts de exemplo
 
 ```

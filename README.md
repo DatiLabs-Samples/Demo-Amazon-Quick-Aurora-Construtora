@@ -44,6 +44,10 @@ Recomendação: testar todas e escolher 2 para a versão final. Recomendação i
 
 - [Pré-requisitos AWS](setup/00-prerequisitos-aws.md)
 - [Dados sintéticos PT-BR](setup/01-dados-sinteticos.md)
+- [Custos](setup/02-custos.md)
+- [Integrações por demo](setup/03-integracoes.md)
+- [Empresa-modelo Aurora](setup/04-empresa.md)
+- [**Novidades Amazon Quick 2026**](setup/05-novidades-2026.md) ⭐ atualizado 28/04/2026
 
 ## Referências AWS
 

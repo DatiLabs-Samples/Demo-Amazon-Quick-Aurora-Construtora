@@ -96,7 +96,9 @@ Em **Agent settings → Tools**, ativar **Research**. Isso permite o agente cruz
 
 ### Bloco 1 — Contexto (1 min)
 
-> "Você é o controller. Reunião do comitê executivo amanhã. CEO vai perguntar: 'como fechou o Q1?' E o que tá por trás dos números. Hoje, você passa a tarde inteira no Excel, abrindo PDF de mercado, lendo ata de comitê. Vamos fazer em 3 minutos."
+> "Você é o controller. Domingo à noite. Reunião do comitê executivo amanhã 9h. CEO vai perguntar: 'como fechou o Q1?' e o que tá por trás dos números. **Mas antes de você abrir o computador segunda de manhã, o app desktop do Quick já te briefou**: variance de Q1 destacando BA, links pra ata de mar/2026 do comitê financeiro e pro relatório de mercado de construção Nordeste. Tudo em background, sem você precisar pedir."
+
+> *Talking point opcional:* o **app desktop foi anunciado em 28/04/2026** com personal knowledge graph local e pre-meeting briefings. Em produção, conecta direto no Snowflake (anúncio Snowflake-chat também de 28/04).
 
 ### Bloco 2 — Dashboard (3 min)
 
