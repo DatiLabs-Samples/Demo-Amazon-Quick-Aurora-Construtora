@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Mineradora Itacolomi",
+    "domain": "itacolomi.com.br",
+    "industry": "MINING_METALS",
+    "city": "Belo Horizonte",
+    "state": "MG",
+    "country": "Brazil",
+    "numberofemployees": 3200,
+    "annualrevenue": 890000000,
+    "csat_score": 4.5,
+    "open_tickets": 2
+  },
+  {
+    "name": "Frigorífico Pampa",
+    "domain": "frigorificopampa.com.br",
+    "industry": "FOOD_PRODUCTION",
+    "city": "Porto Alegre",
+    "state": "RS",
+    "country": "Brazil",
+    "numberofemployees": 1800,
+    "annualrevenue": 450000000,
+    "csat_score": 3.2,
+    "open_tickets": 8
+  },
+  {
+    "name": "Hospital São Lucas",
+    "domain": "hospitalsaolucas.com.br",
+    "industry": "HOSPITAL_HEALTH_CARE",
+    "city": "Rio de Janeiro",
+    "state": "RJ",
+    "country": "Brazil",
+    "numberofemployees": 950,
+    "annualrevenue": 210000000,
+    "csat_score": 4.8,
+    "open_tickets": 1
+  },
+  {
+    "name": "Banco Cruzeiro",
+    "domain": "bancocruzeiro.com.br",
+    "industry": "FINANCIAL_SERVICES",
+    "city": "São Paulo",
+    "state": "SP",
+    "country": "Brazil",
+    "numberofemployees": 12000,
+    "annualrevenue": 8900000000,
+    "csat_score": 4.1,
+    "open_tickets": 4
+  },
+  {
+    "name": "Varejo Mil Cores",
+    "domain": "milcores.com.br",
+    "industry": "RETAIL",
+    "city": "São Paulo",
+    "state": "SP",
+    "country": "Brazil",
+    "numberofemployees": 2400,
+    "annualrevenue": 680000000,
+    "csat_score": 4.6,
+    "open_tickets": 0
+  },
+  {
+    "name": "Indústria Cedrofino",
+    "domain": "cedrofino.com.br",
+    "industry": "MECHANICAL_OR_INDUSTRIAL_ENGINEERING",
+    "city": "Curitiba",
+    "state": "PR",
+    "country": "Brazil",
+    "numberofemployees": 1500,
+    "annualrevenue": 380000000,
+    "csat_score": 2.9,
+    "open_tickets": 12
+  },
+  {
+    "name": "Distribuidora Atlântico",
+    "domain": "atlanticodist.com.br",
+    "industry": "WHOLESALE",
+    "city": "Recife",
+    "state": "PE",
+    "country": "Brazil",
+    "numberofemployees": 420,
+    "annualrevenue": 95000000,
+    "csat_score": 4.3,
+    "open_tickets": 1
+  },
+  {
+    "name": "Telecom Aurora",
+    "domain": "telecomaurora.com.br",
+    "industry": "TELECOMMUNICATIONS",
+    "city": "São Paulo",
+    "state": "SP",
+    "country": "Brazil",
+    "numberofemployees": 8900,
+    "annualrevenue": 3400000000,
+    "csat_score": 3.8,
+    "open_tickets": 6
+  }
+]
