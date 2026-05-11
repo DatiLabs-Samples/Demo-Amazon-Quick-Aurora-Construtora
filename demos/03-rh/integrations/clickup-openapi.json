@@ -1,0 +1,203 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ClickUp API Aurora Onboarding TI",
+    "description": "Subset da ClickUp API v2 com endpoints usados na Demo 03 do Assistente RH Aurora: criar e listar tasks na list Onboarding TI. Apenas o necessário para a Quick Flow de onboarding de equipamento.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickup.com/api/v2",
+      "description": "ClickUp Public API v2 base URL."
+    }
+  ],
+  "security": [
+    {
+      "PersonalToken": []
+    }
+  ],
+  "paths": {
+    "/list/901327076204/task": {
+      "post": {
+        "operationId": "create_onboarding_task",
+        "summary": "Cria task de onboarding na list Onboarding TI",
+        "description": "Cria uma nova task na list Onboarding TI id 901327076204 do workspace Dati Aurora Demo. Use para registrar solicitações de equipamento de novos funcionários com custom fields preenchidos. Cada custom field é referenciado pelo seu id UUID e o value varia por tipo do field. Para short_text use string. Para labels use objeto add com array de uuids das opções. Para drop_down use o orderindex inteiro da opção.",
+        "requestBody": {
+          "required": true,
+          "description": "Payload da nova task com name obrigatório description opcional e custom_fields para preencher Nome Cargo Gestor Equipamentos e Status.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTaskRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task criada com sucesso. Retorna id name url e custom_fields populados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "list_onboarding_tasks",
+        "summary": "Lista tasks da list Onboarding TI",
+        "description": "Retorna as tasks da list Onboarding TI id 901327076204. Use para o agente exibir onboardings em andamento ou checar duplicidade antes de criar nova task. Por padrão lista as últimas 100 tasks não arquivadas.",
+        "parameters": [
+          {
+            "name": "archived",
+            "in": "query",
+            "required": false,
+            "description": "Se true retorna apenas tasks arquivadas. Default false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "include_closed",
+            "in": "query",
+            "required": false,
+            "description": "Se true inclui tasks com status fechado tipo Entregue. Default false.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de tasks da list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "PersonalToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "ClickUp Personal Token. O header Authorization deve conter apenas o token sem prefixo Bearer. Exemplo Authorization pk_111946197_xxxxx. Gerar em ClickUp Settings Apps Generate."
+      }
+    },
+    "schemas": {
+      "CreateTaskRequest": {
+        "type": "object",
+        "description": "Body para criar uma nova task. Apenas name é obrigatório os demais campos são opcionais mas para a demo de onboarding preencher description e custom_fields é fundamental.",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Título da task. Para onboarding usar o padrão Equipamento para Nome do Funcionário entre parênteses Cargo.",
+            "example": "Equipamento para Maria Silva (Analista Financeira)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Descrição livre da task em markdown. Use para listar equipamentos solicitados e observações.",
+            "example": "Onboarding TI da Maria. Pacote padrão Notebook Monitor 27 polegadas Cadeira e Headset. Gestor avisado via Slack."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status inicial da task. Para Onboarding TI usar Solicitado.",
+            "example": "Solicitado"
+          },
+          "due_date": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Due date em timestamp unix em milissegundos. Para onboarding calcular hoje mais 3 dias úteis.",
+            "example": 1715299200000
+          },
+          "custom_fields": {
+            "type": "array",
+            "description": "Array de custom fields a preencher. Cada item tem id que é o UUID do field e value que varia por tipo. Para a list Onboarding TI os fields são Nome do Funcionário short_text Cargo short_text Gestor short_text Equipamentos labels Status drop_down.",
+            "items": {
+              "$ref": "#/components/schemas/CustomFieldValue"
+            }
+          }
+        }
+      },
+      "CustomFieldValue": {
+        "type": "object",
+        "description": "Valor de um custom field a ser setado na task. O formato do value depende do tipo do field. Para short_text passar string. Para labels passar objeto com chave add e array de uuids das opções. Para drop_down passar o orderindex inteiro da opção começando em zero.",
+        "required": ["id", "value"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "UUID do custom field obtido via GET list list_id field ou no output do setup-clickup.py."
+          },
+          "value": {
+            "description": "Valor a setar. Tipo varia conforme o field do ClickUp. Para short_text passar string como Maria Silva. Para drop_down passar inteiro orderindex como 0. Para labels passar objeto JSON com chave add e array de uuids como add lista de uuids. O Quick deve serializar este campo sem alteracao do tipo configurado."
+          }
+        }
+      },
+      "Task": {
+        "type": "object",
+        "description": "Representação de uma task no ClickUp. Subset dos campos relevantes para a demo.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID único da task. Pode aparecer como string alfanumérica curta tipo abc12 ou hash longo.",
+            "example": "abc12"
+          },
+          "name": {
+            "type": "string",
+            "description": "Título da task."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL clicável da task no ClickUp UI. Usar no Slack post.",
+            "example": "https://app.clickup.com/t/abc12"
+          },
+          "status": {
+            "type": "object",
+            "description": "Status atual da task com nome cor e tipo.",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "Solicitado"
+              }
+            }
+          },
+          "custom_fields": {
+            "type": "array",
+            "description": "Custom fields preenchidos na task.",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "TaskListResponse": {
+        "type": "object",
+        "description": "Resposta paginada de listagem de tasks.",
+        "properties": {
+          "tasks": {
+            "type": "array",
+            "description": "Array de tasks retornadas.",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          }
+        }
+      }
+    }
+  }
+}

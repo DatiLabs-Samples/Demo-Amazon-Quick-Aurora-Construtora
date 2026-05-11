@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, home office, plano de saúde — recebe respostas com citação direta da política. Depois pede pra solicitar equipamento e o agente abre **task no ClickUp automaticamente** + envia email pro gestor via Outlook. RH economiza 5h/funcionário no onboarding.
+Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, home office, plano de saúde — recebe respostas com citação direta da política. Depois pede pra solicitar equipamento e o agente abre **task no ClickUp automaticamente** + posta alerta no Slack `#rh-onboarding` mencionando o gestor com link da task. RH economiza 5h/funcionário no onboarding.
 
 ## Persona alvo
 
@@ -14,14 +14,15 @@ Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, h
 
 - **Quick Index** + **Space "RH Aurora"**
 - **Custom Chat Agent** "Assistente RH Aurora"
-- **Action Connectors:** ClickUp (task de equipamento) + Outlook (email gestor)
-- **Quick Flow** "Onboarding Equipamento" (orquestra ClickUp + Outlook)
+- **Action Connectors:** ClickUp (task de equipamento) + Slack (alerta `#rh-onboarding`)
+- **Quick Flow** "Onboarding Equipamento" (orquestra ClickUp + Slack)
 
 ## Pré-requisitos
 
-- 4 PDFs em `s3://quick-demo-{conta}/rh/` (ver dados sintéticos)
+- 4 PDFs em `s3://qx3vp-aurora-demo-913567437118/rh/` (ver dados sintéticos)
 - Conta ClickUp com Workspace "Aurora Demo" e List "Onboarding TI" criada
-- Conta Outlook ativa (gestor fictício: `gestor-demo@aurora-demo.com`)
+- Conector Slack ativo (do Demo 01) com canal `#rh-onboarding` criado
+- Gestor fictício: Bruno Vilardi — Slack handle `@bruno.vilardi`
 
 ## Setup (1 vez antes do webinar)
 
@@ -41,7 +42,7 @@ Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, h
 4. Custom fields:
    - `Nome do Funcionário` (Short text)
    - `Cargo` (Short text)
-   - `Gestor Email` (Email)
+   - `Gestor` (Short text — nome + handle Slack, ex.: `Bruno Vilardi (@bruno.vilardi)`)
    - `Equipamentos` (Labels — Notebook, Monitor 27", Cadeira, Headset, Outros)
    - `Status` (Dropdown — Solicitado, Em Andamento, Entregue)
 5. Gerar **Personal Token** em ClickUp → Settings → Apps → Generate (guardar)
@@ -64,11 +65,9 @@ ClickUp não está na lista de conectores nativos. Usar uma das duas opções:
 3. Auth: Bearer token (Personal Token)
 4. Habilitar endpoint `POST /list/{list_id}/task`
 
-### 4. Conectar Outlook
+### 4. Conectar Slack (reuso do Demo 01)
 
-1. **Actions & Integrations** → **Outlook** → **Connect**
-2. OAuth com conta Microsoft (pessoal Outlook.com serve para teste)
-3. Escopo necessário: `Mail.Send`
+Confirmar no Quick Suite que `Aurora Demo Workspace` está conectado e `#rh-onboarding` foi criado (`/create #rh-onboarding` no Slack). Adicionar Bruno Vilardi (`@bruno.vilardi`) ao canal antes do webinar para o `@mention` resolver corretamente.
 
 ### 5. Criar Custom Chat Agent "Assistente RH Aurora"
 
@@ -81,7 +80,7 @@ Princípios:
 1. Sempre responda em português brasileiro, tom acolhedor mas objetivo
 2. Sempre cite a política ou manual de origem (ex.: "conforme Política de Férias, página 3")
 3. Se a pergunta não tiver resposta nos documentos indexados, diga claramente "essa informação não está nas políticas que tenho acesso, vou conectar você com o RH humano"
-4. Para ações concretas (solicitar equipamento, abrir chamado, alterar dados), use as Actions disponíveis (ClickUp, Outlook)
+4. Para ações concretas (solicitar equipamento, abrir chamado, alterar dados), use as Actions disponíveis (ClickUp, Slack)
 5. Nunca invente valores, datas, prazos ou benefícios
 
 Tópicos cobertos:
@@ -96,21 +95,32 @@ Quando o usuário pedir equipamento ou onboarding de novo funcionário, dispare 
 ```
 
 Knowledge: Space "RH Aurora".
-Actions: ClickUp + Outlook.
+Actions: ClickUp + Slack (`send_message`).
 
 ### 6. Criar Quick Flow "Onboarding Equipamento"
 
 Visual editor:
-1. **Trigger:** chamada do agente com parâmetros `{nome, cargo, gestor_email, equipamentos[]}`
+1. **Trigger:** chamada do agente com parâmetros `{nome, cargo, gestor_nome, gestor_slack, equipamentos[]}`
 2. **Step 1 — ClickUp:** criar task na list `Onboarding TI`
    - Title: `Equipamento para {nome} ({cargo})`
    - Description: lista de `equipamentos[]` + observações
-   - Custom fields preenchidos
+   - Custom fields preenchidos (`Gestor` = `{gestor_nome} ({gestor_slack})`)
    - Due date: hoje + 3 dias úteis
    - Status: `Solicitado`
-3. **Step 2 — Outlook:** enviar email para `gestor_email`
-   - Subject: `Onboarding em andamento: {nome}`
-   - Body: link da task ClickUp + checklist do dia 1
+3. **Step 2 — Slack:** post em `#rh-onboarding`
+   ```
+   👋 *Onboarding em andamento — Assistente RH Aurora*
+
+   {gestor_slack}, sua nova liderada *{nome}* ({cargo}) acabou de solicitar o pacote de equipamentos.
+
+   *Equipamentos:*
+   {equipamentos}
+
+   *Próximo passo:* aprovar a task no ClickUp até {due_date}.
+   🔗 Task: {clickup_task_url}
+
+   _Solicitação registrada automaticamente — {{system.timestamp}}_
+   ```
 4. **Step 3 — retorna ID da task pro agente**
 
 ## Roteiro do webinar (~14 min)
@@ -171,7 +181,7 @@ Conforme Manual do Funcionário (página 6):
 
 ### Bloco 4 — Ação real: solicitar equipamento (4 min)
 
-**P5.** `Quero solicitar meu equipamento de trabalho. Sou Analista Financeira, meu gestor é o Carlos Mendes (gestor-demo@aurora-demo.com).`
+**P5.** `Quero solicitar meu equipamento de trabalho. Sou Analista Financeira, meu gestor é o Bruno Vilardi (@bruno.vilardi no Slack).`
 
 Resposta esperada (e ação):
 ```
@@ -188,12 +198,12 @@ Vou abrir a solicitação no nosso sistema agora. Confirma os equipamentos?
 
 Quick Flow dispara:
 - Task ClickUp criada: `Equipamento para [Nome] (Analista Financeira)`
-- Email enviado pra `gestor-demo@aurora-demo.com` (Carlos Mendes)
-- Agente responde com ID da task: `Pronto! Task #ABC-247 aberta no ClickUp, prazo até [data+3]. Seu gestor recebeu email com o link.`
+- Mensagem postada em `#rh-onboarding` mencionando `@bruno.vilardi` com link da task
+- Agente responde com ID da task: `Pronto! Task #ABC-247 aberta no ClickUp, prazo até [data+3]. Seu gestor (@bruno.vilardi) foi marcado em #rh-onboarding com o link.`
 
 **Mostrar ao vivo:**
 1. Aba ClickUp → task aparecendo na list `Onboarding TI` com custom fields preenchidos
-2. Aba Outlook → email do gestor com link da task
+2. Aba Slack → canal `#rh-onboarding` com a mensagem nova mencionando `@bruno.vilardi` e link clicável da task
 
 **Wow moment:** "isso aconteceu em 30 segundos. Hoje, esse processo passa por 4 sistemas e leva 2-3 dias."
 
@@ -231,8 +241,8 @@ Essa informação não está nas políticas que tenho acesso. O reajuste salaria
 | Problema | Plano B |
 |---|---|
 | ClickUp MCP server falha | Trocar pra OpenAPI connector (Opção B) |
-| Ambas integrações ClickUp falham | Pular criação de task, mostrar Outlook só, dizer "no setup real, abre task também" |
-| Outlook OAuth expirou | Mostrar texto do email gerado |
+| Ambas integrações ClickUp falham | Pular criação de task, mostrar só o post Slack, dizer "no setup real, abre task também" |
+| Slack OAuth expirou ou Flow falha | Usar `send_message` direto via action do agente em `#rh-onboarding` com mesmo template |
 | Personal Token ClickUp revogado | Re-gerar (1 min) — sempre testar D-1 |
 | Indexação não pegou um PDF | Pular pergunta correspondente — sempre tenha 2 perguntas reserva |
 | Indexação retorna trecho errado | Reformular: "Conforme política de férias, posso..." |
