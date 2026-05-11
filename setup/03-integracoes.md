@@ -11,17 +11,18 @@ O Quick Suite distingue duas categorias:
 
 Vários conectores são **dual-purpose** (lêem e escrevem), ex.: ClickUp, ServiceNow, SharePoint.
 
-## Matriz mestre — 4 demos
+## Matriz mestre — 5 demos
 
-| Integração | Tipo | 01 Jurídico | 02 Comercial | 03 RH | 04 Financeiro |
-|---|---|:---:|:---:|:---:|:---:|
-| **S3** | Knowledge | ✅ obrig. | ⚪ opcional* | ✅ obrig. | ✅ obrig. |
-| **HubSpot** | Knowledge + Action | ⬜ | ✅ obrig. | ⬜ | ⬜ |
-| **Outlook** | Action | ✅ envio email | ✅ alert AE | ✅ email gestor | ✅ envio brief |
-| **Slack** | Action | ⬜ | ✅ alerta deal | ⬜ | ✅ post leadership |
-| **ClickUp** | Action | ⬜ | ⬜ | ✅ criar task | ⬜ |
-| **IAM Identity Center** | Auth | ✅ recomendado | ✅ recomendado | ✅ recomendado | ✅ recomendado |
-| **Quick Research** | Feature | ⬜ | ⬜ | ⬜ | ✅ obrig. |
+| Integração | Tipo | 01 Jurídico | 02 Comercial | 03 RH | 04 Financeiro | 05 Executivo |
+|---|---|:---:|:---:|:---:|:---:|:---:|
+| **S3** | Knowledge | ✅ obrig. | ⚪ opcional* | ✅ obrig. | ✅ obrig. | ✅ obrig. |
+| **HubSpot** | Knowledge + Action | ⬜ | ✅ obrig. | ⬜ | ⬜ | ✅ obrig. |
+| **Outlook** | Action | ✅ envio email | ✅ alert AE | ✅ email gestor | ✅ envio brief | ⬜ |
+| **Slack** | Action | ⬜ | ✅ alerta deal | ⬜ | ✅ post leadership | ✅ post leadership |
+| **ClickUp** | Action | ⬜ | ⬜ | ✅ criar task | ⬜ | ⬜ |
+| **IAM Identity Center** | Auth | ✅ recomendado | ✅ recomendado | ✅ recomendado | ✅ recomendado | ✅ recomendado |
+| **Quick Research** | Feature | ⬜ | ⬜ | ⬜ | ✅ obrig. | ✅ obrig. |
+| **2 Spaces simultâneos** | Knowledge | ⬜ | ⬜ | ⬜ | ⬜ | ✅ Comercial + Financeiro |
 
 \* S3 na Demo 02 é só um snapshot opcional do pipeline para alimentar Quick Sight com dado estável; fonte de verdade é HubSpot.
 

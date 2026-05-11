@@ -37,6 +37,7 @@ Conectores nativos: SharePoint, Google Drive, Salesforce, ServiceNow, Slack, Out
 | [02](demos/02-comercial-account-360.md) | **Comercial** — Account 360 + pipeline forecast (HubSpot CRM Free) | VP Vendas, AE | Baixo (conector nativo) | ⭐⭐⭐⭐ |
 | [03](demos/03-rh-onboarding-assistant.md) | **RH** — Assistente de onboarding + Q&A em políticas | Diretor RH, BP | Baixo | ⭐⭐⭐⭐ |
 | [04](demos/04-financeiro-variance-analysis.md) | **Financeiro** — Variance analysis + narrativa | CFO, controller, FP&A | Baixo-médio | ⭐⭐⭐⭐⭐ |
+| [05](demos/05-executivo-revenue-bridge.md) | **Executivo** — Revenue bridge cross-silo (CRM × Financeiro) | CFO + VP Comercial juntos | Médio | ⭐⭐⭐⭐⭐ |
 
 Recomendação: testar todas e escolher 2 para a versão final. Recomendação inicial = **RH + Financeiro** (menor risco, melhor cobertura dos 5 componentes).
 
