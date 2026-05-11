@@ -1,0 +1,375 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "HubSpot CRM Aurora demo",
+    "description": "Subset da HubSpot CRM API v3 com endpoints usados na Demo 02 do Sales Copilot Aurora: criar notas e tasks associadas a deals, e buscar deals por nome.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.hubapi.com",
+      "description": "HubSpot Public API base URL."
+    }
+  ],
+  "security": [
+    {
+      "PrivateAppToken": []
+    }
+  ],
+  "paths": {
+    "/crm/v3/objects/deals/search": {
+      "post": {
+        "operationId": "search_deals_by_name",
+        "summary": "Busca deals por nome",
+        "description": "Procura deals no HubSpot filtrando pelo nome (propriedade dealname). Retorna lista de deals com id e propriedades. Use para encontrar o ID de um deal antes de criar uma nota ou task associada a ele.",
+        "requestBody": {
+          "required": true,
+          "description": "Filtros de busca com propertyName dealname e operator CONTAINS_TOKEN.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DealSearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Lista de deals encontrados com id e propriedades.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DealSearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crm/v3/objects/notes": {
+      "post": {
+        "operationId": "create_note_on_deal",
+        "summary": "Cria uma nota associada a um deal",
+        "description": "Cria uma nota (engagement type note) no HubSpot com o texto fornecido em hs_note_body e a associa a um deal pelo ID do deal usando associationTypeId 214 HUBSPOT_DEFINED. Use após search_deals_by_name para registrar análises de risco ou recomendações no histórico do deal.",
+        "requestBody": {
+          "required": true,
+          "description": "Properties da nota com hs_note_body e hs_timestamp, e array associations apontando para o deal.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoteCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Nota criada com sucesso. Retorna id da nota e timestamps.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EngagementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crm/v3/objects/tasks": {
+      "post": {
+        "operationId": "create_task_on_deal",
+        "summary": "Cria uma task de follow-up associada a um deal",
+        "description": "Cria uma task no HubSpot com título, descrição, prioridade e data de vencimento, associada a um deal usando associationTypeId 216 HUBSPOT_DEFINED. Use para registrar próximos passos comerciais como agendar call ou revisar proposta.",
+        "requestBody": {
+          "required": true,
+          "description": "Properties da task com hs_task_subject, hs_task_body, hs_timestamp e prioridade, e array associations apontando para o deal.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task criada com sucesso. Retorna id da task e timestamps.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EngagementResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "PrivateAppToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "HubSpot Private App access token. Valor do header deve incluir o prefixo Bearer seguido de espaço e o token. Exemplo Bearer pat-na1-xxxxx."
+      }
+    },
+    "schemas": {
+      "DealSearchRequest": {
+        "type": "object",
+        "description": "Body da busca de deals com filtros e properties a retornar.",
+        "required": ["filterGroups"],
+        "properties": {
+          "filterGroups": {
+            "type": "array",
+            "description": "Grupos de filtros para a busca. Cada grupo contém uma lista de filtros aplicados em AND.",
+            "items": {
+              "$ref": "#/components/schemas/FilterGroup"
+            }
+          },
+          "properties": {
+            "type": "array",
+            "description": "Lista de propriedades do deal a retornar na resposta como dealname amount dealstage pipeline.",
+            "items": {
+              "type": "string",
+              "description": "Nome da propriedade HubSpot a retornar."
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Número máximo de deals retornados. Default 10.",
+            "default": 10,
+            "example": 5
+          }
+        }
+      },
+      "FilterGroup": {
+        "type": "object",
+        "description": "Grupo de filtros aplicados em AND lógico entre si.",
+        "properties": {
+          "filters": {
+            "type": "array",
+            "description": "Lista de filtros individuais com propertyName operator e value.",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          }
+        }
+      },
+      "Filter": {
+        "type": "object",
+        "description": "Filtro individual aplicado a uma propriedade do deal.",
+        "properties": {
+          "propertyName": {
+            "type": "string",
+            "description": "Nome da propriedade HubSpot a filtrar como dealname amount dealstage.",
+            "example": "dealname"
+          },
+          "operator": {
+            "type": "string",
+            "description": "Operador de comparação. Use CONTAINS_TOKEN para busca parcial em strings e EQ para igualdade exata.",
+            "example": "CONTAINS_TOKEN",
+            "enum": ["EQ", "NEQ", "CONTAINS_TOKEN", "HAS_PROPERTY", "GT", "LT", "GTE", "LTE"]
+          },
+          "value": {
+            "type": "string",
+            "description": "Valor a comparar com a propriedade.",
+            "example": "Frigorífico Pampa"
+          }
+        }
+      },
+      "DealSearchResponse": {
+        "type": "object",
+        "description": "Resposta da busca contendo total de matches e array de deals.",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Total de deals que casam com o filtro."
+          },
+          "results": {
+            "type": "array",
+            "description": "Lista de deals encontrados.",
+            "items": {
+              "$ref": "#/components/schemas/DealResult"
+            }
+          }
+        }
+      },
+      "DealResult": {
+        "type": "object",
+        "description": "Deal individual retornado pela busca.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID do deal usado como toObjectId em associations de notas e tasks."
+          },
+          "properties": {
+            "type": "object",
+            "description": "Properties do deal solicitadas em DealSearchRequest properties.",
+            "additionalProperties": {
+              "type": "string",
+              "description": "Valor da property como string."
+            }
+          }
+        }
+      },
+      "NoteCreateRequest": {
+        "type": "object",
+        "description": "Body de criação de nota com properties e associations.",
+        "required": ["properties"],
+        "properties": {
+          "properties": {
+            "$ref": "#/components/schemas/NoteProperties"
+          },
+          "associations": {
+            "type": "array",
+            "description": "Lista de associações da nota a outros objetos. Para nota associada a deal use um item com to.id igual ao ID do deal e types associationTypeId 214 HUBSPOT_DEFINED.",
+            "items": {
+              "$ref": "#/components/schemas/Association"
+            }
+          }
+        }
+      },
+      "NoteProperties": {
+        "type": "object",
+        "description": "Properties obrigatórias e opcionais da nota.",
+        "required": ["hs_note_body", "hs_timestamp"],
+        "properties": {
+          "hs_note_body": {
+            "type": "string",
+            "description": "Conteúdo textual da nota. Suporta HTML básico para formatação.",
+            "example": "Health score 45 risco alto última atividade há 18 dias agendar follow up esta semana."
+          },
+          "hs_timestamp": {
+            "type": "string",
+            "description": "Timestamp da nota em formato ISO 8601 normalmente a data e hora atual.",
+            "example": "2026-04-28T15:30:00Z"
+          }
+        }
+      },
+      "TaskCreateRequest": {
+        "type": "object",
+        "description": "Body de criação de task com properties e associations.",
+        "required": ["properties"],
+        "properties": {
+          "properties": {
+            "$ref": "#/components/schemas/TaskProperties"
+          },
+          "associations": {
+            "type": "array",
+            "description": "Lista de associações da task a outros objetos. Para task associada a deal use um item com to.id igual ao ID do deal e types associationTypeId 216 HUBSPOT_DEFINED.",
+            "items": {
+              "$ref": "#/components/schemas/Association"
+            }
+          }
+        }
+      },
+      "TaskProperties": {
+        "type": "object",
+        "description": "Properties obrigatórias e opcionais da task.",
+        "required": ["hs_task_subject", "hs_timestamp"],
+        "properties": {
+          "hs_task_subject": {
+            "type": "string",
+            "description": "Título curto da task que aparece no card.",
+            "example": "Follow up Frigorífico Pampa agendar call com decisor"
+          },
+          "hs_task_body": {
+            "type": "string",
+            "description": "Descrição detalhada da task com contexto e próximos passos.",
+            "example": "Deal em risco health score 45 revisar proposta e agendar call esta semana."
+          },
+          "hs_timestamp": {
+            "type": "string",
+            "description": "Data de vencimento da task em formato ISO 8601.",
+            "example": "2026-05-02T17:00:00Z"
+          },
+          "hs_task_priority": {
+            "type": "string",
+            "description": "Prioridade da task LOW MEDIUM ou HIGH.",
+            "enum": ["LOW", "MEDIUM", "HIGH"],
+            "example": "HIGH"
+          },
+          "hs_task_status": {
+            "type": "string",
+            "description": "Status inicial da task. Default NOT_STARTED.",
+            "enum": ["NOT_STARTED", "IN_PROGRESS", "WAITING", "COMPLETED", "DEFERRED"],
+            "example": "NOT_STARTED"
+          }
+        }
+      },
+      "Association": {
+        "type": "object",
+        "description": "Associação de um engagement nota ou task a outro objeto CRM.",
+        "properties": {
+          "to": {
+            "$ref": "#/components/schemas/AssociationTarget"
+          },
+          "types": {
+            "type": "array",
+            "description": "Tipos de associação aplicados normalmente um único elemento com associationCategory HUBSPOT_DEFINED e o associationTypeId apropriado 214 para note_to_deal e 216 para task_to_deal.",
+            "items": {
+              "$ref": "#/components/schemas/AssociationType"
+            }
+          }
+        }
+      },
+      "AssociationTarget": {
+        "type": "object",
+        "description": "Objeto destino da associação identificado pelo id.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID do objeto destino normalmente o ID do deal obtido em search_deals_by_name."
+          }
+        }
+      },
+      "AssociationType": {
+        "type": "object",
+        "description": "Tipo de associação que define a relação entre os objetos.",
+        "properties": {
+          "associationCategory": {
+            "type": "string",
+            "description": "Categoria da associação. Use HUBSPOT_DEFINED para tipos padrão e USER_DEFINED para custom.",
+            "enum": ["HUBSPOT_DEFINED", "USER_DEFINED"],
+            "example": "HUBSPOT_DEFINED"
+          },
+          "associationTypeId": {
+            "type": "integer",
+            "description": "ID numérico do tipo de associação. 214 igual a note_to_deal e 216 igual a task_to_deal.",
+            "example": 214
+          }
+        }
+      },
+      "EngagementResponse": {
+        "type": "object",
+        "description": "Resposta de criação de engagement nota ou task com id e timestamps.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID do engagement criado."
+          },
+          "properties": {
+            "type": "object",
+            "description": "Properties do engagement criado.",
+            "additionalProperties": {
+              "type": "string",
+              "description": "Valor da property como string."
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Timestamp de criação em formato ISO 8601."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Timestamp da última atualização em formato ISO 8601."
+          }
+        }
+      }
+    }
+  }
+}
