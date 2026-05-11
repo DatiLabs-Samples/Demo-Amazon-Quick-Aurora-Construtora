@@ -1,0 +1,109 @@
+regional,categoria,data,tipo,valor
+BA,Custo Direto,2026-01-01,actual,2050000
+BA,Custo Direto,2026-01-01,budget,2000000
+BA,Custo Direto,2026-02-01,actual,2000000
+BA,Custo Direto,2026-02-01,budget,1950000
+BA,Custo Direto,2026-03-01,actual,2200000
+BA,Custo Direto,2026-03-01,budget,2100000
+BA,Custo Direto,2026-04-01,budget,2050000
+BA,Custo Direto,2026-05-01,budget,2150000
+BA,Custo Direto,2026-06-01,budget,2210000
+BA,Despesa Operacional,2026-01-01,actual,790000
+BA,Despesa Operacional,2026-01-01,budget,760000
+BA,Despesa Operacional,2026-02-01,actual,770000
+BA,Despesa Operacional,2026-02-01,budget,740000
+BA,Despesa Operacional,2026-03-01,actual,830000
+BA,Despesa Operacional,2026-03-01,budget,800000
+BA,Despesa Operacional,2026-04-01,budget,780000
+BA,Despesa Operacional,2026-05-01,budget,820000
+BA,Despesa Operacional,2026-06-01,budget,840000
+BA,Receita,2026-01-01,actual,2900000
+BA,Receita,2026-01-01,budget,3800000
+BA,Receita,2026-02-01,actual,2800000
+BA,Receita,2026-02-01,budget,3700000
+BA,Receita,2026-03-01,actual,3100000
+BA,Receita,2026-03-01,budget,4000000
+BA,Receita,2026-04-01,budget,3900000
+BA,Receita,2026-05-01,budget,4100000
+BA,Receita,2026-06-01,budget,4200000
+MG,Custo Direto,2026-01-01,actual,2680000
+MG,Custo Direto,2026-01-01,budget,2700000
+MG,Custo Direto,2026-02-01,actual,2580000
+MG,Custo Direto,2026-02-01,budget,2600000
+MG,Custo Direto,2026-03-01,actual,2880000
+MG,Custo Direto,2026-03-01,budget,2900000
+MG,Custo Direto,2026-04-01,budget,2800000
+MG,Custo Direto,2026-05-01,budget,2950000
+MG,Custo Direto,2026-06-01,budget,3050000
+MG,Despesa Operacional,2026-01-01,actual,1020000
+MG,Despesa Operacional,2026-01-01,budget,1040000
+MG,Despesa Operacional,2026-02-01,actual,990000
+MG,Despesa Operacional,2026-02-01,budget,1000000
+MG,Despesa Operacional,2026-03-01,actual,1080000
+MG,Despesa Operacional,2026-03-01,budget,1100000
+MG,Despesa Operacional,2026-04-01,budget,1060000
+MG,Despesa Operacional,2026-05-01,budget,1120000
+MG,Despesa Operacional,2026-06-01,budget,1160000
+MG,Receita,2026-01-01,actual,5300000
+MG,Receita,2026-01-01,budget,5200000
+MG,Receita,2026-02-01,actual,5100000
+MG,Receita,2026-02-01,budget,5000000
+MG,Receita,2026-03-01,actual,5650000
+MG,Receita,2026-03-01,budget,5500000
+MG,Receita,2026-04-01,budget,5300000
+MG,Receita,2026-05-01,budget,5600000
+MG,Receita,2026-06-01,budget,5800000
+RJ,Custo Direto,2026-01-01,actual,4520000
+RJ,Custo Direto,2026-01-01,budget,4500000
+RJ,Custo Direto,2026-02-01,actual,4350000
+RJ,Custo Direto,2026-02-01,budget,4300000
+RJ,Custo Direto,2026-03-01,actual,4900000
+RJ,Custo Direto,2026-03-01,budget,4800000
+RJ,Custo Direto,2026-04-01,budget,4700000
+RJ,Custo Direto,2026-05-01,budget,4900000
+RJ,Custo Direto,2026-06-01,budget,5050000
+RJ,Despesa Operacional,2026-01-01,actual,1710000
+RJ,Despesa Operacional,2026-01-01,budget,1700000
+RJ,Despesa Operacional,2026-02-01,actual,1660000
+RJ,Despesa Operacional,2026-02-01,budget,1640000
+RJ,Despesa Operacional,2026-03-01,actual,1830000
+RJ,Despesa Operacional,2026-03-01,budget,1800000
+RJ,Despesa Operacional,2026-04-01,budget,1760000
+RJ,Despesa Operacional,2026-05-01,budget,1840000
+RJ,Despesa Operacional,2026-06-01,budget,1900000
+RJ,Receita,2026-01-01,actual,8400000
+RJ,Receita,2026-01-01,budget,8500000
+RJ,Receita,2026-02-01,actual,8100000
+RJ,Receita,2026-02-01,budget,8200000
+RJ,Receita,2026-03-01,actual,8800000
+RJ,Receita,2026-03-01,budget,9000000
+RJ,Receita,2026-04-01,budget,8800000
+RJ,Receita,2026-05-01,budget,9200000
+RJ,Receita,2026-06-01,budget,9500000
+SP,Custo Direto,2026-01-01,actual,9100000
+SP,Custo Direto,2026-01-01,budget,9000000
+SP,Custo Direto,2026-02-01,actual,8900000
+SP,Custo Direto,2026-02-01,budget,8800000
+SP,Custo Direto,2026-03-01,actual,9650000
+SP,Custo Direto,2026-03-01,budget,9500000
+SP,Custo Direto,2026-04-01,budget,9300000
+SP,Custo Direto,2026-05-01,budget,9800000
+SP,Custo Direto,2026-06-01,budget,10000000
+SP,Despesa Operacional,2026-01-01,actual,3650000
+SP,Despesa Operacional,2026-01-01,budget,3600000
+SP,Despesa Operacional,2026-02-01,actual,3520000
+SP,Despesa Operacional,2026-02-01,budget,3500000
+SP,Despesa Operacional,2026-03-01,actual,3850000
+SP,Despesa Operacional,2026-03-01,budget,3800000
+SP,Despesa Operacional,2026-04-01,budget,3700000
+SP,Despesa Operacional,2026-05-01,budget,3900000
+SP,Despesa Operacional,2026-06-01,budget,4000000
+SP,Receita,2026-01-01,actual,17800000
+SP,Receita,2026-01-01,budget,18000000
+SP,Receita,2026-02-01,actual,17600000
+SP,Receita,2026-02-01,budget,17500000
+SP,Receita,2026-03-01,actual,18900000
+SP,Receita,2026-03-01,budget,19000000
+SP,Receita,2026-04-01,budget,18500000
+SP,Receita,2026-05-01,budget,19500000
+SP,Receita,2026-06-01,budget,20000000
