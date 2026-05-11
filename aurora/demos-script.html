@@ -383,8 +383,8 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0
      ============================================================ -->
 <header class="page-header">
   <div class="container">
-    <h1>Roteiro <span class="accent">ao vivo</span> · 4 demos do webinar Amazon Quick</h1>
-    <p class="page-header-sub">Empresa-modelo: Aurora Construtora · ~14 min por demo · escolha 2 para o webinar final</p>
+    <h1>Roteiro <span class="accent">ao vivo</span> · 5 demos do webinar Amazon Quick</h1>
+    <p class="page-header-sub">Empresa-modelo: Aurora Construtora · ~14 min por demo · escolha as demos para o webinar final</p>
   </div>
 </header>
 
@@ -418,6 +418,11 @@ h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0
         <span class="nav-tab-num">04</span>
         <span class="nav-tab-area">Financeiro</span>
         <span>Variance · narrativa</span>
+      </a>
+      <a href="#demo-05" class="nav-tab">
+        <span class="nav-tab-num">05</span>
+        <span class="nav-tab-area">Executivo</span>
+        <span>Revenue bridge cross-silo</span>
       </a>
     </div>
   </div>
@@ -1338,6 +1343,193 @@ Ação recomendada para o comitê amanhã:
         <tr><td>Agent não vê o flow</td><td>Edit → Actions → Link Slack</td></tr>
         <tr><td>Slack OAuth expirou</td><td>Mostrar texto da mensagem que iria postar</td></tr>
         <tr><td>Dataset Quick Sight com erro</td><td>Screenshot do dashboard; explicar que dados estão no S3</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEMO 05 — EXECUTIVO REVENUE BRIDGE (CROSS-SILO)
+     ============================================================ -->
+<section class="demo" id="demo-05">
+  <header class="demo-header">
+    <span class="demo-eyebrow">Demo 05 · Executivo</span>
+    <h2>Revenue bridge cross-silo</h2>
+    <p class="demo-summary">CFO + VP Comercial juntos olhando Q1. BA gap de R$ 2,7M tem causa específica? Agente cruza 4 fontes em 1 pergunta: variance dataset + ata do comitê + pipeline HubSpot + relatório de mercado. Identifica deal slipped, mostra pipeline de recuperação, conecta ao plano de mitigação da ata, posta brief no Slack.</p>
+    <div class="demo-meta">
+      <span><strong>Agente:</strong> Aurora Executive Copilot</span>
+      <span><strong>Knowledge:</strong> Space Financeiro + Space Comercial</span>
+      <span><strong>Actions:</strong> Slack send_message</span>
+      <span><strong>Quick Research:</strong> habilitado</span>
+    </div>
+  </header>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">01</span>
+      <h3>Contexto</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Segunda de manhã. CFO e VP Comercial na mesma reunião. CFO trouxe o fechamento Q1: BA -R$ 2,7M em receita. VP Comercial trouxe o pipeline: temos deals na BA. <strong>Os dois sabem partes da história, mas a resposta executiva exige cruzar os dois.</strong> Antes do Quick: 2 reuniões + 1 planilha intermediária. Com o Quick: 1 pergunta.</p>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">02</span>
+      <h3>Pergunta executiva — por que BA miss Q1?</h3>
+      <span class="bloco-time">4 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+    <div class="action action-prompt">
+      <span class="action-label">P1 · Digitar</span>
+      <code>Por que a receita BA ficou R$ 2,7M abaixo no Q1? Cruza o variance com o pipeline pra identificar o deal específico.</code>
+    </div>
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>HEADLINE: O gap de R$ 2,7M na receita BA Q1 é explicado pelo slippage do
+deal DER-BA — Recuperação BR-324 (R$ 5,8M, Patrícia Alves), que originalmente
+fecharia em Q1 mas foi reprogramado para Q3 por atraso na liberação federal.
+
+CONTEXTO CRUZADO:
+- Dataset Aurora Variance Q1: receita BA realizada R$ 8,8M vs orçada R$ 11,5M
+  (-R$ 2,7M / -23%)
+- HubSpot deal DER-BA: closedate 2026-07-15, expected_close_quarter_original=Q1,
+  SLIPPED 2 trimestres. Valor R$ 5,8M × ~50% reconhecimento POC = R$ 2,9M
+  de receita perdida em Q1, batendo com o gap.
+- Ata Comitê mar/2026 item 3.2a: confirma atraso em obras públicas no Nordeste,
+  BA particularmente exposta — ~60% da carteira regional em contratos públicos
+  federais.
+- Relatório de Mercado Q1 página 4: corrobora retração 4,7% Nordeste,
+  execução orçamentária União em 31% vs histórico 38%.
+
+CONCLUSÃO: o gap NÃO é falha de execução comercial nem operacional — é
+macro (atraso federal). O deal está vivo no pipeline, só foi reagendado.</pre>
+    </div>
+    <div class="action action-wow">
+      <span class="action-label">Wow moment</span>
+      <p>O agente identificou um deal específico cruzando 4 fontes diferentes — pipeline CRM + dataset financeiro + ata interna + relatório externo. Isso é <strong>impossível hoje sem cross-silo manual</strong>.</p>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">03</span>
+      <h3>Recovery pipeline — dá pra recuperar o gap?</h3>
+      <span class="bloco-time">4 min</span>
+      <span class="bloco-wow-tag">Wow moment 2</span>
+    </div>
+    <div class="action action-prompt">
+      <span class="action-label">P2 · Digitar</span>
+      <code>Olhando o pipeline BA Q2-Q3 atual, dá pra recuperar o gap? Lista os deals com valor, sales rep responsável e timing.</code>
+    </div>
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Pipeline BA total Q2-Q3: R$ 7,9M em 2 deals ativos:
+
+1. DER-BA — Recuperação BR-324 Trecho Urbano | R$ 5,8M | Negotiation
+   Sales Rep: Patrícia Alves | health_score 50 | last_activity 6 dias
+   Closedate: 2026-07-15 (Q3) | original Q1 (slipped 2 trimestres)
+   Tipo: contrato público (concessionária estadual)
+   Status: deal vivo, recuperável condicionado à retomada de licitação federal
+
+2. Polo Camaçari — Galpões Logísticos Setor B | R$ 2,1M | Proposal
+   Sales Rep: Carla Souza | health_score 75 | last_activity 8 dias
+   Closedate: 2026-06-20 (Q2) | original Q2 (no slippage)
+   Tipo: contrato privado (industrial)
+   Status: saudável, alinha com estratégia de diversificação privada da ata
+
+CRUZAMENTO COM ATA item 3.2b: o plano de mitigação aprovado em fev/2026 mas
+não acionado em março contempla exatamente isso — diversificação privada
+(Polo Camaçari materializa) + monitoramento de pleitos federais (DER-BA).
+
+GAP COBERTO: R$ 7,9M em pipeline vs R$ 2,7M de gap Q1 = cobertura 2,9x.</pre>
+    </div>
+    <div class="action action-wow">
+      <span class="action-label">Wow moment 2</span>
+      <p>O agente <strong>conectou cada deal ao item específico do plano de mitigação da ata</strong>. Transforma a ata de "documento de leitura" em "plano com tracking automático".</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">04</span>
+      <h3>Ação estratégica pro comitê</h3>
+      <span class="bloco-time">3 min</span>
+    </div>
+    <div class="action action-prompt">
+      <span class="action-label">P3 · Digitar</span>
+      <code>Qual a ação concreta pro comitê amanhã, combinando ata, pipeline e relatório de mercado?</code>
+    </div>
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>HEADLINE: BA Q1 lost R$ 2,7M por slippage de 1 deal (DER-BA), pipeline
+Q2-Q3 cobre 2,9x o gap mas precisa execução cirúrgica em 2 frentes paralelas.
+
+DRIVERS:
+- DER-BA R$ 5,8M (Patrícia, Negotiation, Q3): monitoramento quinzenal por
+  Mariana conforme item 6 da ata, condicionado à retomada de licitações
+  federais sinalizadas no Relatório de Mercado p.5 para Q2-Q3.
+- Polo Camaçari R$ 2,1M (Carla, Proposal, Q2): acelerar fechamento, alinha
+  com item 3.2c da ata (redução de exposição pública para 45% até 2027).
+- Macro Nordeste (Relatório p.4): retração 4,7% com BA -18%; execução
+  orçamentária federal em 31% — sinais Q2 mas incertos.
+
+OUTLOOK: cenário base mantém recuperação parcial Q2 condicionada à
+retomada federal; pessimista mantém slippage DER-BA até Q4 (impacto
+anual ~R$ 11M conforme ata).
+
+AÇÃO: aprovar (1) acompanhamento quinzenal DER-BA por Mariana, (2)
+priorização comercial de Polo Camaçari por Lucas em 2 semanas, (3)
+revisão da meta diversificação BA no próximo comitê.</pre>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">05</span>
+      <h3>Acionar Slack</h3>
+      <span class="bloco-time">2 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+    <div class="action action-prompt">
+      <span class="action-label">P4 · Digitar</span>
+      <code>Manda esse brief pro time de leadership financeiro no Slack.</code>
+    </div>
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Agente chama action <strong>send_message</strong> do Slack</li>
+        <li>Aba Slack → canal <strong>#financeiro-leadership</strong></li>
+        <li>Mensagem aparece com 🎯 HEADLINE · DRIVERS · OUTLOOK · AÇÃO</li>
+        <li>Fechar com talking point: "Esse brief cruzou 4 fontes que hoje vivem em 4 sistemas."</li>
+      </ol>
+    </div>
+  </article>
+
+  <div class="cheatsheet">
+    <h3>Cheatsheet de prompts</h3>
+    <ol>
+      <li>Por que a receita BA ficou R$ 2,7M abaixo no Q1? Cruza o variance com o pipeline pra identificar o deal específico.</li>
+      <li>Olhando o pipeline BA Q2-Q3 atual, dá pra recuperar o gap? Lista os deals com valor, sales rep responsável e timing.</li>
+      <li>Qual a ação concreta pro comitê amanhã, combinando ata, pipeline e relatório de mercado?</li>
+      <li>Manda esse brief pro time de leadership financeiro no Slack.</li>
+    </ol>
+  </div>
+
+  <div class="fallback-section">
+    <h3>Fallback / troubleshooting</h3>
+    <table>
+      <thead><tr><th>Problema</th><th>Plano B</th></tr></thead>
+      <tbody>
+        <tr><td>Agente responde com macro sem identificar deal</td><td>Reforçar: "use o HubSpot pipeline pra identificar deal específico antes de citar macro"</td></tr>
+        <tr><td>Agente cita deal mas inventa amount</td><td>Reformular: "qual o amount exato do DER-BA no HubSpot?"</td></tr>
+        <tr><td>Agente não conecta deal ao item da ata</td><td>Reformular: "qual item da ata corresponde a este deal?"</td></tr>
+        <tr><td>HubSpot OAuth expirou</td><td>Re-autenticar (2 min); ter screenshot pronto se urgente</td></tr>
+        <tr><td>Quick Research demora</td><td>Disparar P1 antes do bloco e mostrar pronto na hora</td></tr>
+        <tr><td>Slack OAuth expirou</td><td>Mostrar texto da mensagem que iria postar</td></tr>
       </tbody>
     </table>
   </div>
