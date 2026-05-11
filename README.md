@@ -48,6 +48,7 @@ Recomendação: testar todas e escolher 2 para a versão final. Recomendação i
 - [Integrações por demo](setup/03-integracoes.md)
 - [Empresa-modelo Aurora](setup/04-empresa.md)
 - [**Novidades Amazon Quick 2026**](setup/05-novidades-2026.md) ⭐ atualizado 28/04/2026
+- [Dados de construtora — contexto setorial](setup/06-dados-construtora.md)
 
 ## Referências AWS
 
