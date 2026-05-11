@@ -2,14 +2,20 @@
 """
 setup-hubspot.py — provisiona scaffold de CRM no HubSpot Aurora
 
-Cria (idempotente):
+Cria/atualiza (idempotente):
   - 5 stages no pipeline default ("Sales Pipeline"):
     Discovery, Qualification, Proposal, Negotiation, Closed Won
   - Custom properties:
-    Deal: health_score, last_activity_days, sales_rep
+    Deal: health_score, last_activity_days, sales_rep,
+          regional, aurora_vertical, expected_close_quarter_original
     Company: csat_score, open_tickets
-  - 8 companies (data/companies.json)
-  - 8 deals (data/deals.json) com associação à company correspondente
+  - 9 companies (data/companies.json) — Aurora carteira-âncora + 2 BA
+  - 9 deals (data/deals.json) com associação à company correspondente
+
+Orphan cleanup:
+  No final, arquiva (soft-delete) qualquer deal ou company que esteja no
+  HubSpot mas não na lista canônica do repo. Permite re-rodar o script
+  depois de mudanças sem deixar lixo no HubSpot.
 
 Uso:
   export HUBSPOT_TOKEN=pat-na1-...
@@ -140,6 +146,30 @@ DEAL_PROPERTIES = [
         "groupName": "dealinformation",
         "description": "AE responsável pelo deal (Carla, Rodrigo, Patrícia).",
     },
+    {
+        "name": "regional",
+        "label": "Regional",
+        "type": "string",
+        "fieldType": "text",
+        "groupName": "dealinformation",
+        "description": "Estado/regional da operação do deal (SP, RJ, MG, BA, RS, PR).",
+    },
+    {
+        "name": "aurora_vertical",
+        "label": "Aurora Vertical",
+        "type": "string",
+        "fieldType": "text",
+        "groupName": "dealinformation",
+        "description": "Linha de negócio Aurora (Industrial, Predial, Infra, Tech).",
+    },
+    {
+        "name": "expected_close_quarter_original",
+        "label": "Expected Close Quarter (Original)",
+        "type": "string",
+        "fieldType": "text",
+        "groupName": "dealinformation",
+        "description": "Quarter de fechamento previsto na assinatura do deal (Q1, Q2, Q3, Q4). Comparar com closedate atual revela slippage.",
+    },
 ]
 
 COMPANY_PROPERTIES = [
@@ -263,6 +293,9 @@ def setup_deals(stage_label_to_id: dict[str, str], company_name_to_id: dict[str,
             "sales_rep": d["sales_rep"],
             "health_score": d["health_score"],
             "last_activity_days": d["last_activity_days"],
+            "regional": d["regional"],
+            "aurora_vertical": d["aurora_vertical"],
+            "expected_close_quarter_original": d["expected_close_quarter_original"],
         }
 
         existing = find_deal_by_name(d["dealname"])
@@ -295,6 +328,72 @@ def setup_deals(stage_label_to_id: dict[str, str], company_name_to_id: dict[str,
 
 
 # ──────────────────────────────────────────────────────────────────────
+# Orphan cleanup — arquiva deals/companies que não estão no repo
+# ──────────────────────────────────────────────────────────────────────
+
+def _list_all(object_type: str, properties: list[str]) -> list[dict]:
+    """Lista todos os objetos paginando. Retorna lista crua de results."""
+    all_results: list[dict] = []
+    after: Optional[str] = None
+    while True:
+        params = f"limit=100&properties={','.join(properties)}"
+        if after:
+            params += f"&after={after}"
+        res = api("GET", f"/crm/v3/objects/{object_type}?{params}")
+        all_results.extend(res.get("results", []))
+        paging = res.get("paging", {})
+        next_page = paging.get("next", {})
+        if not next_page or "after" not in next_page:
+            break
+        after = next_page["after"]
+    return all_results
+
+
+def archive_orphan_records() -> None:
+    """Arquiva (soft-delete) deals e companies do HubSpot que não estão
+    nas listas canônicas do repo. Preserva idempotência ao re-rodar setup
+    depois de mudar deals.json ou companies.json."""
+
+    print("🗑️  Orphan cleanup — checando registros órfãos...")
+
+    with open(DATA_DIR / "deals.json", encoding="utf-8") as f:
+        canonical_deal_names = {d["dealname"] for d in json.load(f)}
+    with open(DATA_DIR / "companies.json", encoding="utf-8") as f:
+        canonical_company_domains = {c["domain"] for c in json.load(f)}
+
+    # Deals
+    deals = _list_all("deals", ["dealname", "pipeline"])
+    deal_orphans = [
+        d for d in deals
+        if d["properties"].get("pipeline") == "default"
+        and d["properties"].get("dealname") not in canonical_deal_names
+    ]
+    if deal_orphans:
+        print(f"   {len(deal_orphans)} deal(s) órfão(s) — arquivando:")
+        for d in deal_orphans:
+            name = d["properties"].get("dealname", "(sem nome)")
+            print(f"      🗑  {name} (id={d['id']})")
+            api("DELETE", f"/crm/v3/objects/deals/{d['id']}")
+    else:
+        print("   ✓ Nenhum deal órfão")
+
+    # Companies
+    companies = _list_all("companies", ["name", "domain"])
+    company_orphans = [
+        c for c in companies
+        if c["properties"].get("domain") not in canonical_company_domains
+    ]
+    if company_orphans:
+        print(f"   {len(company_orphans)} company(ies) órfã(s) — arquivando:")
+        for c in company_orphans:
+            label = c["properties"].get("name") or c["properties"].get("domain") or "(sem nome)"
+            print(f"      🗑  {label} (id={c['id']})")
+            api("DELETE", f"/crm/v3/objects/companies/{c['id']}")
+    else:
+        print("   ✓ Nenhuma company órfã")
+
+
+# ──────────────────────────────────────────────────────────────────────
 # Main
 # ──────────────────────────────────────────────────────────────────────
 
@@ -317,6 +416,9 @@ def main() -> None:
     print()
 
     setup_deals(stage_ids, company_ids)
+    print()
+
+    archive_orphan_records()
     print()
 
     print("🎉 Scaffold concluído!")

@@ -72,18 +72,6 @@
     "open_tickets": 12
   },
   {
-    "name": "Distribuidora Atlântico",
-    "domain": "atlanticodist.com.br",
-    "industry": "WHOLESALE",
-    "city": "Recife",
-    "state": "PE",
-    "country": "Brazil",
-    "numberofemployees": 420,
-    "annualrevenue": 95000000,
-    "csat_score": 4.3,
-    "open_tickets": 1
-  },
-  {
     "name": "Telecom Aurora",
     "domain": "telecomaurora.com.br",
     "industry": "TELECOMMUNICATIONS",
@@ -94,5 +82,29 @@
     "annualrevenue": 3400000000,
     "csat_score": 3.8,
     "open_tickets": 6
+  },
+  {
+    "name": "DER-BA",
+    "domain": "der.ba.gov.br",
+    "industry": "GOVERNMENT_ADMINISTRATION",
+    "city": "Salvador",
+    "state": "BA",
+    "country": "Brazil",
+    "numberofemployees": 1800,
+    "annualrevenue": 0,
+    "csat_score": 3.8,
+    "open_tickets": 2
+  },
+  {
+    "name": "Polo Industrial Camaçari",
+    "domain": "polocamacari.com.br",
+    "industry": "INDUSTRIAL_AUTOMATION",
+    "city": "Camaçari",
+    "state": "BA",
+    "country": "Brazil",
+    "numberofemployees": 1200,
+    "annualrevenue": 520000000,
+    "csat_score": 4.2,
+    "open_tickets": 0
   }
 ]

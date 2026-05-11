@@ -69,7 +69,7 @@ Ser, até 2030, a construtora referência em projetos público-privados de médi
 | Receita Q1 2026 (orçada) | R$ 95 milhões |
 | Receita Q1 2026 (realizada) | R$ 90 milhões (-5,3%) |
 | Margem operacional média | 9,2% |
-| Pipeline comercial Q2 2026 | R$ 12,77 milhões em 8 deals ativos |
+| Pipeline comercial Q2-Q3 2026 | R$ 20,25 milhões em 9 deals ativos |
 | Contratos jurídicos ativos | ~145 |
 | Volume médio de novos contratos/mês | 12 |
 
@@ -99,16 +99,17 @@ Ser, até 2030, a construtora referência em projetos público-privados de médi
 
 ## Carteira de clientes-âncora
 
-| Cliente | Setor | Vertical Aurora | Início da relação |
-|---|---|---|---|
-| Mineradora Itacolomi | Mineração | Aurora Industrial | 2018 |
-| Hospital São Lucas | Saúde | Aurora Predial | 2021 |
-| Banco Cruzeiro | Financeiro | Aurora Predial | 2019 |
-| Telecom Aurora | Telecomunicações | Aurora Infra | 2023 (homônimo, sem relação societária) |
-| Frigorífico Pampa | Alimentos | Aurora Industrial | 2022 |
-| Indústria Cedrofino | Indústria | Aurora Industrial | 2024 |
-| Varejo Mil Cores | Varejo | Aurora Predial | 2020 |
-| Distribuidora Atlântico | Distribuição | Aurora Industrial | 2025 |
+| Cliente | Setor | Vertical Aurora | Regional | Início da relação |
+|---|---|---|---|---|
+| Mineradora Itacolomi | Mineração | Aurora Industrial | MG | 2018 |
+| Hospital São Lucas | Saúde | Aurora Predial | RJ | 2021 |
+| Banco Cruzeiro | Financeiro | Aurora Predial | SP | 2019 |
+| Telecom Aurora | Telecomunicações | Aurora Infra | SP | 2023 (homônimo, sem relação societária) |
+| Frigorífico Pampa | Alimentos | Aurora Industrial | RS | 2022 |
+| Indústria Cedrofino | Indústria | Aurora Industrial | PR | 2024 |
+| Varejo Mil Cores | Varejo | Aurora Predial | SP | 2020 |
+| DER-BA | Setor público (rodoviário) | Aurora Infra | BA | 2024 |
+| Polo Industrial Camaçari | Industrial (real estate) | Aurora Industrial | BA | 2025 |
 
 ## Fornecedores estratégicos (citados nos contratos da Demo 01)
 
@@ -129,6 +130,7 @@ Ser, até 2030, a construtora referência em projetos público-privados de médi
 ## Como usar este arquivo nas demos
 
 - **Demo 01 (Jurídico):** contratos sempre referenciam Aurora como contratante/contratada com o CNPJ e endereço sede acima
-- **Demo 02 (Comercial):** owner dos deals = Carla / Rodrigo / Patrícia; pipeline reflete os 8 clientes da carteira
+- **Demo 02 (Comercial):** owner dos deals = Carla / Rodrigo / Patrícia; pipeline reflete os 9 clientes da carteira (Distribuidora Atlântico saiu da carteira; DER-BA e Polo Camaçari entraram com a estratégia de mitigação BA)
 - **Demo 03 (RH):** Aurora People é o app interno; políticas mencionam estrutura organizacional acima
 - **Demo 04 (Financeiro):** desvio orçamentário Q1 2026 corresponde aos números na seção Indicadores; regional BA é o "gancho" do desvio explicado por atraso em obras públicas
+- **Demo 05 (Executivo cross-silo):** cruza Comercial (HubSpot) com Financeiro (variance + ata) — pipeline BA agora reflete a recuperação proposta pela ata de mar/2026 (DER-BA slipped do Q1, Polo Camaçari como diversificação privada)
