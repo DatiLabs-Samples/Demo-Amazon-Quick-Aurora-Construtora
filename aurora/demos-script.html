@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro das demos · Webinar Amazon Quick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0E1E36;
+  --navy-2: #1B2845;
+  --amber: #D4A24C;
+  --amber-dark: #B5832A;
+  --aws-orange: #FF9900;
+  --bg: #FAF8F3;
+  --bg-2: #F2EDE0;
+  --text: #1A1A1A;
+  --muted: #5A5A5A;
+  --line: #D6D2C7;
+  --quote: #2C5282;
+  --quote-bg: #EBF2FA;
+  --prompt-bg: #FBF1D9;
+  --prompt-border: #D4A24C;
+  --show: #2F7D4E;
+  --show-bg: #E8F2EC;
+  --wow: #B45309;
+  --wow-bg: #FDF2DC;
+  --fallback: #B43A3A;
+  --fallback-bg: #FCEEEE;
+  --code-bg: #F0EDE5;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 6em; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+}
+h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header {
+  background: var(--navy);
+  color: #fff;
+  padding: 40px 0 32px;
+}
+.page-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.page-header h1 .accent { color: var(--amber); }
+.page-header-sub {
+  color: rgba(255,255,255,0.72);
+  font-size: 15px;
+}
+
+/* ============================================================
+   STICKY NAV
+   ============================================================ */
+.nav-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+}
+.nav-tabs-inner {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.nav-tab {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 16px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: background 0.15s, transform 0.15s, border-color 0.15s;
+}
+.nav-tab:hover { background: var(--amber); border-color: var(--amber-dark); transform: translateY(-1px); }
+.nav-tab .nav-tab-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--amber-dark);
+}
+.nav-tab:hover .nav-tab-num { color: var(--navy); }
+.nav-tab .nav-tab-area {
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ============================================================
+   DEMO SECTION
+   ============================================================ */
+.demo {
+  padding: 56px 0 32px;
+  border-bottom: 2px dashed var(--line);
+}
+.demo:last-child { border-bottom: none; }
+.demo-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.demo-eyebrow {
+  display: inline-block;
+  color: var(--amber-dark);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.demo h2 {
+  font-size: 32px;
+  color: var(--navy);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.demo-summary {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 80ch;
+}
+.demo-meta {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  font-size: 13px;
+}
+.demo-meta strong { color: var(--navy); font-weight: 700; }
+
+/* ============================================================
+   BLOCO
+   ============================================================ */
+.bloco {
+  margin-bottom: 28px;
+  padding: 24px 28px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(14,30,54,0.04);
+}
+.bloco.bloco-wow { border-left: 4px solid var(--wow); }
+.bloco-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.bloco-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--amber-dark);
+  line-height: 1;
+}
+.bloco h3 {
+  font-size: 19px;
+  color: var(--navy);
+  font-weight: 700;
+  flex: 1;
+}
+.bloco-time {
+  background: var(--navy);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.bloco-wow-tag {
+  background: var(--wow-bg);
+  color: var(--wow);
+  border: 1px solid var(--wow);
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   ACTION BLOCKS
+   ============================================================ */
+.action {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  border-left: 4px solid;
+  position: relative;
+}
+.action-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.action p { line-height: 1.65; }
+
+/* FALAR — quote */
+.action-say {
+  background: var(--quote-bg);
+  border-left-color: var(--quote);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--navy);
+}
+.action-say .action-label {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  color: var(--quote);
+}
+.action-say p::before { content: '"'; color: var(--quote); margin-right: 4px; }
+.action-say p::after  { content: '"'; color: var(--quote); margin-left: 4px; }
+
+/* PROMPT — to type */
+.action-prompt {
+  background: var(--prompt-bg);
+  border-left-color: var(--prompt-border);
+}
+.action-prompt .action-label { color: var(--amber-dark); }
+.action-prompt code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.5;
+  margin-top: 4px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 4px;
+  user-select: all;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.action-prompt-why {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* RESPOSTA — expected */
+.action-expected {
+  background: var(--code-bg);
+  border-left-color: var(--muted);
+}
+.action-expected .action-label { color: var(--muted); }
+.action-expected pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+  margin-top: 4px;
+}
+
+/* MOSTRAR — what to show */
+.action-show {
+  background: var(--show-bg);
+  border-left-color: var(--show);
+}
+.action-show .action-label { color: var(--show); }
+.action-show ol, .action-show ul {
+  margin-left: 20px;
+  line-height: 1.7;
+}
+.action-show li { margin-bottom: 4px; }
+
+/* WOW — wow moment */
+.action-wow {
+  background: var(--wow-bg);
+  border-left-color: var(--wow);
+}
+.action-wow .action-label { color: var(--wow); }
+.action-wow p { font-weight: 500; }
+
+/* FALLBACK */
+.fallback-section {
+  margin-top: 32px;
+  padding: 20px 24px;
+  background: var(--fallback-bg);
+  border: 1px solid var(--fallback);
+  border-radius: 8px;
+}
+.fallback-section h3 {
+  font-size: 18px;
+  color: var(--fallback);
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.fallback-section table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.fallback-section th, .fallback-section td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(180,58,58,0.20);
+}
+.fallback-section th {
+  color: var(--fallback);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.fallback-section td:first-child { font-weight: 600; color: var(--navy); width: 40%; }
+
+/* PROMPTS CHEATSHEET */
+.cheatsheet {
+  margin-top: 24px;
+  padding: 18px 22px;
+  background: var(--bg-2);
+  border: 1px dashed var(--amber-dark);
+  border-radius: 8px;
+}
+.cheatsheet h3 {
+  font-size: 16px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.cheatsheet ol {
+  margin-left: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--navy);
+}
+.cheatsheet ol li::marker { color: var(--amber-dark); font-weight: 700; }
+
+/* PRINT */
+@media print {
+  .nav-tabs { position: static; }
+  .demo { page-break-after: always; }
+  body { font-size: 11pt; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     PAGE HEADER
+     ============================================================ -->
+<header class="page-header">
+  <div class="container">
+    <h1>Roteiro <span class="accent">ao vivo</span> · 4 demos do webinar Amazon Quick</h1>
+    <p class="page-header-sub">Empresa-modelo: Aurora Construtora · ~14 min por demo · escolha 2 para o webinar final</p>
+  </div>
+</header>
+
+<!-- ============================================================
+     STICKY NAV
+     ============================================================ -->
+<nav class="nav-tabs">
+  <div class="container">
+    <div class="nav-tabs-inner">
+      <a href="#demo-01" class="nav-tab">
+        <span class="nav-tab-num">01</span>
+        <span class="nav-tab-area">Jurídico</span>
+        <span>Revisão de contrato</span>
+      </a>
+      <a href="#demo-02" class="nav-tab">
+        <span class="nav-tab-num">02</span>
+        <span class="nav-tab-area">Comercial</span>
+        <span>Account 360 · HubSpot</span>
+      </a>
+      <a href="#demo-03" class="nav-tab">
+        <span class="nav-tab-num">03</span>
+        <span class="nav-tab-area">RH</span>
+        <span>Onboarding · políticas</span>
+      </a>
+      <a href="#demo-04" class="nav-tab">
+        <span class="nav-tab-num">04</span>
+        <span class="nav-tab-area">Financeiro</span>
+        <span>Variance · narrativa</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+<!-- ============================================================
+     DEMO 01 — JURÍDICO
+     ============================================================ -->
+<section class="demo" id="demo-01">
+  <div class="demo-header">
+    <span class="demo-eyebrow">Demo 01 · Jurídico</span>
+    <h2>Revisão de contrato + extração de cláusulas</h2>
+    <p class="demo-summary">Advogado faz upload de um contrato no Quick Suite, pergunta em linguagem natural sobre vigência, multas e riscos. Em 2 min: resumo executivo + flags de risco + post automático no canal jurídico no Slack.</p>
+    <div class="demo-meta">
+      <span><strong>Persona:</strong> Diretor jurídico, advogado interno</span>
+      <span><strong>Login:</strong> juridico-demo@</span>
+      <span><strong>Space:</strong> Jurídico Aurora</span>
+      <span><strong>Canal Slack:</strong> #juridico-aurora</span>
+    </div>
+  </div>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">01</span>
+      <h3>Contexto</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Imagina que você é o jurídico da Aurora Construtora. Chegou agora um contrato de locação de galpão. 5 páginas. Você tem 14 outros contratos na fila. O que você faz hoje? Lê tudo, anota, manda pra revisão? Vamos fazer diferente.</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">02</span>
+      <h3>Tour do Space</h3>
+      <span class="bloco-time">2 min</span>
+    </div>
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Login como <code>juridico-demo@</code></li>
+        <li>Abrir Space <strong>Jurídico Aurora</strong></li>
+        <li>Mostrar os 3 documentos indexados</li>
+        <li>Highlight: "esses PDFs estão no S3, mas eu pergunto direto, sem precisar abrir um por um"</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">03</span>
+      <h3>Q&amp;A em linguagem natural</h3>
+      <span class="bloco-time">4 min</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P1 · Digitar</span>
+      <code>Quais são os contratos ativos e suas vigências?</code>
+      <p class="action-prompt-why">Por que primeiro: estabelece confiança ("ele lê os documentos").</p>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P2 · Digitar</span>
+      <code>No contrato de prestação de serviços com a TechFlow, qual a multa por rescisão antecipada e como ela é calculada?</code>
+      <p class="action-prompt-why">Mostra extração de número específico + citação à cláusula.</p>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P3 · Digitar (wow)</span>
+      <code>Existe alguma cláusula de risco no contrato de locação de Guarulhos que eu deveria revisar com atenção?</code>
+      <p class="action-prompt-why">Wow moment: a cláusula 12 (rescisão por materiais inflamáveis) está escondida. O agente acha.</p>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">04</span>
+      <h3>Resumo executivo</h3>
+      <span class="bloco-time">3 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P4 · Digitar</span>
+      <code>Gere um resumo executivo do contrato de prestação de serviços com a TechFlow no formato padrão da Aurora.</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>RESUMO EXECUTIVO
+
+Partes: Aurora Construtora Ltda (contratante) | TechFlow Sistemas Ltda (contratada)
+Objeto: Desenvolvimento de software de gestão de obras
+Vigência: 24 meses (01/03/2026 — 28/02/2028), renovação automática 12 meses
+Valor: R$ 1.200.000,00 (24 parcelas mensais de R$ 50.000,00)
+
+Riscos identificados:
+- ALTO: Multa de 30% do saldo em caso de rescisão antecipada (cláusula 8.3)
+- MÉDIO: Renovação automática se não houver denúncia em 90 dias (cláusula 4.2)
+- BAIXO: Reajuste por IPCA anual (cláusula 6.1)
+
+Recomendação: Atenção à multa de rescisão. Considerar negociar gatilho de revisão semestral.</pre>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">05</span>
+      <h3>Acionar Quick Flow</h3>
+      <span class="bloco-time">3 min</span>
+      <span class="bloco-wow-tag">Wow moment 2</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P5 · Digitar</span>
+      <code>Posta esse resumo no canal do time jurídico no Slack.</code>
+    </div>
+
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Quick Flow é acionado</li>
+        <li>Mostrar a confirmação: "Mensagem postada em #juridico-aurora"</li>
+        <li>Abrir Slack ao vivo e mostrar o post no canal</li>
+      </ol>
+    </div>
+
+    <div class="action action-wow">
+      <span class="action-label">Falar</span>
+      <p>Isso aqui é trabalho que tomava 2h, em 4 minutos. E o time inteiro vê em tempo real.</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">06</span>
+      <h3>Encerramento</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Esse mesmo agente pode ser conectado ao SharePoint, ao Google Drive, à pasta de contratos do seu time. Toda vez que entrar contrato novo, ele lê, classifica risco e aciona o workflow. O jurídico foca em decisão, não em leitura.</p>
+    </div>
+  </article>
+
+  <div class="cheatsheet">
+    <h3>Cheatsheet de prompts (cola no crachá)</h3>
+    <ol>
+      <li>Quais são os contratos ativos e suas vigências?</li>
+      <li>No contrato com a TechFlow, qual a multa por rescisão antecipada?</li>
+      <li>Existe cláusula de risco no contrato de locação que eu deveria revisar?</li>
+      <li>Gere um resumo executivo do contrato com a TechFlow.</li>
+      <li>Posta esse resumo no canal do time jurídico no Slack.</li>
+    </ol>
+  </div>
+
+  <div class="fallback-section">
+    <h3>Fallback / troubleshooting</h3>
+    <table>
+      <thead><tr><th>Problema</th><th>Plano B</th></tr></thead>
+      <tbody>
+        <tr><td>Agente não encontra cláusula 12</td><td>Reformular: "Existe alguma cláusula sobre materiais inflamáveis ou armazenamento de risco?"</td></tr>
+        <tr><td>Quick Flow falha (Slack OAuth expirado)</td><td>Pular o post, mostrar copy/paste do resumo</td></tr>
+        <tr><td>PDF não indexou</td><td>Ter screenshot do Space populado pronto pra colar</td></tr>
+        <tr><td>Internet cai</td><td>Vídeo gravado de 90s da demo completa pré-renderizado</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEMO 02 — COMERCIAL
+     ============================================================ -->
+<section class="demo" id="demo-02">
+  <div class="demo-header">
+    <span class="demo-eyebrow">Demo 02 · Comercial</span>
+    <h2>Account 360 + pipeline forecast (HubSpot CRM Free)</h2>
+    <p class="demo-summary">VP de vendas pergunta sobre deals em risco. Em segundos: lista priorizada com diagnóstico cross-CRM (CSAT, tickets, dias sem atividade), forecast em 3 cenários e alerta no Slack do leadership. HubSpot read-only.</p>
+    <div class="demo-meta">
+      <span><strong>Persona:</strong> VP Vendas, AE</span>
+      <span><strong>CRM:</strong> HubSpot Free (8 deals, 8 companies)</span>
+      <span><strong>Agente:</strong> Sales Copilot Aurora</span>
+      <span><strong>Canal Slack:</strong> #sales-leadership</span>
+    </div>
+  </div>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">01</span>
+      <h3>Contexto</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Você é VP de vendas. Segunda-feira 8h. Reunião com o CEO em 1h. Antes mesmo de você abrir o computador, o app desktop do Quick já te enviou um pre-meeting briefing: dois deals do pipeline mudaram de status no fim de semana, o Frigorífico Pampa segue 21 dias sem atividade. Hoje sem Quick: você abre HubSpot, planilha de forecast, painel de CSAT em 3 abas. Hoje com Quick: tudo em uma só conversa.</p>
+    </div>
+    <div class="action action-show">
+      <span class="action-label">Talking point opcional</span>
+      <p>O <strong>app desktop</strong> foi anunciado em 28/04/2026 — roda em background, monitora apps abertos, integra nativo com Salesforce/HubSpot/Google Workspace/M365.</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">02</span>
+      <h3>Tour HubSpot</h3>
+      <span class="bloco-time">3 min</span>
+    </div>
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Abrir HubSpot → <strong>Sales → Deals → Board view</strong></li>
+        <li>8 deals visualmente distribuídos pelos 5 stages</li>
+        <li>Apontar 2 cards "feios": <strong>Frigorífico Pampa</strong> e <strong>Indústria Cedrofino</strong></li>
+        <li>Mostrar custom properties: health_score, last_activity_days</li>
+        <li>Abrir o deal Frigorífico Pampa → company associada → csat_score 3.2, open_tickets 8</li>
+      </ol>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Esses dados estão no HubSpot da Aurora há semanas. Quem tem tempo de cruzar tudo isso manualmente toda segunda? Vamos pedir pro Quick fazer.</p>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">03</span>
+      <h3>Sales Copilot — análise de risco</h3>
+      <span class="bloco-time">4 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P1 · Digitar</span>
+      <code>Mostra os 3 deals com maior risco no Q2 e me explica por quê. Use os dados do HubSpot.</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Identifiquei 3 deals em risco no HubSpot:
+
+1. Frigorífico Pampa — Sistema Rastreabilidade (R$ 890K) — Sales Rep: Rodrigo Lima
+   Sinais: health_score 45, 21 dias sem atividade, csat_score 3.2, 8 tickets abertos
+   Risco: ALTO — combinação de baixo engajamento + insatisfação operacional
+   Ação: chamada de discovery com C-level esta semana + escalada do suporte
+
+2. Indústria Cedrofino — Modernização (R$ 1.1M) — Sales Rep: Patrícia Alves
+   Sinais: health_score 38, 28 dias sem atividade, csat_score 2.9, 12 tickets
+   Risco: ALTO — pior csat_score da carteira, deal travando há quase 1 mês
+   Ação: revisar plano de sucesso antes de avançar negociação; envolver CSM
+
+3. Telecom Aurora — Expansão (R$ 2.7M) — Sales Rep: Rodrigo Lima
+   Sinais: health_score 55, 17 dias sem atividade
+   Risco: MÉDIO — deal grande, monitorar de perto; ainda recuperável
+   Ação: agendar QBR esta semana</pre>
+    </div>
+
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Esses dados vêm direto do HubSpot, em tempo real. Nada cacheado, nada exportado. E o agente cruzou propriedades de deal + company associada — isso é Account 360.</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">04</span>
+      <h3>Forecast com cenários</h3>
+      <span class="bloco-time">2 min</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P2 · Digitar</span>
+      <code>Me dá um forecast Q2 em 3 cenários considerando o health_score como probabilidade de fechamento.</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Forecast Q2 2026 — pipeline total R$ 12,77M (8 deals)
+
+Otimista (90% dos deals com health > 70 + 50% dos demais): R$ 8,4M
+Realista (probabilidade ponderada por health_score): R$ 6,2M
+Pessimista (apenas health > 80): R$ 3,9M
+
+Driver crítico: Frigorífico Pampa (R$ 890K) e Cedrofino (R$ 1,1M) representam R$ 2M;
+recuperação muda o forecast realista em ~30%.</pre>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">05</span>
+      <h3>Agente dispara alerta no Slack</h3>
+      <span class="bloco-time">3 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P3 · Digitar</span>
+      <code>Manda um alerta urgente pro time de leadership no Slack sobre o Frigorífico Pampa, com a análise e a ação recomendada.</code>
+    </div>
+
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Quick Flow <strong>Sales Risk Alert</strong> dispara</li>
+        <li>Voltar pro Slack (deixar aba aberta) → canal <strong>#sales-leadership</strong></li>
+        <li>Mensagem aparece com Deal · Valor · Sales Rep · Sinal · Ação recomendada</li>
+      </ol>
+    </div>
+
+    <div class="action action-say">
+      <span class="action-label">Talking point honesto</span>
+      <p>Isso aconteceu em 5 segundos. Em produção, esse alerta vira nota direto no deal do HubSpot — write nativo entrou em GA semana passada e a AWS está afinando os últimos detalhes. Hoje, dropar no Slack do leadership já mata 80% do problema.</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">06</span>
+      <h3>Encerramento</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P4 · Digitar</span>
+      <code>Gera um resumo de 4 bullets pra eu apresentar pro CEO daqui 30 minutos.</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>1. Pipeline Q2 totaliza R$ 12,77M em 8 deals; forecast realista R$ 6,2M
+2. 2 deals em risco alto somam R$ 2M de exposição (Frigorífico Pampa e Cedrofino)
+3. Ações já disparadas: alerta Slack para leadership; sales reps notificados
+4. Próximo checkpoint: revisão quinzenal até Q2 estabilizar</pre>
+    </div>
+
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>O HubSpot que você já usa, conversando com você. Mesmo agente conecta no Salesforce, Pipedrive, Dynamics. Toda segunda de manhã, você recebe esse briefing por email automático antes da sua primeira reunião — sem precisar pedir.</p>
+    </div>
+  </article>
+
+  <div class="cheatsheet">
+    <h3>Cheatsheet de prompts</h3>
+    <ol>
+      <li>Mostra os 3 deals com maior risco no Q2 e me explica por quê. Use os dados do HubSpot.</li>
+      <li>Me dá um forecast Q2 em 3 cenários considerando o health_score.</li>
+      <li>Manda um alerta urgente pro time de leadership no Slack sobre o Frigorífico Pampa.</li>
+      <li>Gera um resumo de 4 bullets pra eu apresentar pro CEO daqui 30 minutos.</li>
+    </ol>
+  </div>
+
+  <div class="fallback-section">
+    <h3>Fallback / troubleshooting</h3>
+    <table>
+      <thead><tr><th>Problema</th><th>Plano B</th></tr></thead>
+      <tbody>
+        <tr><td>HubSpot OAuth expirou</td><td>Re-autenticar (2 min); ter screenshot do Kanban</td></tr>
+        <tr><td>Quick lê HubSpot mas erra dado</td><td>Settings → Connectors → HubSpot → Refresh</td></tr>
+        <tr><td>Conector HubSpot lista 0 actions</td><td>Custom properties criadas depois — desconectar e reconectar</td></tr>
+        <tr><td>Slack OAuth expirou</td><td>Mostrar texto da mensagem que iria ser postada</td></tr>
+        <tr><td>Forecast com número diferente</td><td>"Depende dos pesos do health_score que você configura"</td></tr>
+        <tr><td>Agente tenta usar tool de write e falha</td><td>Talking point sobre roadmap; redirecionar pra Slack</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEMO 03 — RH
+     ============================================================ -->
+<section class="demo" id="demo-03">
+  <div class="demo-header">
+    <span class="demo-eyebrow">Demo 03 · RH</span>
+    <h2>Assistente de onboarding + Q&amp;A em políticas</h2>
+    <p class="demo-summary">Funcionária novata pergunta sobre férias, home office, plano de saúde. Recebe respostas com citação direta da política. Solicita equipamento → agente abre task no ClickUp e posta alerta no Slack <code>#rh-onboarding</code> mencionando o gestor.</p>
+    <div class="demo-meta">
+      <span><strong>Persona:</strong> Diretor RH, BP, Coordenador Onboarding</span>
+      <span><strong>Login:</strong> funcionario-demo@</span>
+      <span><strong>Space:</strong> RH Aurora</span>
+      <span><strong>Canal Slack:</strong> #rh-onboarding</span>
+    </div>
+  </div>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">01</span>
+      <h3>Contexto</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Imagina sua nova analista financeira. Primeira semana. Vai mandar 18 perguntas pro RH: horário, férias, plano de saúde, banco de horas, gympass... E o RH responde sempre as mesmas. Vamos virar isso de cabeça pra baixo.</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">02</span>
+      <h3>Login como funcionária novata</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Login como <code>funcionario-demo@</code></li>
+        <li>Abrir Quick chat</li>
+        <li><strong>Não mostrar</strong> Space ou agente ainda — entrar no fluxo do funcionário direto</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">03</span>
+      <h3>Q&amp;A nas políticas</h3>
+      <span class="bloco-time">5 min</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P1 · Digitar</span>
+      <code>Oi! Sou nova na Aurora, comecei hoje. Posso fazer home office?</code>
+    </div>
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Bem-vinda à Aurora!
+
+Sim, conforme o Manual do Funcionário (página 4), você pode fazer home office até
+2 dias por semana, mediante alinhamento prévio com seu gestor. O acordo é registrado
+no app Aurora People.
+
+Quer que eu ajude a marcar uma conversa com seu gestor pra alinhar os dias?</pre>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P2 · Digitar</span>
+      <code>Quando posso tirar férias e como funciona?</code>
+    </div>
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Conforme Política de Férias (página 1-3):
+- Férias adquiridas após 12 meses de trabalho na Aurora
+- 30 dias corridos no total
+- Divisão em até 3 períodos (mínimo 14 dias um deles, demais ≥ 5)
+- Solicitação no app Aurora People com 45 dias de antecedência
+- Pode vender até 1/3 (10 dias) como abono pecuniário
+
+Importante: férias não podem começar nos 2 dias anteriores a feriado ou DSR.</pre>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P3 · Digitar</span>
+      <code>Qual o valor do auxílio creche e até que idade?</code>
+    </div>
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>R$ 600/mês até o filho completar 5 anos e 11 meses
+(Política de Benefícios 2026, página 5).</pre>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P4 · Digitar</span>
+      <code>E se eu precisar trabalhar até mais tarde, como funciona o banco de horas?</code>
+    </div>
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Conforme Manual do Funcionário (página 6):
+- Compensação até 12 meses
+- Após 22h, adicional de 50%
+- Registro automático via app Aurora People</pre>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">04</span>
+      <h3>Ação real: solicitar equipamento</h3>
+      <span class="bloco-time">4 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P5 · Digitar</span>
+      <code>Quero solicitar meu equipamento de trabalho. Sou Analista Financeira, meu gestor é o Bruno Vilardi (@bruno.vilardi no Slack).</code>
+    </div>
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Perfeito! Conforme Manual (página 5), o pacote padrão da Aurora inclui:
+- Notebook
+- Monitor 27"
+- Cadeira ergonômica
+- Headset
+
+Vou abrir a solicitação no nosso sistema agora. Confirma os equipamentos?</pre>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P6 · Digitar</span>
+      <code>Confirmo, pode abrir.</code>
+    </div>
+
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Aba ClickUp → task aparecendo na list <strong>Onboarding TI</strong> com custom fields preenchidos</li>
+        <li>Aba Slack → canal <strong>#rh-onboarding</strong> com a mensagem nova mencionando <code>@bruno.vilardi</code> e link clicável da task</li>
+      </ol>
+    </div>
+
+    <div class="action action-wow">
+      <span class="action-label">Wow moment</span>
+      <p>Isso aconteceu em 30 segundos. Hoje, esse processo passa por 4 sistemas e leva 2-3 dias.</p>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">05</span>
+      <h3>Pergunta-armadilha</h3>
+      <span class="bloco-time">2 min</span>
+      <span class="bloco-wow-tag">Credibilidade</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P7 · Digitar</span>
+      <code>Quanto é o reajuste salarial anual da Aurora?</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Essa informação não está nas políticas que tenho acesso. O reajuste salarial é
+definido em acordo coletivo e comunicado pelo RH humano. Vou direcionar sua
+pergunta para o time de RH — quer que eu abra um chamado?</pre>
+    </div>
+
+    <div class="action action-wow">
+      <span class="action-label">Por que importa</span>
+      <p>Mostra que o agente <strong>não inventa</strong>. A plateia confia mais quando vê o "não sei".</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">06</span>
+      <h3>Encerramento</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Mesmo agente, conectado no SharePoint, no Workday, no SAP HR. Cada nova política que você publicar é absorvida automaticamente. RH humano vira consultor, não call center.</p>
+    </div>
+    <div class="action action-show">
+      <span class="action-label">Talking point opcional · Visier Vee (~30s)</span>
+      <p>Pra clientes que já usam Visier, o Quick agora integra com o Vee via MCP (anúncio 14/04/2026). HRBP pergunta no chat "qual o turnover voluntário do Q1 na regional Nordeste?" e o Vee responde com dados governados, dentro da experiência do Quick.</p>
+    </div>
+  </article>
+
+  <div class="cheatsheet">
+    <h3>Cheatsheet de prompts</h3>
+    <ol>
+      <li>Sou nova na Aurora, comecei hoje. Posso fazer home office?</li>
+      <li>Quando posso tirar férias e como funciona?</li>
+      <li>Qual o valor do auxílio creche e até que idade?</li>
+      <li>E se eu precisar trabalhar até mais tarde, como funciona o banco de horas?</li>
+      <li>Quero solicitar meu equipamento de trabalho.</li>
+      <li>Quanto é o reajuste salarial anual da Aurora? <em>(armadilha)</em></li>
+    </ol>
+  </div>
+
+  <div class="fallback-section">
+    <h3>Fallback / troubleshooting</h3>
+    <table>
+      <thead><tr><th>Problema</th><th>Plano B</th></tr></thead>
+      <tbody>
+        <tr><td>ClickUp MCP server falha</td><td>Trocar pra OpenAPI connector</td></tr>
+        <tr><td>Ambas integrações ClickUp falham</td><td>Pular task, mostrar só o post Slack</td></tr>
+        <tr><td>Slack OAuth expirou ou Flow falha</td><td>Usar <code>send_message</code> direto via action do agente em #rh-onboarding</td></tr>
+        <tr><td>Personal Token ClickUp revogado</td><td>Re-gerar (1 min) — sempre testar D-1</td></tr>
+        <tr><td>Indexação não pegou um PDF</td><td>Pular pergunta correspondente — sempre tenha 2 reservas</td></tr>
+        <tr><td>Indexação retorna trecho errado</td><td>Reformular: "Conforme política de férias, posso..."</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEMO 04 — FINANCEIRO
+     ============================================================ -->
+<section class="demo" id="demo-04">
+  <div class="demo-header">
+    <span class="demo-eyebrow">Demo 04 · Financeiro</span>
+    <h2>Variance analysis + narrativa do CFO</h2>
+    <p class="demo-summary">Controller pergunta como fechou o Q1. Em 3 min: dashboard de orçado vs. realizado, identificação automática do desvio crítico (BA -23%), explicação com citação a relatório de mercado e ata de comitê, alerta no Slack <code>#financeiro-leadership</code>.</p>
+    <div class="demo-meta">
+      <span><strong>Persona:</strong> CFO, Controller, FP&amp;A</span>
+      <span><strong>Dashboard:</strong> Aurora — Variance Q1 2026</span>
+      <span><strong>Space:</strong> Financeiro Aurora</span>
+      <span><strong>Canal Slack:</strong> #financeiro-leadership</span>
+    </div>
+  </div>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">01</span>
+      <h3>Contexto</h3>
+      <span class="bloco-time">1 min</span>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Você é o controller. Domingo à noite. Reunião do comitê executivo amanhã 9h. CEO vai perguntar: "como fechou o Q1?" e o que tá por trás dos números. Antes mesmo de você abrir o computador segunda de manhã, o app desktop do Quick já te briefou: variance de Q1 destacando BA, links pra ata de mar/2026 e pro relatório de mercado de construção Nordeste. Tudo em background, sem você pedir.</p>
+    </div>
+    <div class="action action-show">
+      <span class="action-label">Talking point opcional</span>
+      <p>App desktop anunciado em <strong>28/04/2026</strong> com personal knowledge graph local e pre-meeting briefings. Em produção, conecta direto no Snowflake (anúncio Snowflake-chat também de 28/04).</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">02</span>
+      <h3>Dashboard</h3>
+      <span class="bloco-time">3 min</span>
+    </div>
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Abrir <strong>Aurora — Variance Q1 2026 Dashboard</strong></li>
+        <li>Receita Q1 realizada: ~R$ 89,9M | orçada: ~R$ 95M | <strong>desvio -5,4%</strong></li>
+        <li>Mapa: BA destacada em vermelho intenso (-23%), MG em verde claro (+2%)</li>
+        <li>Tabela detalhada por regional</li>
+      </ol>
+    </div>
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Esse dashboard foi gerado por prompt. Eu não montei nenhum gráfico — pedi em uma frase.</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">03</span>
+      <h3>Pergunta executiva ao agente</h3>
+      <span class="bloco-time">3 min</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P1 · Digitar</span>
+      <code>Como fechou o Q1 da Aurora? Me dá o resumo executivo no formato padrão pro CFO.</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>HEADLINE: Q1 fechou 5,4% abaixo do orçado em receita, com BA puxando o desvio (-23%); MG e SP em linha.
+
+DRIVERS:
+- BA: receita realizada R$ 8,8M vs. orçada R$ 11,5M (-R$ 2,7M / -23%) — concentrado em janeiro
+- SP: leve pressão de custo direto (+1,5% em março) sem comprometer margem ainda
+- MG: ligeiramente acima (+2% receita, -1% custo) — região farol do trimestre
+
+OUTLOOK: se a tendência da BA persistir, impacto anual projetado é de ~R$ 11M de receita perdida.
+
+AÇÃO: priorizar execução do plano de mitigação BA registrado em ata de mar/2026.</pre>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">04</span>
+      <h3>Quick Research: por que a BA caiu?</h3>
+      <span class="bloco-time">4 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P2 · Digitar</span>
+      <code>Por que a regional BA ficou tão abaixo do plano? Cita as fontes que usou.</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>A queda na BA tem 2 causas combinadas, suportadas por fontes externas e internas:
+
+1. Atraso em obras públicas — Componente conjuntural
+   O Relatório de Mercado de Construção Q1/2026 (página 4) registra retração agregada de
+   4,7% na atividade do setor no Nordeste no Q1, com BA como o estado mais impactado
+   (-18% na demanda agregada entre janeiro e fevereiro).
+   [relatorio-mercado-construcao-q1-2026.pdf, p. 4]
+
+   A BA é particularmente exposta: aproximadamente 60% da carteira regional é de
+   contratos públicos.
+   [ata-comite-financeiro-mar-2026.pdf, item 3.2]
+
+2. Risco já mapeado internamente — Componente executivo
+   A Ata do Comitê Financeiro de março/2026 (item 3.2) registra que o risco da BA havia
+   sido identificado já na reunião de fevereiro, com plano de mitigação aprovado mas
+   NÃO acionado durante o mês de março.
+   [ata-comite-financeiro-mar-2026.pdf, item 3.2]
+
+Conclusão: o desvio de R$ 2,7M no Q1 tem grande componente conjuntural (mercado), mas
+há também componente executivo relevante (mitigação não executada tempestivamente).</pre>
+    </div>
+
+    <div class="action action-wow">
+      <span class="action-label">Wow moment</span>
+      <p>O agente cruzou <strong>dados financeiros + PDF de mercado externo + ata interna</strong> e citou fontes específicas com paginação. Isso é o diferencial sobre BI tradicional.</p>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">05</span>
+      <h3>Reconciliação de fontes</h3>
+      <span class="bloco-time">2 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P3 · Digitar</span>
+      <code>A ata do comitê fala que a receita Q1 fechou em R$ 89,9M com desvio de -5,4%. Mas o dashboard mostra R$ 104,5M, desvio -2,7%. Qual número eu confio? Como explico isso pro CFO?</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Os dois números estão corretos, mas refletem momentos diferentes do fechamento:
+
+1. Ata do Comitê (26/03/2026, item 2): R$ 89,9M / orçado R$ 95,0M / -5,4%
+   - Snapshot preliminar apresentado pela VP Financeiro na reunião
+   - Fechamento contábil definitivo previsto para 10/04 (ata, item 2)
+
+2. Dashboard / dataset: R$ 104,5M / orçado R$ 107,4M / -2,7%
+   - Reflete a posição atual com faturamentos late incorporados
+   - Inclui ajustes contábeis do fechamento posterior
+
+Diferença de R$ 14,6M explica-se por:
+- Faturamentos late de SP e RJ entrando após o fechamento da ata
+- Ajustes de revenue recognition em contratos plurianuais
+- Não há melhora operacional — é puramente reconhecimento posterior
+
+Recomendação para o CFO:
+- Apresentar o número atualizado: R$ 104,5M / -2,7%
+- Sinalizar que a leitura preliminar do comitê era -5,4%
+- Manter o foco no diagnóstico de BA — o desvio regional de -23% é o tema central</pre>
+    </div>
+
+    <div class="action action-wow">
+      <span class="action-label">Wow moment</span>
+      <p>Finance team <strong>convive com isso todo dia</strong>: BI vs ata vs relatório vs dashboard. O agente não escolhe uma fonte cegamente — explica a divergência. Mostra raciocínio sobre múltiplas fontes, não só retrieval.</p>
+    </div>
+  </article>
+
+  <article class="bloco">
+    <div class="bloco-header">
+      <span class="bloco-num">06</span>
+      <h3>Forecast e próximo passo</h3>
+      <span class="bloco-time">2 min</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P4 · Digitar</span>
+      <code>Se a BA continuar nesse ritmo, qual o impacto na receita anual? E qual ação eu apresento amanhã?</code>
+    </div>
+
+    <div class="action action-expected">
+      <span class="action-label">Resposta esperada</span>
+<pre>Projeção BA 2026 mantendo desvio de Q1:
+- Receita anual orçada: R$ 47M
+- Realizada projetada: R$ 36M
+- Gap: R$ 11M (-23%)
+
+Ação recomendada para o comitê amanhã:
+1. Confirmar acionamento do plano BA na semana de 31/03 (responsável: VP Operações)
+2. Validar timing de retomada das licitações federais no Q2
+3. Aprovar revisão da meta de diversificação da carteira regional
+4. Definir checkpoint quinzenal até Q2 estabilizar</pre>
+    </div>
+  </article>
+
+  <article class="bloco bloco-wow">
+    <div class="bloco-header">
+      <span class="bloco-num">07</span>
+      <h3>Acionar Slack</h3>
+      <span class="bloco-time">1 min</span>
+      <span class="bloco-wow-tag">Wow moment</span>
+    </div>
+
+    <div class="action action-prompt">
+      <span class="action-label">P5 · Digitar</span>
+      <code>Manda esse brief pro time de leadership financeiro no Slack.</code>
+    </div>
+
+    <div class="action action-show">
+      <span class="action-label">Mostrar ao vivo</span>
+      <ol>
+        <li>Agente chama action <strong>send_message</strong> do Slack</li>
+        <li>Aba Slack → canal <strong>#financeiro-leadership</strong></li>
+        <li>Mensagem aparece com HEADLINE · DRIVERS · OUTLOOK · AÇÃO</li>
+      </ol>
+    </div>
+
+    <div class="action action-say">
+      <span class="action-label">Falar</span>
+      <p>Em produção, isso roda toda segunda-feira de manhã antes do CFO chegar.</p>
+    </div>
+  </article>
+
+  <div class="cheatsheet">
+    <h3>Cheatsheet de prompts</h3>
+    <ol>
+      <li>Como fechou o Q1 da Aurora? Resumo executivo formato CFO.</li>
+      <li>Por que a regional BA ficou tão abaixo do plano? Cita as fontes.</li>
+      <li>A ata fala em R$ 89,9M / -5,4% mas o dashboard mostra R$ 104,5M / -2,7%. Qual número eu confio? Como explico pro CFO?</li>
+      <li>Se a BA continuar nesse ritmo, qual impacto anual? Qual ação apresento amanhã?</li>
+      <li>Manda esse brief pro time de leadership financeiro no Slack.</li>
+    </ol>
+  </div>
+
+  <div class="fallback-section">
+    <h3>Fallback / troubleshooting</h3>
+    <table>
+      <thead><tr><th>Problema</th><th>Plano B</th></tr></thead>
+      <tbody>
+        <tr><td>Quick Research não cita fontes</td><td>Repetir prompt adicionando "cite a página exata do PDF"</td></tr>
+        <tr><td>Dashboard demora carregar</td><td>Print pronto; "vou usar o cache"</td></tr>
+        <tr><td>Números do dashboard não batem</td><td>"O número é ilustrativo, regra de cálculo é a do seu time"</td></tr>
+        <tr><td>Agent não vê o flow</td><td>Edit → Actions → Link Slack</td></tr>
+        <tr><td>Slack OAuth expirou</td><td>Mostrar texto da mensagem que iria postar</td></tr>
+        <tr><td>Dataset Quick Sight com erro</td><td>Screenshot do dashboard; explicar que dados estão no S3</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon Quick — Slide de abertura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0E1E36;
+  --navy-2: #1B2845;
+  --amber: #D4A24C;
+  --aws-orange: #FF9900;
+  --aws-orange-2: #F2A33C;
+  --line: rgba(255,255,255,0.10);
+  --u: min(calc(100vw / 16), calc(100vh / 9));
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  background: #000;
+  overflow: hidden;
+}
+
+.slide-stage {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #000;
+}
+
+.slide {
+  width: calc(var(--u) * 16);
+  height: calc(var(--u) * 9);
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(14,30,54,0.96) 0%, rgba(27,40,69,0.92) 100%),
+    radial-gradient(circle at 75% 50%, rgba(255, 153, 0, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 15% 85%, rgba(212, 162, 76, 0.08) 0%, transparent 45%),
+    var(--navy);
+  color: #fff;
+  overflow: hidden;
+  font-size: calc(var(--u) * 0.18);
+  display: flex;
+  flex-direction: column;
+  padding: 1.6em 2.6em 1.2em;
+  gap: 1em;
+}
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 4em 4em;
+  pointer-events: none;
+}
+
+h1, h2 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.slide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  z-index: 3;
+}
+.brand { display: flex; align-items: center; gap: 0.8em; }
+.brand-logo {
+  height: 5.4em;
+  width: auto;
+  max-width: 22em;
+  object-fit: contain;
+  display: block;
+}
+.brand-logo-placeholder {
+  height: 5.4em;
+  min-width: 14em;
+  display: grid;
+  place-items: center;
+  border: 0.14em dashed rgba(255, 153, 0, 0.55);
+  border-radius: 0.5em;
+  color: var(--aws-orange);
+  font-size: 0.95em;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  padding: 0 1.4em;
+  background: rgba(255, 153, 0, 0.06);
+}
+.slide-tag {
+  color: var(--aws-orange);
+  font-size: 0.82em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.45em 1em;
+  border: 1px solid rgba(255, 153, 0, 0.40);
+  border-radius: 100px;
+}
+
+/* ============================================================
+   BODY — duas colunas: texto à esquerda, hub à direita
+   ============================================================ */
+.body {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 2em;
+  align-items: center;
+  min-height: 0;
+  z-index: 1;
+}
+
+/* ---- COLUNA ESQUERDA — texto + verbos ---- */
+.intro { display: flex; flex-direction: column; gap: 1.2em; }
+.intro-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--aws-orange);
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.intro-eyebrow::before {
+  content: '';
+  width: 1.6em;
+  height: 0.13em;
+  background: var(--aws-orange);
+}
+.intro-title {
+  font-size: 2.6em;
+  line-height: 1.05;
+  font-weight: 700;
+  max-width: 14em;
+}
+.intro-title .accent { color: var(--aws-orange); }
+.intro-sub {
+  font-size: 1em;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.5;
+  max-width: 32em;
+}
+.intro-sub strong { color: #fff; font-weight: 600; }
+
+/* 3 verbos em chips horizontais */
+.verbs {
+  display: flex;
+  gap: 0.7em;
+  margin-top: 0.4em;
+}
+.verb {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
+  padding: 0.9em 0.7em 0.85em;
+  background: rgba(255,153,0,0.08);
+  border: 1px solid rgba(255,153,0,0.30);
+  border-radius: 0.5em;
+  text-align: center;
+}
+.verb-icon {
+  width: 1.8em;
+  height: 1.8em;
+  color: var(--aws-orange);
+  margin-bottom: 0.15em;
+}
+.verb-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.4em;
+  color: var(--aws-orange);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.verb-hint {
+  font-size: 0.68em;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* ============================================================
+   HUB VISUAL — Quick no centro, sistemas ao redor
+   ============================================================ */
+.hub-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+.hub {
+  position: relative;
+  width: min(100%, 38em);
+  aspect-ratio: 1.45 / 1;
+}
+.hub-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: visible;
+}
+.hub-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, var(--aws-orange) 0%, var(--aws-orange-2) 100%);
+  color: var(--navy);
+  padding: 0.85em 1.4em;
+  border-radius: 100px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: 1.3em;
+  letter-spacing: 0.02em;
+  z-index: 2;
+  box-shadow:
+    0 0 0 0.4em rgba(255, 153, 0, 0.10),
+    0 0 0 0.85em rgba(255, 153, 0, 0.05),
+    0 0.4em 1.5em rgba(255, 153, 0, 0.30);
+  white-space: nowrap;
+}
+.hub-center small {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.42em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(14,30,54,0.7);
+  margin-top: 0.1em;
+}
+.hub-pill {
+  position: absolute;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 0.4em 0.9em;
+  border-radius: 100px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0.2em 0.6em rgba(0,0,0,0.25);
+  letter-spacing: 0.01em;
+}
+/* posições em volta do centro (em proporção ao container) */
+.hub-pill-1 { top: 12%;  left: 24%; }   /* NW */
+.hub-pill-2 { top: 8%;   left: 56%; }   /* N-NE */
+.hub-pill-3 { top: 24%;  left: 88%; }   /* E-NE */
+.hub-pill-4 { top: 50%;  left: 95%; }   /* E */
+.hub-pill-5 { top: 76%;  left: 88%; }   /* E-SE */
+.hub-pill-6 { top: 92%;  left: 56%; }   /* S-SE */
+.hub-pill-7 { top: 76%;  left: 12%; }   /* W-SW */
+.hub-pill-8 { top: 50%;  left: 5%; }    /* W */
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 0 auto;
+  font-size: 0.7em;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 500;
+  z-index: 2;
+}
+.slide-footer .demo-badge {
+  color: var(--aws-orange);
+  background: rgba(255, 153, 0, 0.10);
+  padding: 0.3em 0.85em;
+  border-radius: 100px;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<div class="slide-stage">
+  <article class="slide">
+
+    <!-- HEADER -->
+    <header class="slide-header">
+      <div class="brand">
+        <img class="brand-logo"
+             src="logo-amazon-quick.png"
+             alt="Amazon Quick"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+        <span class="brand-logo-placeholder" style="display:none;">Logo Amazon Quick</span>
+      </div>
+      <span class="slide-tag">Workspace Agentic AWS · 5/2026</span>
+    </header>
+
+    <!-- BODY: 2 colunas -->
+    <div class="body">
+
+      <!-- COLUNA ESQUERDA -->
+      <section class="intro">
+        <h1 class="intro-title">O que é o <span class="accent">Amazon Quick.</span></h1>
+        <p class="intro-sub">O <strong>workspace agentic da AWS</strong> onde os sistemas que sua empresa já usa <strong>conversam, decidem e agem</strong> em um só lugar — com seus dados, suas regras e seus times.</p>
+
+        <div class="verbs">
+          <div class="verb">
+            <svg class="verb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="m21 21-4.3-4.3"/>
+            </svg>
+            <span class="verb-name">Pesquisa</span>
+            <span class="verb-hint">nos seus dados</span>
+          </div>
+          <div class="verb">
+            <svg class="verb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 18h6"/>
+              <path d="M10 22h4"/>
+              <path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V18h6v-1.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/>
+            </svg>
+            <span class="verb-name">Decide</span>
+            <span class="verb-hint">com contexto</span>
+          </div>
+          <div class="verb">
+            <svg class="verb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span class="verb-name">Age</span>
+            <span class="verb-hint">nos seus sistemas</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLUNA DIREITA — Hub visual -->
+      <section class="hub-wrap">
+        <div class="hub">
+
+          <!-- linhas conectando o centro a cada pill -->
+          <svg class="hub-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%"   stop-color="#FF9900" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#FF9900" stop-opacity="0.10"/>
+              </linearGradient>
+            </defs>
+            <g stroke="url(#lineGrad)" stroke-width="0.25" stroke-dasharray="0.8 0.6" fill="none">
+              <line x1="50" y1="50" x2="24" y2="12"/>
+              <line x1="50" y1="50" x2="56" y2="8"/>
+              <line x1="50" y1="50" x2="88" y2="24"/>
+              <line x1="50" y1="50" x2="95" y2="50"/>
+              <line x1="50" y1="50" x2="88" y2="76"/>
+              <line x1="50" y1="50" x2="56" y2="92"/>
+              <line x1="50" y1="50" x2="12" y2="76"/>
+              <line x1="50" y1="50" x2="5"  y2="50"/>
+            </g>
+          </svg>
+
+          <!-- 8 sistemas ao redor -->
+          <span class="hub-pill hub-pill-1">SharePoint</span>
+          <span class="hub-pill hub-pill-2">Slack</span>
+          <span class="hub-pill hub-pill-3">Outlook</span>
+          <span class="hub-pill hub-pill-4">Salesforce</span>
+          <span class="hub-pill hub-pill-5">SAP</span>
+          <span class="hub-pill hub-pill-6">Snowflake</span>
+          <span class="hub-pill hub-pill-7">ClickUp</span>
+          <span class="hub-pill hub-pill-8">S3</span>
+
+          <!-- núcleo: Amazon Quick -->
+          <div class="hub-center">
+            Amazon Quick
+            <small>workspace agentic</small>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="slide-footer">
+      <span>50+ conectores nativos · trial 30 dias · até 25 usuários</span>
+      <span class="demo-badge">4 demos · Aurora Construtora</span>
+    </footer>
+
+  </article>
+</div>
+
+</body>
+</html>

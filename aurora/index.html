@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Construtora — Engenharia que viabiliza o Brasil</title>
+<meta name="description" content="Aurora Construtora Ltda — construção civil e infraestrutura. Sede em São Paulo, filiais em RJ, BH e Salvador. Desde 2008.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0E1E36;
+  --navy-2: #1B2845;
+  --navy-3: #2A3B5C;
+  --amber: #D4A24C;
+  --amber-light: #E5B86A;
+  --amber-dark: #B5832A;
+  --stone: #F5F2EC;
+  --stone-2: #EAE5D9;
+  --text: #1A1A1A;
+  --muted: #5A5A5A;
+  --line: #D6D2C7;
+  --white: #FFFFFF;
+  --success: #2F7D4E;
+  --danger: #B43A3A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--white);
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; }
+
+a { color: var(--navy); text-decoration: none; }
+a:hover { color: var(--amber-dark); }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(14, 30, 54, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+}
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--amber);
+  color: var(--navy);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 4px;
+}
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.78);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--amber-light); }
+@media (max-width: 760px) { .nav-links { display: none; } }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  background:
+    linear-gradient(135deg, rgba(14,30,54,0.92) 0%, rgba(27,40,69,0.88) 100%),
+    radial-gradient(circle at 80% 20%, rgba(212, 162, 76, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 20% 80%, rgba(212, 162, 76, 0.10) 0%, transparent 50%),
+    var(--navy);
+  color: var(--white);
+  padding: 120px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; max-width: 820px; }
+.hero-eyebrow {
+  display: inline-block;
+  color: var(--amber);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--amber);
+}
+.hero h1 {
+  font-size: clamp(36px, 5.4vw, 64px);
+  line-height: 1.08;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+.hero h1 .accent { color: var(--amber); }
+.hero-lede {
+  font-size: 18px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.82);
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--amber);
+  color: var(--navy);
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: background 0.15s, transform 0.15s;
+}
+.hero-cta:hover { background: var(--amber-light); color: var(--navy); transform: translateY(-1px); }
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats {
+  background: var(--stone);
+  border-top: 4px solid var(--amber);
+  padding: 56px 0;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+@media (max-width: 760px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.stat { text-align: left; }
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-value .unit { color: var(--amber-dark); font-size: 0.7em; }
+.stat-label {
+  font-size: 13px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+/* ============================================================
+   SECTION
+   ============================================================ */
+.section { padding: 96px 0; }
+.section-stone { background: var(--stone); }
+.section-navy { background: var(--navy); color: var(--white); }
+.section-eyebrow {
+  display: block;
+  color: var(--amber-dark);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.section-navy .section-eyebrow { color: var(--amber); }
+.section-title {
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 24px;
+  max-width: 720px;
+}
+.section-navy .section-title { color: var(--white); }
+.section-subtitle {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 680px;
+  margin-bottom: 56px;
+  line-height: 1.7;
+}
+.section-navy .section-subtitle { color: rgba(255,255,255,0.72); }
+
+/* ============================================================
+   SOBRE — MISSÃO/VISÃO/VALORES
+   ============================================================ */
+.mvv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+@media (max-width: 880px) { .mvv-grid { grid-template-columns: 1fr; } }
+.mvv-card {
+  background: var(--white);
+  padding: 36px 32px;
+  border-left: 3px solid var(--amber);
+  border-radius: 2px;
+  box-shadow: 0 2px 14px rgba(14,30,54,0.06);
+}
+.mvv-card h3 {
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+.mvv-card p { color: var(--text); line-height: 1.7; }
+.mvv-card ol {
+  list-style: none;
+  counter-reset: vlist;
+}
+.mvv-card ol li {
+  counter-increment: vlist;
+  padding: 10px 0 10px 38px;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+}
+.mvv-card ol li:last-child { border-bottom: none; }
+.mvv-card ol li::before {
+  content: counter(vlist, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  color: var(--amber-dark);
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+}
+
+/* ============================================================
+   LINHAS DE NEGÓCIO
+   ============================================================ */
+.lines-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1000px) { .lines-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .lines-grid { grid-template-columns: 1fr; } }
+.line-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 32px 28px;
+  position: relative;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+}
+.line-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(14,30,54,0.10);
+  border-color: var(--amber);
+}
+.line-share {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--amber-dark);
+}
+.line-card h3 {
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.line-tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.line-desc { color: var(--text); font-size: 14.5px; line-height: 1.65; }
+
+/* ============================================================
+   LIDERANÇA — table
+   ============================================================ */
+.table-wrap {
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+}
+table.lider {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--white);
+}
+table.lider th, table.lider td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 14.5px;
+}
+table.lider th {
+  background: rgba(212, 162, 76, 0.10);
+  color: var(--amber);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+table.lider tr:last-child td { border-bottom: none; }
+table.lider td.role { color: rgba(255,255,255,0.62); font-weight: 500; }
+table.lider td.name { font-weight: 600; }
+table.lider td.email { color: rgba(255,255,255,0.62); font-family: 'Inter', monospace; font-size: 13px; }
+
+/* ============================================================
+   INDICADORES — métricas grid
+   ============================================================ */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--white);
+}
+@media (max-width: 880px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .metrics-grid { grid-template-columns: 1fr; } }
+.metric {
+  padding: 28px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.metric:nth-child(3n) { border-right: none; }
+@media (max-width: 880px) {
+  .metric { border-right: 1px solid var(--line); }
+  .metric:nth-child(3n) { border-right: 1px solid var(--line); }
+  .metric:nth-child(2n) { border-right: none; }
+}
+.metric-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.metric-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+}
+.metric-delta {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+.metric-delta.down { color: var(--danger); background: rgba(180, 58, 58, 0.10); }
+.metric-delta.up { color: var(--success); background: rgba(47, 125, 78, 0.10); }
+
+/* ============================================================
+   STACK + COMPLIANCE — duas colunas
+   ============================================================ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+@media (max-width: 880px) { .two-col { grid-template-columns: 1fr; gap: 48px; } }
+.col-block h3 {
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+.section-navy .col-block h3 { color: var(--white); }
+.kv-list { list-style: none; }
+.kv-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14.5px;
+}
+.section-navy .kv-list li { border-bottom: 1px solid rgba(255,255,255,0.10); }
+.kv-list li:last-child { border-bottom: none; }
+.kv-key { color: var(--muted); font-weight: 500; }
+.section-navy .kv-key { color: rgba(255,255,255,0.65); }
+.kv-val { color: var(--text); font-weight: 600; text-align: right; }
+.section-navy .kv-val { color: var(--white); }
+.kv-val .small { font-weight: 400; color: var(--muted); display: block; font-size: 12px; }
+
+/* ============================================================
+   CARTEIRA — cards de clientes
+   ============================================================ */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1000px) { .clients-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .clients-grid { grid-template-columns: 1fr; } }
+.client-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 22px 20px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.client-card:hover { border-color: var(--amber); transform: translateY(-2px); }
+.client-name { font-weight: 700; color: var(--navy); margin-bottom: 6px; font-size: 15px; }
+.client-meta { font-size: 12.5px; color: var(--muted); }
+.client-since {
+  margin-top: 12px;
+  display: inline-block;
+  font-size: 11px;
+  color: var(--amber-dark);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   REGIONAIS — barras
+   ============================================================ */
+.regional-list { list-style: none; }
+.regional-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 80px;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.regional-row:last-child { border-bottom: none; }
+.regional-uf {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--navy);
+}
+.regional-bar {
+  height: 12px;
+  background: var(--stone-2);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.regional-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber-dark), var(--amber));
+  border-radius: 100px;
+}
+.regional-pct {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 16px;
+  text-align: right;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: #0A172A;
+  color: rgba(255,255,255,0.72);
+  padding: 64px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+@media (max-width: 880px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+.footer p, .footer li { font-size: 14px; line-height: 1.7; }
+.footer ul { list-style: none; }
+.footer a { color: rgba(255,255,255,0.72); }
+.footer a:hover { color: var(--amber-light); }
+.footer-brand .brand { margin-bottom: 16px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.10);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+}
+.demo-disclaimer {
+  display: inline-block;
+  background: rgba(212, 162, 76, 0.12);
+  color: var(--amber);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">A</span>
+      <span>AURORA <small style="font-weight: 400; opacity: 0.6;">CONSTRUTORA</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#negocio">Linhas de negócio</a></li>
+      <li><a href="#lideranca">Liderança</a></li>
+      <li><a href="#indicadores">Indicadores</a></li>
+      <li><a href="#carteira">Carteira</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Desde 2008 — Construção civil e infraestrutura</span>
+      <h1>Engenharia que viabiliza <span class="accent">o crescimento do Brasil.</span></h1>
+      <p class="hero-lede">A Aurora Construtora projeta e executa galpões logísticos, condomínios, infraestrutura pública e obras industriais para clientes-âncora em Mineração, Saúde, Financeiro, Telecom e Varejo. Sede em São Paulo, presença em quatro regionais — SP, RJ, MG e BA.</p>
+      <a class="hero-cta" href="#sobre">Conheça a Aurora &nbsp;→</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     STATS
+     ============================================================ -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-value">824</div>
+        <div class="stat-label">Funcionários</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value"><span class="unit">R$</span> 487<span class="unit">M</span></div>
+        <div class="stat-label">Receita 2025</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">145<span class="unit">+</span></div>
+        <div class="stat-label">Contratos ativos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Regionais (SP, RJ, MG, BA)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOBRE — MISSÃO, VISÃO, VALORES
+     ============================================================ -->
+<section class="section section-stone" id="sobre">
+  <div class="container">
+    <span class="section-eyebrow">Sobre a Aurora</span>
+    <h2 class="section-title">Engenharia técnica criteriosa, prazo respeitado, relação ética.</h2>
+    <p class="section-subtitle">Fundada em 12 de março de 2008, a Aurora cresceu de empreiteira de galpões logísticos para construtora de médio porte com atuação nacional. Manteve a cultura técnica e de segurança que originou a marca, hoje certificada em ISO 9001, ISO 14001 e OHSAS 18001.</p>
+
+    <div class="mvv-grid">
+      <div class="mvv-card">
+        <h3>Missão</h3>
+        <p>Construir infraestrutura sustentável que viabiliza o crescimento do Brasil, com qualidade técnica, prazo respeitado e relação ética com clientes, fornecedores e comunidade.</p>
+      </div>
+      <div class="mvv-card">
+        <h3>Visão</h3>
+        <p>Ser, até 2030, a construtora referência em projetos público-privados de médio porte nas regiões Sudeste e Nordeste, reconhecida pela engenharia de alto padrão e pela cultura de pessoas.</p>
+      </div>
+      <div class="mvv-card">
+        <h3>Valores</h3>
+        <ol>
+          <li>Segurança em primeiro lugar</li>
+          <li>Compromisso com prazo</li>
+          <li>Engenharia técnica criteriosa</li>
+          <li>Transparência financeira</li>
+          <li>Respeito à comunidade</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LINHAS DE NEGÓCIO
+     ============================================================ -->
+<section class="section" id="negocio">
+  <div class="container">
+    <span class="section-eyebrow">Quatro frentes integradas</span>
+    <h2 class="section-title">Linhas de negócio</h2>
+    <p class="section-subtitle">Cada vertical opera com equipe técnica dedicada e BU comercial própria, mas compartilha engenharia, suprimentos e gestão integrada de obras na plataforma Aurora People.</p>
+
+    <div class="lines-grid">
+      <div class="line-card">
+        <div class="line-share">40%</div>
+        <span class="line-tag">Faturamento</span>
+        <h3>Aurora Industrial</h3>
+        <p class="line-desc">Galpões logísticos, plantas industriais e obras de mineração. Maior vertical em receita; clientes-âncora em Mineração, Alimentos e Distribuição.</p>
+      </div>
+      <div class="line-card">
+        <div class="line-share">30%</div>
+        <span class="line-tag">Faturamento</span>
+        <h3>Aurora Predial</h3>
+        <p class="line-desc">Condomínios residenciais, comerciais e prediais corporativos. Forte em Saúde (hospitais), Financeiro (agências) e Varejo (centros logísticos).</p>
+      </div>
+      <div class="line-card">
+        <div class="line-share">22%</div>
+        <span class="line-tag">Faturamento</span>
+        <h3>Aurora Infra</h3>
+        <p class="line-desc">Obras públicas e PPP — rodovias, saneamento e mobilidade urbana. Vertical mais sensível a calendário de orçamento federal e estadual.</p>
+      </div>
+      <div class="line-card">
+        <div class="line-share">8%</div>
+        <span class="line-tag">Vertical 2024</span>
+        <h3>Aurora Tech</h3>
+        <p class="line-desc">IoT e gestão digital de canteiros — sensores de presença, segurança e produtividade. Vertical mais nova, criada em 2024 sobre a base TechFlow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LIDERANÇA
+     ============================================================ -->
+<section class="section section-navy" id="lideranca">
+  <div class="container">
+    <span class="section-eyebrow">Comitê executivo</span>
+    <h2 class="section-title">Liderança</h2>
+    <p class="section-subtitle">Time executivo com média de 14 anos de experiência em construção e infraestrutura. Reporta-se diretamente ao conselho.</p>
+
+    <div class="table-wrap">
+      <table class="lider">
+        <thead>
+          <tr>
+            <th style="width:35%">Cargo</th>
+            <th style="width:30%">Nome</th>
+            <th style="width:35%">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="role">CEO</td><td class="name">Helena Marques</td><td class="email">helena.marques@aurora-construtora.com.br</td></tr>
+          <tr><td class="role">VP Operações</td><td class="name">Rafael Tavares</td><td class="email">rafael.tavares@aurora-construtora.com.br</td></tr>
+          <tr><td class="role">VP Comercial</td><td class="name">Lucas Andrade</td><td class="email">lucas.andrade@aurora-construtora.com.br</td></tr>
+          <tr><td class="role">VP Financeiro</td><td class="name">Mariana Cordeiro</td><td class="email">mariana.cordeiro@aurora-construtora.com.br</td></tr>
+          <tr><td class="role">VP RH</td><td class="name">Ana Paula Vieira</td><td class="email">ana.vieira@aurora-construtora.com.br</td></tr>
+          <tr><td class="role">Diretor Jurídico</td><td class="name">Roberto Almeida</td><td class="email">roberto.almeida@aurora-construtora.com.br</td></tr>
+          <tr><td class="role">Controller (FP&amp;A lead)</td><td class="name">Felipe Monteiro</td><td class="email">felipe.monteiro@aurora-construtora.com.br</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INDICADORES
+     ============================================================ -->
+<section class="section section-stone" id="indicadores">
+  <div class="container">
+    <span class="section-eyebrow">Performance</span>
+    <h2 class="section-title">Indicadores 2025–2026</h2>
+    <p class="section-subtitle">Dados consolidados pelo time de FP&amp;A. Q1 2026 fechou 5,3% abaixo do orçado em receita — desvio puxado pela regional BA. Análise completa no comitê financeiro de mar/2026.</p>
+
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="metric-label">Receita 2025</div>
+        <div class="metric-value">R$ 487 M</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Receita Q1 2026 (orçada)</div>
+        <div class="metric-value">R$ 95 M</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Receita Q1 2026 (realizada)</div>
+        <div class="metric-value">R$ 90 M</div>
+        <span class="metric-delta down">-5,3%</span>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Margem operacional média</div>
+        <div class="metric-value">9,2%</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Pipeline comercial Q2 2026</div>
+        <div class="metric-value">R$ 12,77 M</div>
+        <span class="metric-delta up">8 deals ativos</span>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Volume médio de novos contratos</div>
+        <div class="metric-value">12 / mês</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ESTRUTURA REGIONAL
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="section-eyebrow">Presença nacional</span>
+    <h2 class="section-title">Estrutura regional</h2>
+    <p class="section-subtitle">Sede em São Paulo concentra projetos diversificados; BA é a regional mais sensível a atraso de orçamento federal por causa do peso de obras de infraestrutura pública.</p>
+
+    <ul class="regional-list">
+      <li class="regional-row">
+        <span class="regional-uf">SP</span>
+        <div class="regional-bar"><div class="regional-bar-fill" style="width: 100%;"></div></div>
+        <span class="regional-pct">~50%</span>
+      </li>
+      <li class="regional-row">
+        <span class="regional-uf">RJ</span>
+        <div class="regional-bar"><div class="regional-bar-fill" style="width: 44%;"></div></div>
+        <span class="regional-pct">~22%</span>
+      </li>
+      <li class="regional-row">
+        <span class="regional-uf">MG</span>
+        <div class="regional-bar"><div class="regional-bar-fill" style="width: 28%;"></div></div>
+        <span class="regional-pct">~14%</span>
+      </li>
+      <li class="regional-row">
+        <span class="regional-uf">BA</span>
+        <div class="regional-bar"><div class="regional-bar-fill" style="width: 20%;"></div></div>
+        <span class="regional-pct">~10%</span>
+      </li>
+      <li class="regional-row">
+        <span class="regional-uf">Outras</span>
+        <div class="regional-bar"><div class="regional-bar-fill" style="width: 8%;"></div></div>
+        <span class="regional-pct">~4%</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     STACK + COMPLIANCE
+     ============================================================ -->
+<section class="section section-navy">
+  <div class="container">
+    <div class="two-col">
+      <div class="col-block">
+        <span class="section-eyebrow">Tecnologia</span>
+        <h3>Stack corporativo</h3>
+        <ul class="kv-list">
+          <li><span class="kv-key">ERP financeiro</span><span class="kv-val">SAP S/4HANA</span></li>
+          <li><span class="kv-key">CRM</span><span class="kv-val">HubSpot Sales Hub Starter <span class="small">avaliando upgrade</span></span></li>
+          <li><span class="kv-key">Operações &amp; Onboarding TI</span><span class="kv-val">ClickUp</span></li>
+          <li><span class="kv-key">App de RH</span><span class="kv-val">Aurora People <span class="small">proprietário</span></span></li>
+          <li><span class="kv-key">Produtividade</span><span class="kv-val">Microsoft 365 <span class="small">Outlook, Teams, SharePoint</span></span></li>
+          <li><span class="kv-key">Gestão de obras</span><span class="kv-val">TechFlow</span></li>
+          <li><span class="kv-key">Cloud</span><span class="kv-val">AWS <span class="small">em adoção desde 2024</span></span></li>
+        </ul>
+      </div>
+      <div class="col-block">
+        <span class="section-eyebrow">Compliance</span>
+        <h3>Certificações &amp; programas</h3>
+        <ul class="kv-list">
+          <li><span class="kv-key">ISO 9001 — Qualidade</span><span class="kv-val">desde 2014</span></li>
+          <li><span class="kv-key">ISO 14001 — Ambiental</span><span class="kv-val">desde 2017</span></li>
+          <li><span class="kv-key">OHSAS 18001 — SST</span><span class="kv-val">desde 2019</span></li>
+          <li><span class="kv-key">Programa de integridade Lei 12.846</span><span class="kv-val">desde 2020</span></li>
+          <li><span class="kv-key">LGPD — DPO formal</span><span class="kv-val">desde 2021</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CARTEIRA DE CLIENTES
+     ============================================================ -->
+<section class="section section-stone" id="carteira">
+  <div class="container">
+    <span class="section-eyebrow">Clientes-âncora</span>
+    <h2 class="section-title">Carteira ativa</h2>
+    <p class="section-subtitle">Oito relações comerciais de médio e longo prazo distribuídas pelas verticais Industrial, Predial e Infra.</p>
+
+    <div class="clients-grid">
+      <div class="client-card">
+        <div class="client-name">Mineradora Itacolomi</div>
+        <div class="client-meta">Mineração · Aurora Industrial</div>
+        <span class="client-since">Cliente desde 2018</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Hospital São Lucas</div>
+        <div class="client-meta">Saúde · Aurora Predial</div>
+        <span class="client-since">Cliente desde 2021</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Banco Cruzeiro</div>
+        <div class="client-meta">Financeiro · Aurora Predial</div>
+        <span class="client-since">Cliente desde 2019</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Telecom Aurora</div>
+        <div class="client-meta">Telecomunicações · Aurora Infra</div>
+        <span class="client-since">Cliente desde 2023</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Frigorífico Pampa</div>
+        <div class="client-meta">Alimentos · Aurora Industrial</div>
+        <span class="client-since">Cliente desde 2022</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Indústria Cedrofino</div>
+        <div class="client-meta">Indústria · Aurora Industrial</div>
+        <span class="client-since">Cliente desde 2024</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Varejo Mil Cores</div>
+        <div class="client-meta">Varejo · Aurora Predial</div>
+        <span class="client-since">Cliente desde 2020</span>
+      </div>
+      <div class="client-card">
+        <div class="client-name">Distribuidora Atlântico</div>
+        <div class="client-meta">Distribuição · Aurora Industrial</div>
+        <span class="client-since">Cliente desde 2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FORNECEDORES
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="section-eyebrow">Cadeia de suprimentos</span>
+    <h2 class="section-title">Fornecedores estratégicos</h2>
+    <p class="section-subtitle">Parceiros com contrato ativo de longo prazo na operação cotidiana — software de obras, logística e ativos imobiliários.</p>
+
+    <div class="lines-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="line-card">
+        <span class="line-tag">Tecnologia</span>
+        <h3>TechFlow Sistemas Ltda</h3>
+        <p class="line-desc">Software de gestão de obras — sistema base do Aurora Tech. Contrato de prestação de serviços vigente.</p>
+      </div>
+      <div class="line-card">
+        <span class="line-tag">Logística</span>
+        <h3>Logística Bandeirantes S.A.</h3>
+        <p class="line-desc">Transporte interestadual de equipamentos pesados. NDA bilateral firmado em 2026.</p>
+      </div>
+      <div class="line-card">
+        <span class="line-tag">Imóveis</span>
+        <h3>Imobiliária Galpões Brasil</h3>
+        <p class="line-desc">Locador do galpão de Guarulhos — base operacional Aurora Industrial em SP.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER / CONTATO
+     ============================================================ -->
+<footer class="footer" id="contato">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-mark">A</span>
+          <span style="color: var(--white);">AURORA <small style="font-weight: 400; opacity: 0.6;">CONSTRUTORA</small></span>
+        </div>
+        <p>Aurora Construtora Ltda<br>
+        CNPJ 18.452.973/0001-65 · IE 145.892.371.110<br>
+        Construção civil e infraestrutura desde 2008.</p>
+      </div>
+      <div>
+        <h4>Sede</h4>
+        <p>Av. Brigadeiro Faria Lima, 3477<br>
+        14º andar, Itaim Bibi<br>
+        São Paulo / SP — 04538-133</p>
+        <p style="margin-top: 12px;">+55 11 3045-7800</p>
+      </div>
+      <div>
+        <h4>Filiais</h4>
+        <ul>
+          <li>Rio de Janeiro / RJ</li>
+          <li>Belo Horizonte / MG</li>
+          <li>Salvador / BA</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Institucional</h4>
+        <ul>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#negocio">Linhas de negócio</a></li>
+          <li><a href="#lideranca">Liderança</a></li>
+          <li><a href="#carteira">Carteira</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Aurora Construtora Ltda — Todos os direitos reservados.</span>
+      <span class="demo-disclaimer">Empresa fictícia · usada nas demos do webinar Amazon Quick</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

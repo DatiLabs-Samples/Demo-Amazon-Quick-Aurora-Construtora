@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Construtora — Slide de apresentação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0E1E36;
+  --navy-2: #1B2845;
+  --navy-3: #2A3B5C;
+  --amber: #D4A24C;
+  --amber-light: #E5B86A;
+  --amber-dark: #B5832A;
+  --stone: #F5F2EC;
+  --text: #1A1A1A;
+  --muted: #5A5A5A;
+  --line: rgba(255,255,255,0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  background: #000;
+  overflow: hidden;
+}
+
+/* ============================================================
+   16:9 SLIDE — usa unidade --u = min(vw/16, vh/9)
+   garante que o slide ocupe a maior área 16:9 que cabe na tela
+   e que todas as medidas escalem proporcionalmente
+   ============================================================ */
+:root {
+  --u: min(calc(100vw / 16), calc(100vh / 9));
+}
+.slide-stage {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #000;
+}
+.slide {
+  width: calc(var(--u) * 16);
+  height: calc(var(--u) * 9);
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(14,30,54,0.96) 0%, rgba(27,40,69,0.92) 100%),
+    radial-gradient(circle at 88% 12%, rgba(212, 162, 76, 0.20) 0%, transparent 50%),
+    radial-gradient(circle at 12% 88%, rgba(212, 162, 76, 0.10) 0%, transparent 45%),
+    var(--navy);
+  color: #fff;
+  overflow: hidden;
+  font-size: calc(var(--u) * 0.18);
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 4em 4em;
+  pointer-events: none;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -0.01em; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.slide-header {
+  position: absolute;
+  top: 1.8em;
+  left: 3.2em;
+  right: 3.2em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.brand-logo {
+  height: 5.4em;
+  width: auto;
+  max-width: 20em;
+  object-fit: contain;
+  display: block;
+}
+/* placeholder enquanto a imagem real não estiver no caminho — some quando img carrega */
+.brand-logo-placeholder {
+  height: 5.4em;
+  min-width: 14em;
+  display: grid;
+  place-items: center;
+  border: 0.14em dashed rgba(212, 162, 76, 0.55);
+  border-radius: 0.5em;
+  color: var(--amber);
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0 1.4em;
+  background: rgba(212, 162, 76, 0.06);
+}
+.brand-name {
+  font-weight: 700;
+  font-size: 1.4em;
+  letter-spacing: 0.04em;
+}
+.brand-name small {
+  font-weight: 400;
+  font-size: 0.7em;
+  opacity: 0.6;
+  margin-left: 0.4em;
+}
+.slide-tag {
+  color: var(--amber);
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.5em 1.2em;
+  border: 1px solid rgba(212, 162, 76, 0.40);
+  border-radius: 100px;
+}
+
+/* ============================================================
+   GRID PRINCIPAL — 4 quadrantes
+   ============================================================ */
+.slide-body {
+  position: absolute;
+  top: 8.4em;
+  left: 3.2em;
+  right: 3.2em;
+  bottom: 3.5em;
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.4em;
+  z-index: 1;
+}
+
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+  border-radius: 0.6em;
+  padding: 1.6em 1.8em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  position: relative;
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+}
+.card-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--amber);
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.card-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 1.6em;
+  height: 0.15em;
+  background: var(--amber);
+}
+.card h2 {
+  font-size: 1.95em;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.2em;
+}
+
+/* ============================================================
+   CARD 1 — EMPRESA
+   ============================================================ */
+.card-empresa {
+  background: linear-gradient(135deg, rgba(212, 162, 76, 0.18), rgba(212, 162, 76, 0.06));
+  border-color: rgba(212, 162, 76, 0.35);
+}
+.empresa-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45em;
+  line-height: 1.3;
+  color: rgba(255,255,255,0.92);
+  font-style: italic;
+  margin-bottom: 0.3em;
+}
+.empresa-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8em 1.2em;
+  margin-top: auto;
+}
+.empresa-stat {
+  text-align: left;
+  border-left: 0.2em solid var(--amber);
+  padding-left: 0.8em;
+}
+.empresa-stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.85em;
+  font-weight: 700;
+  color: var(--amber);
+  line-height: 1;
+}
+.empresa-stat-label {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.10em;
+  color: rgba(255,255,255,0.70);
+  margin-top: 0.3em;
+  font-weight: 600;
+}
+.empresa-meta {
+  font-size: 1em;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.55;
+}
+.empresa-meta strong { color: #fff; }
+
+/* ============================================================
+   CARD 2 — CLIENTES
+   ============================================================ */
+.clients {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.3em 1.2em;
+  margin-top: 0.2em;
+}
+.client {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 0.55em 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.client:nth-last-child(-n+2) { border-bottom: none; }
+.client-dot {
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--amber);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.client-name {
+  font-size: 1em;
+  font-weight: 600;
+  color: #fff;
+}
+.client-sector {
+  font-size: 0.82em;
+  color: rgba(255,255,255,0.60);
+  margin-left: auto;
+  font-weight: 400;
+}
+
+/* ============================================================
+   CARD 3 — DORES
+   ============================================================ */
+.pains-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  margin-top: 0.2em;
+}
+.pain {
+  display: grid;
+  grid-template-columns: 7.2em 1fr;
+  gap: 1.2em;
+  padding: 0.55em 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: start;
+}
+.pain:last-child { border-bottom: none; }
+.pain-area {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--amber);
+  font-size: 1em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-top: 0.1em;
+}
+.pain-text {
+  font-size: 0.95em;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.45;
+}
+
+/* ============================================================
+   CARD 4 — SISTEMAS
+   ============================================================ */
+.stack {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.3em 1.2em;
+  margin-top: 0.2em;
+}
+.stack-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  padding: 0.45em 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.stack-row:nth-last-child(-n+2) { border-bottom: none; }
+.stack-key {
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.60);
+  font-weight: 600;
+}
+.stack-val {
+  font-size: 1.02em;
+  font-weight: 600;
+  color: #fff;
+}
+.stack-val .small {
+  font-weight: 400;
+  font-size: 0.82em;
+  color: rgba(255,255,255,0.55);
+  margin-left: 0.4em;
+}
+
+/* ============================================================
+   FOOTER strip
+   ============================================================ */
+.slide-footer {
+  position: absolute;
+  bottom: 1.2em;
+  left: 3.2em;
+  right: 3.2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78em;
+  color: rgba(255,255,255,0.40);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.slide-footer .demo-badge {
+  color: var(--amber);
+  background: rgba(212, 162, 76, 0.10);
+  padding: 0.3em 0.9em;
+  border-radius: 100px;
+  font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<div class="slide-stage">
+  <article class="slide">
+
+    <!-- HEADER -->
+    <div class="slide-header">
+      <div class="brand">
+        <!--
+          Coloque o arquivo do logo em: aurora/logo-aurora.png (ou .svg)
+          Enquanto a imagem não existir, aparece o placeholder tracejado.
+        -->
+        <img class="brand-logo"
+             src="logo-aurora.png"
+             alt="Aurora Construtora"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+        <span class="brand-logo-placeholder" style="display:none;">Logo Aurora aqui</span>
+        <span class="brand-name">AURORA <small>CONSTRUTORA</small></span>
+      </div>
+      <span class="slide-tag">Empresa-modelo · Webinar Amazon Quick</span>
+    </div>
+
+    <!-- BODY: 4 cards -->
+    <div class="slide-body">
+
+      <!-- CARD 1 — EMPRESA -->
+      <section class="card card-empresa">
+        <span class="card-eyebrow">A empresa</span>
+        <h2>Aurora Construtora Ltda</h2>
+        <p class="empresa-tagline">"Engenharia que viabiliza o crescimento do Brasil."</p>
+        <p class="empresa-meta">
+          Construção civil e infraestrutura desde <strong>2008</strong>. Sede em <strong>São Paulo</strong>, filiais em <strong>Rio, BH e Salvador</strong>. Quatro verticais: <strong>Industrial</strong> (galpões e plantas) · <strong>Predial</strong> (condomínios e hospitais) · <strong>Infra</strong> (obras públicas) · <strong>Tech</strong> (IoT em canteiros).
+        </p>
+        <div class="empresa-stats">
+          <div class="empresa-stat">
+            <div class="empresa-stat-value">824</div>
+            <div class="empresa-stat-label">Funcionários</div>
+          </div>
+          <div class="empresa-stat">
+            <div class="empresa-stat-value">R$ 487M</div>
+            <div class="empresa-stat-label">Receita 2025</div>
+          </div>
+          <div class="empresa-stat">
+            <div class="empresa-stat-value">145+</div>
+            <div class="empresa-stat-label">Contratos</div>
+          </div>
+          <div class="empresa-stat">
+            <div class="empresa-stat-value">4</div>
+            <div class="empresa-stat-label">Regionais</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 2 — CLIENTES -->
+      <section class="card">
+        <span class="card-eyebrow">Principais clientes</span>
+        <h2>Carteira ativa</h2>
+        <div class="clients">
+          <div class="client">
+            <span class="client-dot"></span>
+            <span class="client-name">Mineradora Itacolomi</span>
+            <span class="client-sector">Mineração</span>
+          </div>
+          <div class="client">
+            <span class="client-dot"></span>
+            <span class="client-name">Hospital São Lucas</span>
+            <span class="client-sector">Saúde</span>
+          </div>
+          <div class="client">
+            <span class="client-dot"></span>
+            <span class="client-name">Banco Cruzeiro</span>
+            <span class="client-sector">Financeiro</span>
+          </div>
+          <div class="client">
+            <span class="client-dot"></span>
+            <span class="client-name">Telecom Aurora</span>
+            <span class="client-sector">Telecom</span>
+          </div>
+          <div class="client">
+            <span class="client-dot"></span>
+            <span class="client-name">Frigorífico Pampa</span>
+            <span class="client-sector">Alimentos</span>
+          </div>
+          <div class="client">
+            <span class="client-dot"></span>
+            <span class="client-name">Indústria Cedrofino</span>
+            <span class="client-sector">Indústria</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 3 — DORES -->
+      <section class="card">
+        <span class="card-eyebrow">Principais dores</span>
+        <h2>Onde o trabalho trava</h2>
+        <ul class="pains-list">
+          <li class="pain">
+            <span class="pain-area">Jurídico</span>
+            <span class="pain-text">Alto volume de contratos, baixa padronização, risco de cláusulas escondidas.</span>
+          </li>
+          <li class="pain">
+            <span class="pain-area">Comercial</span>
+            <span class="pain-text">Visibilidade fragmentada (CRM + suporte + email + planilhas); forecast manual; deals viram fumaça sem aviso.</span>
+          </li>
+          <li class="pain">
+            <span class="pain-area">RH</span>
+            <span class="pain-text">80% das perguntas se repetem; dispersão de canais; dificuldade de manter conhecimento atualizado.</span>
+          </li>
+          <li class="pain">
+            <span class="pain-area">Financeiro</span>
+            <span class="pain-text">Variance analysis manual; narrativa do CFO escrita à mão toda semana; "porquês" descobertos tarde.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- CARD 4 — SISTEMAS -->
+      <section class="card">
+        <span class="card-eyebrow">Sistemas que usam</span>
+        <h2>Stack corporativo</h2>
+        <div class="stack">
+          <div class="stack-row">
+            <span class="stack-key">ERP financeiro</span>
+            <span class="stack-val">SAP S/4HANA</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-key">CRM</span>
+            <span class="stack-val">HubSpot <span class="small">Sales Hub</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-key">Operações &amp; TI</span>
+            <span class="stack-val">ClickUp</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-key">App de RH</span>
+            <span class="stack-val">Aurora People <span class="small">proprietário</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-key">Produtividade</span>
+            <span class="stack-val">Microsoft 365 <span class="small">Outlook · Teams · SharePoint</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-key">Gestão de obras</span>
+            <span class="stack-val">TechFlow</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-key">Cloud</span>
+            <span class="stack-val">AWS <span class="small">desde 2024</span></span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-key">Comunicação</span>
+            <span class="stack-val">Slack <span class="small">workspace dedicado</span></span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="slide-footer">
+      <span>Aurora Construtora · São Paulo / SP</span>
+      <span class="demo-badge">Empresa fictícia · usada nas 4 demos</span>
+    </div>
+
+  </article>
+</div>
+
+</body>
+</html>
