@@ -73,11 +73,17 @@ REGRAS CRÍTICAS
 ACTIONS (apenas 1)
 send_message do Slack — posta em #financeiro-leadership quando o usuário pedir alertar, avisar, mandar pro Slack, compartilhar resumo. Sem outras tools — pedido fora desse escopo, redirecionar para Sales Copilot ou FP&A Copilot.
 
-FORMATO NARRATIVO PADRÃO (resumo executivo)
+FORMATO NARRATIVO — APENAS QUANDO SOLICITADO
+
+Use o formato HEADLINE / DRIVERS / OUTLOOK / AÇÃO APENAS quando o usuário pedir explicitamente: "resumo executivo", "brief", "recomendação pro comitê", "Slack post", "narrativa pro CFO" ou similar.
+
+Quando aplicar:
 - HEADLINE: 1 frase com leitura cruzada (financeiro + comercial)
-- DRIVERS: 3 bullets com números exatos, deals específicos, e fonte
+- DRIVERS: 3 bullets com números exatos, deals específicos pelo nome, e fonte
 - OUTLOOK: 1 frase de projeção combinando ata + pipeline
 - AÇÃO: 1 frase de ação recomendada concreta para o comitê
+
+Para perguntas factuais ou exploratórias ("liste os deals", "qual o valor X", "por que Y aconteceu"), responda em prosa direta ou tabela conforme o caso pedir. Mantenha sempre as regras de citação de fonte e formato monetário R$ X,XM, mas SEM estrutura HEADLINE imposta.
 
 TEMPLATE PARA POST NO SLACK
 🎯 *Executive Brief — Aurora Executive Copilot*
@@ -114,27 +120,13 @@ Já configurado no Demo 04. Confirmar acesso.
 
 **P1.** `Por que a receita BA ficou R$ 2,7M abaixo no Q1? Cruza o variance com o pipeline pra identificar o deal específico.`
 
-Resposta esperada (cita 3 fontes):
-```
-HEADLINE: O gap de R$ 2,7M na receita BA Q1 é explicado pelo slippage do
-deal DER-BA — Recuperação BR-324 (R$ 5,8M, Patrícia Alves), que originalmente
-fecharia em Q1 mas foi reprogramado para Q3 por atraso na liberação federal.
+Resposta esperada (prosa cruzando 4 fontes, sem estrutura HEADLINE):
 
-CONTEXTO CRUZADO:
-- Dataset Aurora Variance Q1: receita BA realizada R$ 8,8M vs orçada R$ 11,5M
-  (-R$ 2,7M / -23%)
-- HubSpot deal DER-BA: closedate 2026-07-15, expected_close_quarter_original=Q1,
-  ou seja SLIPPED 2 trimestres. Valor R$ 5,8M × ~50% reconhecimento POC = R$ 2,9M
-  de receita perdida em Q1, batendo com o gap.
-- Ata Comitê mar/2026 item 3.2a: confirma "atraso em obras públicas no Nordeste,
-  com BA particularmente exposta — aproximadamente 60% da carteira regional em
-  contratos públicos federais".
-- Relatório de Mercado Q1 página 4: corrobora retração 4,7% Nordeste, execução
-  orçamentária União em 31% vs histórico 38%.
-
-CONCLUSÃO: o gap NÃO é falha de execução comercial nem operacional — é macro
-(atraso federal). O deal está vivo no pipeline, só foi reagendado.
-```
+> O gap de R$ 2,7M na receita BA Q1 (R$ 8,8M realizado vs R$ 11,5M orçado, -23%, conforme dataset Aurora Variance) é explicado pelo slippage do deal **DER-BA — Recuperação BR-324** no pipeline HubSpot. O deal tem `expected_close_quarter_original=Q1` mas o closedate atual é 2026-07-15 (Q3) — slippage de 2 trimestres. Com valor de R$ 5,8M e POC method ~50% de reconhecimento esperado em Q1, isso equivale a aproximadamente R$ 2,9M de receita não reconhecida, batendo praticamente com o gap.
+>
+> A causa é macroeconômica, não falha comercial. Conforme **Ata do Comitê mar/2026 item 3.2a**, a BA tem aproximadamente 60% da carteira regional em contratos públicos federais e o trimestre teve "atraso na liberação de orçamentos federais no Nordeste". O **Relatório de Mercado Q1 2026 página 4** corrobora: retração de 4,7% no Nordeste e execução orçamentária da União em apenas 31% (vs histórico de 38%).
+>
+> O deal está vivo no pipeline, apenas reagendado. Sales rep responsável: **Patrícia Alves**, health_score 50, última atividade 6 dias atrás.
 
 **Wow moment:** agente identificou um deal específico (DER-BA) cruzando 4 fontes diferentes — pipeline CRM + dataset financeiro + ata interna + relatório externo. Isso é IMPOSSÍVEL hoje sem cross-silo manual.
 
@@ -164,9 +156,12 @@ ANÁLISE DE RECUPERAÇÃO:
 - DER-BA precisa monitoramento — Patrícia já reativou (last_activity 6 dias),
   mas timing depende do governo federal.
 
-CRUZAMENTO COM ATA item 3.2b: o plano de mitigação aprovado em fev/2026 mas
-não acionado em março contempla exatamente isso — diversificação privada
-(Polo Camaçari materializa) + monitoramento de pleitos federais (DER-BA).
+CRUZAMENTO COM ATA: Polo Camaçari materializa o item 3.2c (componente
+estrutural — meta de redução de exposição a contratos públicos para 45%
+até 2027 via diversificação privada). DER-BA é o caso do item 3.2b
+(componente executivo — plano de mitigação aprovado em fev/2026 mas não
+acionado em março; agora sob monitoramento quinzenal por Mariana Cordeiro
+desde 14/04, conforme encaminhamentos item 6).
 
 GAP COBERTO: R$ 7,9M em pipeline vs R$ 2,7M de gap Q1 = cobertura 2,9x.
 Mesmo com 50% de conversion rate ponderado por health, dá pra recuperar.
