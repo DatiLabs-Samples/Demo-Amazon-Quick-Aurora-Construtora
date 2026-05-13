@@ -1,7 +1,5 @@
 # Custos das demos — Amazon Quick
 
-Câmbio de referência: USD 1 ≈ R$ 5,00 (abr/2026).
-
 ## Modelo de pricing — Amazon Quick
 
 | Item | Valor (USD) | Observação |
@@ -39,82 +37,82 @@ Consumo estimado por ensaio completo de cada demo (5-7 perguntas + 1 flow):
 ## Cenário 2 — Custo recorrente de produção (cliente adota)
 
 Premissas para um cliente médio que adota a Demo X em produção:
-- 1 autor + 5-50 usuários consumidores
+- 1 autor + 3-15 usuários consumidores (mix SMB)
 
-### Demo 01 — Jurídico (uso por equipe jurídica de ~5 advogados)
+### Demo 01 — Jurídico (uso por equipe jurídica de ~3 advogados)
 
-| Item | Quantidade | Custo USD/mês | BRL/mês |
-|---|---|---|---|
-| Plano Professional | 5 usuários | $100 | R$ 500 |
-| Infra fee | 1 conta | $250 | R$ 1.250 |
-| Storage S3 (contratos) | < 5 GB | < $1 | < R$ 5 |
-| Agent-hours Chat | ~3h/mês | dentro cota | R$ 0 |
-| Agent-hours Flows | ~0,5h/mês | dentro cota | R$ 0 |
-| **Total mensal** | | **~$351** | **~R$ 1.755** |
-| **Por usuário** | | $70 | R$ 351 |
+| Item | Quantidade | Custo USD/mês |
+|---|---|---|
+| Plano Professional | 3 usuários | $60 |
+| Infra fee | 1 conta | $250 |
+| Storage S3 (contratos) | < 5 GB | < $1 |
+| Agent-hours Chat | ~2h/mês | dentro cota |
+| Agent-hours Flows | ~0,3h/mês | dentro cota |
+| **Total mensal** | | **~$311** |
+| **Por usuário** | | ~$104 |
 
 **Não precisa de Enterprise** (sem autoria de dashboard nem Automate).
 
-### Demo 02 — Comercial (time de vendas ~20 pessoas, 1 sales ops autor) — com HubSpot
+### Demo 02 — Comercial (time de vendas ~8 pessoas, 1 sales ops autor) — com HubSpot
 
-| Item | Quantidade | Custo USD/mês | BRL/mês |
-|---|---|---|---|
-| Plano Enterprise (autor SalesOps) | 1 | $40 | R$ 200 |
-| Plano Professional (AEs/SDRs) | 19 | $380 | R$ 1.900 |
-| Infra fee | 1 conta | $250 | R$ 1.250 |
-| SPICE (pipeline + 360) | ~2 GB | $0,76 | R$ 4 |
-| Agent-hours Chat | ~10h/mês | dentro cota | R$ 0 |
-| Agent-hours Flows | ~3h/mês | dentro cota | R$ 0 |
-| **Total mensal** | | **~$671** | **~R$ 3.355** |
-| **Por usuário** | | $34 | R$ 168 |
+| Item | Quantidade | Custo USD/mês |
+|---|---|---|
+| Plano Enterprise (autor SalesOps) | 1 | $40 |
+| Plano Professional (AEs/SDRs) | 7 | $140 |
+| Infra fee | 1 conta | $250 |
+| SPICE (pipeline + 360) | ~2 GB | $0,76 |
+| Agent-hours Chat | ~5h/mês | dentro cota |
+| Agent-hours Flows | ~1,5h/mês | dentro cota |
+| **Total mensal** | | **~$431** |
+| **Por usuário** | | ~$54 |
 
 **Custo externo a considerar:** HubSpot Free Forever (sem custo até 1M contacts) ou plano pago se cliente já estiver em Sales Hub Starter (USD 15/usuário). Slack: geralmente já existe.
 
-### Demo 03 — RH (~800 funcionários consumidores, 2 RH autores)
+### Demo 03 — RH (~100 funcionários consumidores, 2 RH autores)
 
-| Item | Quantidade | Custo USD/mês | BRL/mês |
-|---|---|---|---|
-| Plano Professional (RH + funcionários) | 800 | $16.000 | R$ 80.000 |
-| Infra fee | 1 conta | $250 | R$ 1.250 |
-| Storage S3 (políticas) | < 1 GB | < $1 | < R$ 5 |
-| Agent-hours Chat | ~150h/mês | overage ~50h × $3 | $150 |
-| Agent-hours Flows | ~30h/mês | overage 10h × $3 | $30 |
-| ClickUp Free (até 5 membros) ou Unlimited ($7/usuário) | — | $0 ou ~$7/usuário | $0 ou ~R$ 35 |
-| **Total mensal** | | **~$16.430** | **~R$ 82.150** |
-| **Por usuário** | | $20,5 | R$ 102 |
+| Item | Quantidade | Custo USD/mês |
+|---|---|---|
+| Plano Professional (RH + funcionários) | 100 | $2.000 |
+| Infra fee | 1 conta | $250 |
+| Storage S3 (políticas) | < 1 GB | < $1 |
+| Agent-hours Chat | ~20h/mês | dentro cota |
+| Agent-hours Flows | ~5h/mês | dentro cota |
+| ClickUp Free (até 5 membros) | — | $0 |
+| **Total mensal** | | **~$2.250** |
+| **Por usuário** | | ~$23 |
 
-⚠️ **Atenção:** RH escala com headcount. Para 800 pessoas o custo absoluto é alto, mas o **custo por funcionário é R$ 102/mês**. Comparar com:
-- Custo médio de helpdesk de RH: R$ 8-15/atendimento
-- Estimativa de 1-2 atendimentos/funcionário/mês = R$ 8-30
+⚠️ **Atenção:** RH escala com headcount. Para 100 pessoas o custo absoluto é alto, mas o **custo por funcionário é ~$23/mês**. Comparar com:
+- Custo médio de helpdesk de RH: USD 1,60-3 por atendimento
+- Estimativa de 1-2 atendimentos/funcionário/mês = USD 1,60-6
 - **Payback** se Quick reduzir 50% dos atendimentos.
 
-**Otimização possível:** licenciar apenas RH + gestores (~50 usuários) e expor o Chat Agent via **embed em Slack/Teams** — funcionários consultam sem licença Quick. Custo cai pra ~$1.250/mês (~R$ 6.250).
+**Otimização possível:** licenciar apenas RH + gestores (~10 usuários) e expor o Chat Agent via **embed em Slack/Teams** — funcionários consultam sem licença Quick. Custo cai pra ~$450/mês.
 
-### Demo 04 — Financeiro (FP&A ~10 pessoas, 2 autores)
+### Demo 04 — Financeiro (FP&A ~5 pessoas, 2 autores)
 
-| Item | Quantidade | Custo USD/mês | BRL/mês |
-|---|---|---|---|
-| Plano Enterprise (autores) | 2 | $80 | R$ 400 |
-| Plano Professional (FP&A + leadership) | 8 | $160 | R$ 800 |
-| Infra fee | 1 conta | $250 | R$ 1.250 |
-| SPICE (financial datasets) | ~5 GB | $1,90 | R$ 10 |
-| Agent-hours Chat | ~5h/mês | dentro cota | R$ 0 |
-| Agent-hours **Research** | ~8h/mês | overage 4h × $6 | $24 |
-| Agent-hours Flows | ~1h/mês | dentro cota | R$ 0 |
-| **Total mensal** | | **~$516** | **~R$ 2.580** |
-| **Por usuário** | | $52 | R$ 258 |
+| Item | Quantidade | Custo USD/mês |
+|---|---|---|
+| Plano Enterprise (autores) | 2 | $80 |
+| Plano Professional (FP&A + leadership) | 3 | $60 |
+| Infra fee | 1 conta | $250 |
+| SPICE (financial datasets) | ~3 GB | $1,14 |
+| Agent-hours Chat | ~3h/mês | dentro cota |
+| Agent-hours **Research** | ~5h/mês | overage 1h × $6 | $6 |
+| Agent-hours Flows | ~0,5h/mês | dentro cota |
+| **Total mensal** | | **~$397** |
+| **Por usuário** | | ~$79 |
 
 ⚠️ **Research é o item mais caro** ($6/h overage). Em produção real, monitorar. Se time abusar (analista executa research 30x/dia), conta cresce. Cota Enterprise cobre uso "estratégico", não operacional.
 
 ## Resumo comparativo (mensal, em produção)
 
-| Demo | Usuários | Custo total/mês | Por usuário | Plano necessário | Custo externo? |
+| Demo | Usuários | Custo total/mês (USD) | Por usuário (USD) | Plano necessário | Custo externo? |
 |---|---|---|---|---|---|
-| **01 Jurídico** | 5 | R$ 1.755 | R$ 351 | Professional | Não |
-| **02 Comercial** | 20 | R$ 3.355 | R$ 168 | Mix Enterprise/Pro | Salesforce (já existe) |
-| **03 RH (full headcount)** | 800 | R$ 82.150 | R$ 102 | Professional | ClickUp Free (até 5) ou Unlimited (~R$ 35/usuário) |
-| **03 RH (otimizado)** | 50 + embed | R$ 6.250 | R$ 125 | Professional | Mesmo |
-| **04 Financeiro** | 10 | R$ 2.580 | R$ 258 | Mix Enterprise/Pro | Não |
+| **01 Jurídico** | 3 | $311 | ~$104 | Professional | Não |
+| **02 Comercial** | 8 | $431 | ~$54 | Mix Enterprise/Pro | HubSpot Free (já existe) |
+| **03 RH (full headcount)** | 100 | $2.250 | ~$23 | Professional | ClickUp Free (até 5 membros) |
+| **03 RH (otimizado)** | 10 + embed | $450 | ~$45 | Professional | Mesmo |
+| **04 Financeiro** | 5 | $397 | ~$79 | Mix Enterprise/Pro | Não |
 
 ## Observações pra apresentar no webinar
 
@@ -128,8 +126,8 @@ Premissas para um cliente médio que adota a Demo X em produção:
 
 Para a demo de RH (mais escalável):
 
-- Custo médio HR helpdesk no Brasil: R$ 12/atendimento
-- 800 funcionários × 1,5 atendimento/mês = 1.200 atendimentos/mês = R$ 14.400/mês
-- Amazon Quick captura 50% (autoatendimento): economia R$ 7.200/mês
-- Custo Quick (otimizado, 50 licenças + embed): R$ 6.250/mês
+- Custo médio HR helpdesk: ~$2,40/atendimento
+- 100 funcionários × 1,5 atendimento/mês = 150 atendimentos/mês = $360/mês
+- Amazon Quick captura 50% (autoatendimento): economia $180/mês
+- Custo Quick (otimizado, 10 licenças + embed): $450/mês
 - **Payback: imediato. Margem mensal: R$ 950 + tempo liberado do RH.**

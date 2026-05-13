@@ -1,5 +1,71 @@
 # Setup AWS — pré-requisitos para gravar/apresentar as demos
 
+## 0. Setup automatizado via scripts ⚡
+
+O repo já tem **11 scripts idempotentes** que automatizam a maior parte do setup. Roda em qualquer ordem (ou re-roda à vontade — não duplicam nem corrompem).
+
+### Scripts AWS (S3 upload de artefatos)
+
+| Script | O que faz | Pré-requisito |
+|---|---|---|
+| [`demos/01-juridico/scripts/setup-aws.sh`](../demos/01-juridico/scripts/setup-aws.sh) | Cria bucket `qx3vp-aurora-demo-<account>`, IAM policy + bucket policy oficiais Amazon Quick, sobe 3 PDFs em `juridico/` | `aws sso login --profile quick-dev` |
+| [`demos/01-juridico/scripts/teardown-aws.sh`](../demos/01-juridico/scripts/teardown-aws.sh) | Rollback completo: deleta objetos + bucket + policies | `aws sso login` |
+| [`demos/03-rh/scripts/setup-aws.sh`](../demos/03-rh/scripts/setup-aws.sh) | Sobe 4 PDFs de políticas em `rh/` (reusa bucket do Demo 01) | bucket Demo 01 + PDFs gerados |
+| [`demos/04-financeiro/scripts/setup-aws.sh`](../demos/04-financeiro/scripts/setup-aws.sh) | Sobe 2 PDFs + `variance-q1-2026.csv` em `financeiro/`; arquiva CSVs originais wide-format | bucket Demo 01 + PDFs/CSV gerados |
+
+### Scripts de geração de artefatos
+
+| Script | O que faz |
+|---|---|
+| [`demos/01-juridico/scripts/convert-pdfs.sh`](../demos/01-juridico/scripts/convert-pdfs.sh) | Gera 3 PDFs de contratos via pandoc + weasyprint a partir de MD versionado |
+| [`demos/03-rh/scripts/convert-pdfs.sh`](../demos/03-rh/scripts/convert-pdfs.sh) | Gera 4 PDFs de políticas RH (manual, férias, benefícios, conduta) |
+| [`demos/04-financeiro/scripts/convert-pdfs.sh`](../demos/04-financeiro/scripts/convert-pdfs.sh) | Gera 2 PDFs financeiros (ata comitê + relatório de mercado) |
+| [`demos/04-financeiro/scripts/combine-csvs.py`](../demos/04-financeiro/scripts/combine-csvs.py) | Combina `budget-2026.csv` + `actuals-q1-2026.csv` em `variance-q1-2026.csv` long-format (108 linhas), pronto pro Quick Sight |
+
+### Scripts de integrações externas
+
+| Script | O que faz | Pré-requisito |
+|---|---|---|
+| [`demos/02-comercial/scripts/setup-hubspot.py`](../demos/02-comercial/scripts/setup-hubspot.py) | Provisiona pipeline HubSpot: 5 stages, 8 custom properties em deal + 2 em company, 9 companies, 9 deals (incluindo 2 BA pra Demo 05), associações, orphan cleanup automático | `export HUBSPOT_TOKEN=pat-na1-...` (Private App Token) |
+| [`demos/02-comercial/scripts/teardown-hubspot.py`](../demos/02-comercial/scripts/teardown-hubspot.py) | Arquiva todos os deals e companies do scaffold (não deleta hard, restaurável) | `HUBSPOT_TOKEN` |
+| [`demos/03-rh/scripts/setup-clickup.py`](../demos/03-rh/scripts/setup-clickup.py) | Provisiona ClickUp: Space `Demo - Aurora`, List `Onboarding TI`, 5 custom fields (Nome, Cargo, Gestor, Equipamentos, Status), 3 seed tasks | `export CLICKUP_TOKEN=pk_...` (Personal Token) |
+
+### Setup spec para Quick Sight e ClickUp
+
+| Arquivo | Uso |
+|---|---|
+| [`demos/04-financeiro/scripts/quicksight-manifest.json`](../demos/04-financeiro/scripts/quicksight-manifest.json) | Manifest para criar dataset Quick Sight a partir do S3 — colar direto na UI do Quick Sight ao adicionar S3 data source |
+| [`demos/02-comercial/integrations/hubspot-openapi.json`](../demos/02-comercial/integrations/hubspot-openapi.json) | Spec OpenAPI minimal pra registrar HubSpot como Custom Action (fallback caso conector built-in não esteja disponível) |
+| [`demos/03-rh/integrations/clickup-openapi.json`](../demos/03-rh/integrations/clickup-openapi.json) | Spec OpenAPI pro ClickUp — usar como Custom Action (caminho recomendado, mais estável que MCP) |
+| [`demos/03-rh/integrations/clickup-ids.md`](../demos/03-rh/integrations/clickup-ids.md) | Referência com workspace/space/list/field IDs + UUIDs de option pra preencher após rodar `setup-clickup.py` |
+
+### Ordem recomendada de execução (D-14 a D-3)
+
+```bash
+# D-14: AWS base
+aws sso login --profile quick-dev
+./demos/01-juridico/scripts/setup-aws.sh
+
+# D-13: gerar e subir PDFs RH e Financeiro
+./demos/03-rh/scripts/convert-pdfs.sh
+./demos/03-rh/scripts/setup-aws.sh
+./demos/04-financeiro/scripts/convert-pdfs.sh
+python3 demos/04-financeiro/scripts/combine-csvs.py
+./demos/04-financeiro/scripts/setup-aws.sh
+
+# D-12: HubSpot (Demo 02 + 05)
+export HUBSPOT_TOKEN=pat-na1-...
+python3 demos/02-comercial/scripts/setup-hubspot.py
+
+# D-12: ClickUp (Demo 03)
+export CLICKUP_TOKEN=pk_...
+python3 demos/03-rh/scripts/setup-clickup.py
+```
+
+Os passos manuais nas seções abaixo são a documentação de referência — na prática, os scripts cobrem ~80% do trabalho. Use a documentação manual só pra entender o que cada script faz, ou em ambientes que não permitam rodar os scripts.
+
+---
+
 ## 1. Ativação do Amazon Quick
 
 1. Conta AWS com permissão de admin (ou ao menos `IAMFullAccess` + `quicksuite:*`).
@@ -87,8 +153,10 @@ ClickUp **não está na lista de conectores nativos** do Amazon Quick. Duas opç
 
 ## 4. Buckets S3 e dados
 
+> **🤖 Automate:** rodar [`demos/01-juridico/scripts/setup-aws.sh`](../demos/01-juridico/scripts/setup-aws.sh) cria o bucket compartilhado com policies oficiais Amazon Quick. Depois rodar `setup-aws.sh` de cada demo (RH, Financeiro) pra upload de artefatos específicos. Layout final:
+
 ```
-quick-demo-{conta}/
+qx3vp-aurora-demo-{conta}/
 ├── juridico/
 │   ├── contrato-prestacao-servicos.pdf
 │   ├── nda-fornecedor.pdf
@@ -109,22 +177,41 @@ quick-demo-{conta}/
 
 Conteúdo dos arquivos: ver [01-dados-sinteticos.md](01-dados-sinteticos.md).
 
-## 5. Setup HubSpot (Demo 02 — uma vez só)
+## 5. Setup HubSpot (Demo 02 + Demo 05 — uma vez só)
+
+> **🤖 Automate:** [`demos/02-comercial/scripts/setup-hubspot.py`](../demos/02-comercial/scripts/setup-hubspot.py) provisiona pipeline + 8 custom properties (incluindo `regional`, `aurora_vertical`, `expected_close_quarter_original` da Demo 05) + 9 companies + 9 deals + orphan cleanup. Idempotente.
+>
+> ```bash
+> export HUBSPOT_TOKEN=pat-na1-...   # Private App Token
+> python3 demos/02-comercial/scripts/setup-hubspot.py
+> ```
+
+**Setup manual (referência caso prefira UI):**
 
 1. Criar conta HubSpot Free em [free.hubspot.com](https://free.hubspot.com)
 2. Customizar Sales Pipeline com stages Discovery / Qualification / Proposal / Negotiation / Closed Won
-3. Criar custom properties:
-   - **Deal:** `Health Score` (0-100), `Last Activity Days` (number)
-   - **Company:** `CSAT Score` (decimal), `Open Tickets` (number)
-4. Importar 8 deals + 8 companies via Contacts → Import (CSVs em dados-sinteticos)
-5. Verificar Board view (Kanban) do pipeline
+3. Criar custom properties em **deal:** `health_score`, `last_activity_days`, `sales_rep`, `regional`, `aurora_vertical`, `expected_close_quarter_original`
+4. Criar custom properties em **company:** `csat_score`, `open_tickets`
+5. Importar 9 companies + 9 deals (dados em `demos/02-comercial/data/companies.json` + `deals.json`)
+6. Verificar Board view (Kanban) do pipeline com 9 deals distribuídos pelos 5 stages
 
 ## 6. Setup ClickUp (Demo 03 — uma vez só)
 
+> **🤖 Automate:** [`demos/03-rh/scripts/setup-clickup.py`](../demos/03-rh/scripts/setup-clickup.py) provisiona Space `Demo - Aurora`, List `Onboarding TI`, 5 custom fields (Nome, Cargo, Gestor, Equipamentos, Status) e 3 seed tasks. Imprime os IDs no final pra você anotar.
+>
+> ```bash
+> export CLICKUP_TOKEN=pk_...   # Personal Token
+> python3 demos/03-rh/scripts/setup-clickup.py
+> ```
+>
+> Depois atualize [`demos/03-rh/integrations/clickup-ids.md`](../demos/03-rh/integrations/clickup-ids.md) com os IDs reais (workspace, space, list, fields, options) e [`demos/03-rh/integrations/clickup-openapi.json`](../demos/03-rh/integrations/clickup-openapi.json) substituindo o `999999999999` na URL path pelo seu list_id real.
+
+**Setup manual (referência):**
+
 1. Criar conta ClickUp Free Forever
 2. Criar Workspace `Aurora Demo`
-3. Space `Operações` → List `Onboarding TI` (custom fields para equipamento — ver Demo 03)
-4. Gerar Personal Token (Settings → Apps → Generate)
+3. Space `Demo - Aurora` → List `Onboarding TI` com 5 custom fields (ver `clickup-ids.md` no repo)
+4. Gerar Personal Token (Settings → Apps → Generate) — formato `pk_...`
 
 ## 7. Checklist 1 dia antes do webinar
 
