@@ -35,22 +35,18 @@ Estrutura em `demos/04-financeiro/`:
 ```
 demos/04-financeiro/
 ├── data/
-│   ├── budget-2026.csv         (12 linhas — 4 regionais × 3 categorias × 6 meses)
-│   └── actuals-q1-2026.csv     (12 linhas — Q1 realizado, com BA -23% baked in)
+│   └── variance-q1-2026.csv    (108 linhas long-format — pronto pro Quick Sight)
 ├── docs/
-│   ├── relatorio-mercado-construcao-q1-2026.md/.pdf  (8 páginas)
-│   └── ata-comite-financeiro-mar-2026.md/.pdf        (4 páginas — item 3.2 sobre BA é o gancho)
+│   ├── relatorio-mercado-construcao-q1-2026.pdf  (8 páginas)
+│   └── ata-comite-financeiro-mar-2026.pdf        (4 páginas — item 3.2 sobre BA é o gancho)
 └── scripts/
-    ├── convert-pdfs.sh         (Markdown → PDF via pandoc + weasyprint)
-    └── setup-aws.sh            (upload S3, idempotente)
+    └── quicksight-manifest.json   (template do dataset Quick Sight)
 ```
 
-Para regenerar artefatos:
+Upload S3 dos 3 artefatos é feito pelo script unificado na raiz:
 
 ```bash
-cd demos/04-financeiro
-./scripts/convert-pdfs.sh    # gera os 2 PDFs
-./scripts/setup-aws.sh       # uploada PDFs + CSVs em s3://.../financeiro/
+./scripts/setup-aws.sh       # sobe PDFs + CSV em s3://.../financeiro/
 ```
 
 ### 1. Criar dataset Quick Sight

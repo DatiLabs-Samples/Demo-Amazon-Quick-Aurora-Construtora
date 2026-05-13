@@ -8,21 +8,11 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 
 ### Geração dos PDFs
 
-- [ ] Instalar dependências
-  ```bash
-  brew install pandoc
-  brew install --cask weasyprint   # ou: brew install --cask wkhtmltopdf
-  ```
-- [ ] Rodar script de conversão
-  ```bash
-  cd /Users/brunovilardi/Documents/projetos/demos/amazon-quick-webinar
-  ./demos/01-juridico/scripts/convert-pdfs.sh
-  ```
-- [ ] Verificar 3 PDFs gerados
+- [ ] Verificar 3 PDFs já versionados no repo
   ```bash
   ls -lh demos/01-juridico/contratos/*.pdf
   ```
-  Esperado: 3 arquivos, cada um entre 80 KB e 300 KB.
+  Esperado: 3 arquivos (`contrato-locacao.pdf`, `contrato-prestacao-servicos.pdf`, `nda-fornecedor.pdf`), cada um entre 40 KB e 80 KB.
 - [ ] Abrir cada PDF no Preview e validar:
   - [ ] `contrato-prestacao-servicos.pdf` — 7-9 páginas, contém "30%" e "TechFlow"
   - [ ] `nda-fornecedor.pdf` — 2-4 páginas, contém "Bandeirantes"
@@ -72,14 +62,14 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 
 ### Provisionar S3 + upload PDFs
 
-- [ ] Rodar setup
+- [ ] Rodar setup unificado (cria bucket + sobe artefatos de todas as 3 demos AWS — Jurídico, RH, Financeiro)
   ```bash
-  ./demos/01-juridico/scripts/setup-aws.sh
+  ./scripts/setup-aws.sh
   ```
-- [ ] Anotar URI impressa: `s3://qx3vp-quick-dev-123456789012/juridico/`
+- [ ] Anotar URI impressa: `s3://qx3vp-aurora-demo-123456789012/juridico/`
 - [ ] Verificar upload
   ```bash
-  aws s3 ls s3://qx3vp-quick-dev-123456789012/juridico/ --profile quick-dev
+  aws s3 ls s3://qx3vp-aurora-demo-123456789012/juridico/ --profile quick-dev
   ```
   Esperado: 3 PDFs listados.
 

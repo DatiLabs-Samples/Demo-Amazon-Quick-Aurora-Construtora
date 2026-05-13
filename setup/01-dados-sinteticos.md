@@ -2,14 +2,7 @@
 
 Todos os dados aqui são **fictícios**. Empresa-modelo: **Construtora Aurora Ltda**, médio porte, sede em São Paulo, escritórios em SP/RJ/MG/BA, ~800 funcionários.
 
-> **🤖 Geração automatizada de artefatos:** o conteúdo descrito abaixo já está versionado no repo como Markdown em `demos/*/docs/` ou `politicas/`. PDFs e CSV combinado são gerados via scripts:
->
-> - [`demos/01-juridico/scripts/convert-pdfs.sh`](../demos/01-juridico/scripts/convert-pdfs.sh) — 3 contratos jurídicos
-> - [`demos/03-rh/scripts/convert-pdfs.sh`](../demos/03-rh/scripts/convert-pdfs.sh) — 4 políticas RH
-> - [`demos/04-financeiro/scripts/convert-pdfs.sh`](../demos/04-financeiro/scripts/convert-pdfs.sh) — ata comitê + relatório de mercado
-> - [`demos/04-financeiro/scripts/combine-csvs.py`](../demos/04-financeiro/scripts/combine-csvs.py) — gera `variance-q1-2026.csv` long-format pro Quick Sight
->
-> Pré-requisitos: `brew install pandoc` + `brew install --cask weasyprint` (ou `wkhtmltopdf`).
+> **Artefatos prontos no repo:** os 9 PDFs e o CSV combinado já estão versionados em `demos/01-juridico/contratos/`, `demos/03-rh/politicas/`, `demos/04-financeiro/docs/` e `demos/04-financeiro/data/`. Sem etapa de regeneração — o [`scripts/setup-aws.sh`](../scripts/setup-aws.sh) já faz upload direto.
 
 ## Demo 01 — Jurídico
 

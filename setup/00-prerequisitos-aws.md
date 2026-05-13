@@ -2,25 +2,14 @@
 
 ## 0. Setup automatizado via scripts ⚡
 
-O repo já tem **11 scripts idempotentes** que automatizam a maior parte do setup. Roda em qualquer ordem (ou re-roda à vontade — não duplicam nem corrompem).
+O repo já tem **4 scripts idempotentes** que automatizam a maior parte do setup. Todos os artefatos (9 PDFs + 1 CSV combinado) ficam **versionados no repo**, sem etapa de regeneração.
 
-### Scripts AWS (S3 upload de artefatos)
+### Scripts AWS (S3 — único setup pra todas as demos)
 
 | Script | O que faz | Pré-requisito |
 |---|---|---|
-| [`demos/01-juridico/scripts/setup-aws.sh`](../demos/01-juridico/scripts/setup-aws.sh) | Cria bucket `qx3vp-aurora-demo-<account>`, IAM policy + bucket policy oficiais Amazon Quick, sobe 3 PDFs em `juridico/` | `aws sso login --profile quick-dev` |
-| [`demos/01-juridico/scripts/teardown-aws.sh`](../demos/01-juridico/scripts/teardown-aws.sh) | Rollback completo: deleta objetos + bucket + policies | `aws sso login` |
-| [`demos/03-rh/scripts/setup-aws.sh`](../demos/03-rh/scripts/setup-aws.sh) | Sobe 4 PDFs de políticas em `rh/` (reusa bucket do Demo 01) | bucket Demo 01 + PDFs gerados |
-| [`demos/04-financeiro/scripts/setup-aws.sh`](../demos/04-financeiro/scripts/setup-aws.sh) | Sobe 2 PDFs + `variance-q1-2026.csv` em `financeiro/`; arquiva CSVs originais wide-format | bucket Demo 01 + PDFs/CSV gerados |
-
-### Scripts de geração de artefatos
-
-| Script | O que faz |
-|---|---|
-| [`demos/01-juridico/scripts/convert-pdfs.sh`](../demos/01-juridico/scripts/convert-pdfs.sh) | Gera 3 PDFs de contratos via pandoc + weasyprint a partir de MD versionado |
-| [`demos/03-rh/scripts/convert-pdfs.sh`](../demos/03-rh/scripts/convert-pdfs.sh) | Gera 4 PDFs de políticas RH (manual, férias, benefícios, conduta) |
-| [`demos/04-financeiro/scripts/convert-pdfs.sh`](../demos/04-financeiro/scripts/convert-pdfs.sh) | Gera 2 PDFs financeiros (ata comitê + relatório de mercado) |
-| [`demos/04-financeiro/scripts/combine-csvs.py`](../demos/04-financeiro/scripts/combine-csvs.py) | Combina `budget-2026.csv` + `actuals-q1-2026.csv` em `variance-q1-2026.csv` long-format (108 linhas), pronto pro Quick Sight |
+| [`scripts/setup-aws.sh`](../scripts/setup-aws.sh) | Cria bucket `qx3vp-aurora-demo-<account>`, aplica bucket policy + IAM inline policy oficiais Amazon Quick, sobe os 10 artefatos em 3 prefixos (`juridico/`, `rh/`, `financeiro/`) | `aws sso login --profile quick-dev` |
+| [`scripts/teardown-aws.sh`](../scripts/teardown-aws.sh) | Rollback completo: deleta objetos + bucket + policies (com confirmação interativa) | `aws sso login` |
 
 ### Scripts de integrações externas
 
@@ -39,19 +28,12 @@ O repo já tem **11 scripts idempotentes** que automatizam a maior parte do setu
 | [`demos/03-rh/integrations/clickup-openapi.json`](../demos/03-rh/integrations/clickup-openapi.json) | Spec OpenAPI pro ClickUp — usar como Custom Action (caminho recomendado, mais estável que MCP) |
 | [`demos/03-rh/integrations/clickup-ids.md`](../demos/03-rh/integrations/clickup-ids.md) | Referência com workspace/space/list/field IDs + UUIDs de option pra preencher após rodar `setup-clickup.py` |
 
-### Ordem recomendada de execução (D-14 a D-3)
+### Ordem recomendada de execução
 
 ```bash
-# D-14: AWS base
+# D-14: AWS — único comando cria bucket + sobe os 10 artefatos
 aws sso login --profile quick-dev
-./demos/01-juridico/scripts/setup-aws.sh
-
-# D-13: gerar e subir PDFs RH e Financeiro
-./demos/03-rh/scripts/convert-pdfs.sh
-./demos/03-rh/scripts/setup-aws.sh
-./demos/04-financeiro/scripts/convert-pdfs.sh
-python3 demos/04-financeiro/scripts/combine-csvs.py
-./demos/04-financeiro/scripts/setup-aws.sh
+./scripts/setup-aws.sh
 
 # D-12: HubSpot (Demo 02 + 05)
 export HUBSPOT_TOKEN=pat-na1-...
@@ -153,7 +135,7 @@ ClickUp **não está na lista de conectores nativos** do Amazon Quick. Duas opç
 
 ## 4. Buckets S3 e dados
 
-> **🤖 Automate:** rodar [`demos/01-juridico/scripts/setup-aws.sh`](../demos/01-juridico/scripts/setup-aws.sh) cria o bucket compartilhado com policies oficiais Amazon Quick. Depois rodar `setup-aws.sh` de cada demo (RH, Financeiro) pra upload de artefatos específicos. Layout final:
+> **🤖 Automate:** rodar [`scripts/setup-aws.sh`](../scripts/setup-aws.sh) na raiz do repo. Um único comando cria o bucket compartilhado com policies oficiais Amazon Quick e sobe os 10 artefatos em 3 prefixos. Layout final:
 
 ```
 qx3vp-aurora-demo-{conta}/
