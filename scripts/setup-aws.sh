@@ -23,9 +23,9 @@
 set -euo pipefail
 
 # Configuração
-PROFILE="quick-dev"
-ACCOUNT_ID="123456789012"   # ← substituir pelo seu AWS account ID
-REGION="us-east-1"
+PROFILE="${AWS_PROFILE:-quick-dev}"
+ACCOUNT_ID="${ACCOUNT_ID:-123456789012}"   # placeholder — sobrescrever via env ou editar
+REGION="${AWS_REGION:-us-east-1}"
 BUCKET="qx3vp-aurora-demo-${ACCOUNT_ID}"
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

@@ -9,8 +9,8 @@
 
 set -euo pipefail
 
-PROFILE="quick-dev"
-ACCOUNT_ID="123456789012"   # ← substituir pelo seu AWS account ID
+PROFILE="${AWS_PROFILE:-quick-dev}"
+ACCOUNT_ID="${ACCOUNT_ID:-123456789012}"   # placeholder — sobrescrever via env ou editar
 BUCKET="qx3vp-aurora-demo-${ACCOUNT_ID}"
 
 echo "⚠️  Você está prestes a APAGAR:"
