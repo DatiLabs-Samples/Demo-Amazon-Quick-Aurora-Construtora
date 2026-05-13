@@ -20,8 +20,8 @@ Controller pergunta "como fechou o Q1?" e em 3 minutos tem: dashboard de orçado
 
 ## Pré-requisitos
 
-- 2 CSVs em `s3://qx3vp-aurora-demo-913567437118/financeiro/`
-- 2 PDFs em `s3://qx3vp-aurora-demo-913567437118/financeiro/`
+- 2 CSVs em `s3://qx3vp-aurora-demo-123456789012/financeiro/`
+- 2 PDFs em `s3://qx3vp-aurora-demo-123456789012/financeiro/`
 - Conector Slack ativo (do Demo 01)
 - Quick Research habilitado no agente
 - Setup AWS (S3 + bucket policy) já feito pelo Demo 01
@@ -62,8 +62,8 @@ cd demos/04-financeiro
      "fileLocations": [
        {
          "URIs": [
-           "s3://qx3vp-aurora-demo-913567437118/financeiro/budget-2026.csv",
-           "s3://qx3vp-aurora-demo-913567437118/financeiro/actuals-q1-2026.csv"
+           "s3://qx3vp-aurora-demo-123456789012/financeiro/budget-2026.csv",
+           "s3://qx3vp-aurora-demo-123456789012/financeiro/actuals-q1-2026.csv"
          ]
        }
      ],
@@ -105,7 +105,7 @@ Salvar como `Aurora — Variance Q1 2026 Dashboard`.
 3. Descrição: `Dados financeiros 2026 da Aurora Construtora — orçado, realizado, relatórios de mercado e atas de comitê.`
 4. **Knowledge sources:**
    - Dataset `Aurora Budget vs Actual 2026`
-   - S3 prefix `s3://qx3vp-aurora-demo-913567437118/financeiro/` (para os 2 PDFs serem indexados)
+   - S3 prefix `s3://qx3vp-aurora-demo-123456789012/financeiro/` (para os 2 PDFs serem indexados)
 5. Aguardar indexação (~3-5 min)
 
 ### 4. Criar Custom Chat Agent "FP&A Copilot Aurora"

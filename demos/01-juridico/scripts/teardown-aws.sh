@@ -10,7 +10,7 @@
 set -euo pipefail
 
 PROFILE="quick-dev"
-ACCOUNT_ID="913567437118"
+ACCOUNT_ID="123456789012"
 BUCKET="qx3vp-aurora-demo-${ACCOUNT_ID}"
 
 echo "⚠️  Você está prestes a APAGAR:"

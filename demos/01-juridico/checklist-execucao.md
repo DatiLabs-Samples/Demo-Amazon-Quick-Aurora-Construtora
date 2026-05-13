@@ -53,7 +53,7 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 - [ ] Profile workload `quick-dev` (assume role na conta de dev) — adicionar a `~/.aws/config`:
   ```ini
   [profile quick-dev]
-  role_arn = arn:aws:iam::913567437118:role/Dati-operator
+  role_arn = arn:aws:iam::123456789012:role/Dati-operator
   source_profile = quick-account
   region = us-east-1
   ```
@@ -61,11 +61,11 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
   ```bash
   aws sts get-caller-identity --profile quick-dev
   ```
-  Esperado: `"Account": "913567437118"`
+  Esperado: `"Account": "123456789012"`
 - [ ] Validar Quick Suite ativo
   ```bash
   aws quicksight describe-account-subscription \
-      --aws-account-id 913567437118 \
+      --aws-account-id 123456789012 \
       --profile quick-dev
   ```
   Esperado: `"AccountSubscriptionStatus": "ACCOUNT_CREATED"` ou similar.
@@ -76,10 +76,10 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
   ```bash
   ./demos/01-juridico/scripts/setup-aws.sh
   ```
-- [ ] Anotar URI impressa: `s3://qx3vp-quick-dev-913567437118/juridico/`
+- [ ] Anotar URI impressa: `s3://qx3vp-quick-dev-123456789012/juridico/`
 - [ ] Verificar upload
   ```bash
-  aws s3 ls s3://qx3vp-quick-dev-913567437118/juridico/ --profile quick-dev
+  aws s3 ls s3://qx3vp-quick-dev-123456789012/juridico/ --profile quick-dev
   ```
   Esperado: 3 PDFs listados.
 
@@ -100,7 +100,7 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 - [ ] Descrição: `Contratos, NDAs e documentos jurídicos da Aurora Construtora`
 - [ ] Members: deixar só `bruno.vilardi@dati.com.br` por enquanto
 - [ ] **Knowledge sources** → **Add S3**
-  - Bucket: `qx3vp-quick-dev-913567437118`
+  - Bucket: `qx3vp-quick-dev-123456789012`
   - Prefix: `juridico/`
   - Confirmar
 - [ ] Aguardar status mudar de `Indexing` para `Ready` (~3-5 min para 3 PDFs)

@@ -17,11 +17,11 @@
     }
   ],
   "paths": {
-    "/list/901327076204/task": {
+    "/list/999999999999/task": {
       "post": {
         "operationId": "create_onboarding_task",
         "summary": "Cria task de onboarding na list Onboarding TI",
-        "description": "Cria uma nova task na list Onboarding TI id 901327076204 do workspace Dati Aurora Demo. Use para registrar solicitações de equipamento de novos funcionários com custom fields preenchidos. Cada custom field é referenciado pelo seu id UUID e o value varia por tipo do field. Para short_text use string. Para labels use objeto add com array de uuids das opções. Para drop_down use o orderindex inteiro da opção.",
+        "description": "Cria uma nova task na list Onboarding TI id 999999999999 do workspace Dati Aurora Demo. Use para registrar solicitações de equipamento de novos funcionários com custom fields preenchidos. Cada custom field é referenciado pelo seu id UUID e o value varia por tipo do field. Para short_text use string. Para labels use objeto add com array de uuids das opções. Para drop_down use o orderindex inteiro da opção.",
         "requestBody": {
           "required": true,
           "description": "Payload da nova task com name obrigatório description opcional e custom_fields para preencher Nome Cargo Gestor Equipamentos e Status.",
@@ -49,7 +49,7 @@
       "get": {
         "operationId": "list_onboarding_tasks",
         "summary": "Lista tasks da list Onboarding TI",
-        "description": "Retorna as tasks da list Onboarding TI id 901327076204. Use para o agente exibir onboardings em andamento ou checar duplicidade antes de criar nova task. Por padrão lista as últimas 100 tasks não arquivadas.",
+        "description": "Retorna as tasks da list Onboarding TI id 999999999999. Use para o agente exibir onboardings em andamento ou checar duplicidade antes de criar nova task. Por padrão lista as últimas 100 tasks não arquivadas.",
         "parameters": [
           {
             "name": "archived",

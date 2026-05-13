@@ -2,13 +2,15 @@
 
 Referência rápida dos IDs do workspace ClickUp da Aurora Demo. Use ao montar o Quick Flow "Onboarding Equipamento" e o Custom Chat Agent. Atualizado em 2026-05-10.
 
+> **Importante (placeholders):** os IDs abaixo (workspace `9999999999`, space `999999999998`, list `999999999999` e UUIDs de fields/options) são **placeholders**. Após rodar `setup-clickup.py` no seu próprio ClickUp, atualize estes valores pelos IDs reais do output do script.
+
 ## Workspace / Space / List
 
 | Recurso | ID | URL |
 |---|---|---|
-| Workspace (team) `Dati` | `90132741201` | — |
-| Space `Demo - Aurora` | `901313785931` | — |
-| **List `Onboarding TI`** | **`901327076204`** | https://app.clickup.com/90132741201/v/li/901327076204 |
+| Workspace (team) `Dati` | `9999999999` | — |
+| Space `Demo - Aurora` | `999999999998` | — |
+| **List `Onboarding TI`** | **`999999999999`** | https://app.clickup.com/9999999999/v/li/999999999999 |
 
 ## Custom fields da Onboarding TI
 
@@ -44,7 +46,7 @@ Passar como inteiro no value do custom field.
 
 ## Payload de exemplo — create task
 
-POST `https://api.clickup.com/api/v2/list/901327076204/task`
+POST `https://api.clickup.com/api/v2/list/999999999999/task`
 Header `Authorization: pk_111946197_...`
 
 ```json

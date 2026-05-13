@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # setup-aws.sh — uploada artefatos da Demo 04 Financeiro no bucket compartilhado
 #
-# Reusa o bucket criado pelo setup do Demo 01 (qx3vp-aurora-demo-913567437118)
+# Reusa o bucket criado pelo setup do Demo 01 (qx3vp-aurora-demo-123456789012)
 # e suas policies. Aqui apenas faz upload em financeiro/ prefix.
 #
 # Pré-requisitos:
@@ -15,7 +15,7 @@
 set -euo pipefail
 
 PROFILE="quick-dev"
-ACCOUNT_ID="913567437118"
+ACCOUNT_ID="123456789012"
 BUCKET="qx3vp-aurora-demo-${ACCOUNT_ID}"
 PREFIX="financeiro"
 

@@ -19,7 +19,7 @@ Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, h
 
 ## Pré-requisitos
 
-- 4 PDFs em `s3://qx3vp-aurora-demo-913567437118/rh/` (ver dados sintéticos)
+- 4 PDFs em `s3://qx3vp-aurora-demo-123456789012/rh/` (ver dados sintéticos)
 - Conta ClickUp com Workspace "Aurora Demo" e List "Onboarding TI" criada
 - Conector Slack ativo (do Demo 01) com canal `#rh-onboarding` criado
 - Gestor fictício: Bruno Vilardi — Slack handle `@bruno.vilardi`

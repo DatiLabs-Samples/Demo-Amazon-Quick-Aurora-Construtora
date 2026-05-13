@@ -2,7 +2,7 @@
 # setup-aws.sh — provisiona infraestrutura AWS para a Demo 01 Jurídico
 #
 # Cria (idempotente):
-#   - Bucket S3: qx3vp-aurora-demo-913567437118
+#   - Bucket S3: qx3vp-aurora-demo-123456789012
 #   - Bucket policy: leitura para o serviço Quick Suite
 #   - Encryption AES256 + Versioning + Public access block
 #   - Upload dos 3 PDFs em juridico/
@@ -19,7 +19,7 @@ set -euo pipefail
 
 # Configuração
 PROFILE="quick-dev"
-ACCOUNT_ID="913567437118"
+ACCOUNT_ID="123456789012"
 REGION="us-east-1"
 BUCKET="qx3vp-aurora-demo-${ACCOUNT_ID}"
 PREFIX="juridico"
