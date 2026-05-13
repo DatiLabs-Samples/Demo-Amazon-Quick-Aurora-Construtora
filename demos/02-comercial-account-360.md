@@ -12,7 +12,7 @@ VP de Vendas pergunta "quais deals do Q2 estão em risco e por quê?" e em segun
 
 ## Componentes Quick usados
 
-- **Quick Index** — HubSpot deals + companies (read via conector built-in)
+- **Knowledge Base** — HubSpot deals + companies (read via conector built-in)
 - **Custom Chat Agent** "Sales Copilot Aurora"
 - **Action Connector Slack** — alerta em canal de leadership
 - **Quick Flow** "Sales Risk Alert" — formata e posta resumo no Slack
@@ -22,7 +22,7 @@ VP de Vendas pergunta "quais deals do Q2 estão em risco e por quê?" e em segun
 | Critério | Vantagem |
 |---|---|
 | **Free Forever** | Sem trial, sem limite de tempo, usuários ilimitados, 1M contacts |
-| **Conector nativo Quick Suite** | Listado em [aws.amazon.com/quick/sales](https://aws.amazon.com/quick/sales/) |
+| **Conector nativo Amazon Quick** | Listado em [aws.amazon.com/quick/sales](https://aws.amazon.com/quick/sales/) |
 | **Visual Kanban Sales Pipeline** | Cards com avatar do owner, valor, stage — auditório acha mais bonito que Salesforce |
 | **Read robusto** | 6 ações nativas no Quick (`search_crm_objects`, `get_crm_objects`, `get_properties`, `search_owners`, `search_properties`, `get_user_details`) |
 | **Setup em 20 min** | Conta + 8 deals (importação CSV) + conector OAuth |
@@ -40,8 +40,8 @@ Em abril/2026 o conector built-in do Quick para HubSpot **expõe apenas leitura*
 - 8 deals + 8 companies importados
 - Custom properties em deal: `health_score`, `last_activity_days`, `sales_rep`
 - Custom properties em company: `csat_score`, `open_tickets`
-- Conector HubSpot conectado no Quick Suite (built-in, OAuth)
-- Conector Slack ativo no Quick Suite (já configurado no Demo 01)
+- Conector HubSpot conectado no Amazon Quick (built-in, OAuth)
+- Conector Slack ativo no Amazon Quick (já configurado no Demo 01)
 - Slack workspace com canal `#sales-leadership`
 
 ## Setup (1 vez antes do webinar)
@@ -57,9 +57,9 @@ python3 demos/02-comercial/scripts/setup-hubspot.py
 
 Verificar em **Sales → Deals → Board view**: 8 cards distribuídos pelos 5 stages, com 2 cards "feios" (Frigorífico Pampa e Indústria Cedrofino) chamando atenção pelo health score baixo.
 
-### 2. Conectar HubSpot no Quick Suite
+### 2. Conectar HubSpot no Amazon Quick
 
-1. Quick Suite → **Connectors** → procurar **HubSpot**
+1. Amazon Quick → **Connectors** → procurar **HubSpot**
 2. **Connect** (built-in connector) → OAuth com a conta HubSpot
 3. Aceitar todos os scopes oferecidos (vão ser de leitura)
 4. **Review actions**: confirmar que aparecem 6 ações read (`get_crm_objects`, `search_crm_objects`, `get_properties`, `search_owners`, `search_properties`, `get_user_details`)
@@ -69,7 +69,7 @@ Verificar em **Sales → Deals → Board view**: 8 cards distribuídos pelos 5 s
 
 ### 3. Slack já conectado
 
-Reuso do Demo 01. Confirmar no Quick Suite que `Aurora Demo Workspace` está conectado e `#sales-leadership` foi criado (`/create #sales-leadership` no Slack).
+Reuso do Demo 01. Confirmar no Amazon Quick que `Aurora Demo Workspace` está conectado e `#sales-leadership` foi criado (`/create #sales-leadership` no Slack).
 
 ### 4. Criar Custom Chat Agent "Sales Copilot Aurora"
 

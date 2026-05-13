@@ -14,7 +14,7 @@ Demo que prova ao cliente que **Quick faz raciocínio cross-silo** — não é s
 
 ## Componentes Quick usados (combina todos os anteriores)
 
-- **Quick Index** — HubSpot deals (Comercial Space) + Quick Sight dataset + PDFs ata/mercado (Financeiro Space)
+- **Knowledge Base** — HubSpot deals (Comercial Space) + Quick Sight dataset + PDFs ata/mercado (Financeiro Space)
 - **Quick Research** — habilitado pra cruzar contexto externo (relatório de mercado) com interno
 - **Custom Chat Agent** "Aurora Executive Copilot" com 2 Spaces como Knowledge
 - **Action Slack** — `send_message` em `#financeiro-leadership`
@@ -38,7 +38,7 @@ Verificar via HubSpot UI:
 
 ### 2. Criar (ou confirmar) Space "Comercial Aurora"
 
-Quick Suite → **Spaces** → **Create** (ou abrir existente):
+Amazon Quick → **Spaces** → **Create** (ou abrir existente):
 - Nome: `Comercial Aurora`
 - Knowledge sources:
   - HubSpot connector built-in (Demo 02 já configurou)

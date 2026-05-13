@@ -3,7 +3,7 @@
 #
 # Cria (idempotente):
 #   - Bucket S3: qx3vp-aurora-demo-123456789012
-#   - Bucket policy: leitura para o serviço Quick Suite
+#   - Bucket policy: leitura para o serviço Amazon Quick
 #   - Encryption AES256 + Versioning + Public access block
 #   - Upload dos 3 PDFs em juridico/
 #
@@ -87,14 +87,14 @@ aws s3api put-bucket-encryption \
     }'
 echo "   ✅ Criptografia habilitada"
 
-# 5. Bucket policy — template oficial Quick Suite (docs.aws.amazon.com/quick/latest/userguide/s3-admin-setup.html)
-echo "📜 Aplicando bucket policy para Quick Suite..."
+# 5. Bucket policy — template oficial Amazon Quick (docs.aws.amazon.com/quick/latest/userguide/s3-admin-setup.html)
+echo "📜 Aplicando bucket policy para Amazon Quick..."
 POLICY=$(cat <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "AllowQuickSuiteS3Access",
+      "Sid": "AllowAmazonQuickS3Access",
       "Effect": "Allow",
       "Principal": {
         "AWS": "arn:aws:iam::${ACCOUNT_ID}:role/service-role/aws-quicksight-service-role-v0"
@@ -122,7 +122,7 @@ aws s3api put-bucket-policy \
     --policy "${POLICY}"
 echo "   ✅ Bucket policy aplicada"
 
-# 5b. Inline policy no service role do Quick Suite (sem mexer em policies de outros times)
+# 5b. Inline policy no service role do Amazon Quick (sem mexer em policies de outros times)
 echo "🔧 Anexando inline policy AuroraDemoQuickAccess em aws-quicksight-service-role-v0..."
 ROLE_POLICY=$(cat <<EOF
 {
@@ -177,7 +177,7 @@ done
 echo ""
 echo "🎉 Setup AWS concluído!"
 echo ""
-echo "📍 URI para colar no Quick Suite Space (Knowledge → Add S3):"
+echo "📍 URI para colar no Amazon Quick Space (Knowledge → Add S3):"
 echo "   s3://${BUCKET}/${PREFIX}/"
 echo ""
 echo "📋 Arquivos no bucket:"

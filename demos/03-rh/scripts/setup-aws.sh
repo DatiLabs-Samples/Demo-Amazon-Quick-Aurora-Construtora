@@ -66,7 +66,7 @@ done
 echo ""
 echo "🎉 Upload concluído!"
 echo ""
-echo "📍 URI para colar no Quick Suite Space (Knowledge → Add S3):"
+echo "📍 URI para colar no Amazon Quick Space (Knowledge → Add S3):"
 echo "   s3://${BUCKET}/${PREFIX}/"
 echo ""
 echo "📋 Arquivos no bucket:"

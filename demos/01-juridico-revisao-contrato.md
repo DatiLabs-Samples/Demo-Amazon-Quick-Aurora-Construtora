@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-Advogado interno recebe um contrato novo. Em vez de ler 8 páginas, ele faz upload no Quick Suite, pergunta em linguagem natural sobre vigência, multas e riscos, e o agente entrega um **resumo executivo + flags de risco + post automático no canal do time jurídico no Slack** em 2 minutos.
+Advogado interno recebe um contrato novo. Em vez de ler 8 páginas, ele faz upload no Amazon Quick, pergunta em linguagem natural sobre vigência, multas e riscos, e o agente entrega um **resumo executivo + flags de risco + post automático no canal do time jurídico no Slack** em 2 minutos.
 
 ## Persona alvo
 
@@ -12,7 +12,7 @@ Advogado interno recebe um contrato novo. Em vez de ler 8 páginas, ele faz uplo
 
 ## Componentes Quick usados
 
-- **Quick Index** + **Space "Jurídico Aurora"**
+- **Knowledge Base** + **Space "Jurídico Aurora"**
 - **Custom Chat Agent** "Assistente Jurídico"
 - **Quick Flow** "Resumo Executivo de Contrato" (posta no canal Slack `#juridico-aurora`)
 

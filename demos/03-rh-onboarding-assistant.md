@@ -12,7 +12,7 @@ Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, h
 
 ## Componentes Quick usados
 
-- **Quick Index** + **Space "RH Aurora"**
+- **Knowledge Base** + **Space "RH Aurora"**
 - **Custom Chat Agent** "Assistente RH Aurora"
 - **Action Connectors:** ClickUp (task de equipamento) + Slack (alerta `#rh-onboarding`)
 - **Quick Flow** "Onboarding Equipamento" (orquestra ClickUp + Slack)
@@ -47,13 +47,13 @@ Funcionária novata abre o Quick chat no primeiro dia. Pergunta sobre férias, h
    - `Status` (Dropdown — Solicitado, Em Andamento, Entregue)
 5. Gerar **Personal Token** em ClickUp → Settings → Apps → Generate (guardar)
 
-### 3. Conectar ClickUp no Quick Suite
+### 3. Conectar ClickUp no Amazon Quick
 
 ClickUp não está na lista de conectores nativos. Usar uma das duas opções:
 
 **Opção A — MCP (recomendada)**
 
-1. Quick Suite → **Settings** → **Actions & Integrations** → **Add MCP server**
+1. Amazon Quick → **Settings** → **Actions & Integrations** → **Add MCP server**
 2. URL: `https://api.clickup.com/mcp` (ou self-hosted via [github.com/clickup/mcp-server-clickup](https://github.com/clickup/mcp-server-clickup) se preferir local)
 3. Auth: Personal Token gerado no passo 2.5
 4. Validar com prompt: `crie uma task na list Onboarding TI com título "teste"`
@@ -67,7 +67,7 @@ ClickUp não está na lista de conectores nativos. Usar uma das duas opções:
 
 ### 4. Conectar Slack (reuso do Demo 01)
 
-Confirmar no Quick Suite que `Aurora Demo Workspace` está conectado e `#rh-onboarding` foi criado (`/create #rh-onboarding` no Slack). Adicionar Bruno Vilardi (`@bruno.vilardi`) ao canal antes do webinar para o `@mention` resolver corretamente.
+Confirmar no Amazon Quick que `Aurora Demo Workspace` está conectado e `#rh-onboarding` foi criado (`/create #rh-onboarding` no Slack). Adicionar Bruno Vilardi (`@bruno.vilardi`) ao canal antes do webinar para o `@mention` resolver corretamente.
 
 ### 5. Criar Custom Chat Agent "Assistente RH Aurora"
 

@@ -1,6 +1,6 @@
 # Webinar — Amazon Quick para Áreas de Negócio
 
-Webinar de 45 minutos em PT-BR para usuários de negócio (não-técnicos) das áreas **Jurídico, Comercial, RH e Financeiro**, mostrando como o **Amazon Quick** (rebrand de Quick Suite, ex-QuickSight) atua como teammate agentic em tarefas do dia a dia.
+Webinar de 45 minutos em PT-BR para usuários de negócio (não-técnicos) das áreas **Jurídico, Comercial, RH e Financeiro**, mostrando como o **Amazon Quick** (anteriormente Quick Suite, originalmente QuickSight) atua como teammate agentic em tarefas do dia a dia.
 
 > **Setup para clonar este sample:** IDs específicos (AWS account, ClickUp workspace/space/list) foram substituídos por placeholders antes da publicação:
 > - AWS account `123456789012` — substituir pelo seu account ID em `demos/*/scripts/setup-aws.sh` e em manifests do Quick Sight
@@ -14,7 +14,7 @@ Workspace agentic da AWS lançado em out/2025. Cinco componentes:
 | Componente | Função | Exemplo de uso |
 |---|---|---|
 | **Quick Sight** | BI / dashboards (o antigo QuickSight) | Dashboard de orçado vs. realizado |
-| **Quick Index** | Indexação unificada de docs e dados | Manual do funcionário em PDF + dados Salesforce |
+| **Knowledge Base** | Indexação unificada de docs e dados | Manual do funcionário em PDF + dados Salesforce |
 | **Quick Research** | Agente de deep research com citações | "Por que a região Sul ficou abaixo do plano?" |
 | **Quick Flows** | Workflows agentic no-code | Agente de onboarding cria ticket Jira de equipamento |
 | **Quick Automate** | Automação multi-agente cross-departamental | Reconciliação automática de invoices SAP ↔ ServiceNow |
@@ -26,7 +26,7 @@ Conectores nativos: SharePoint, Google Drive, Salesforce, ServiceNow, Slack, Out
 ## Agenda — 45 min
 
 ```
-0:00–0:08  Abertura + visão geral Quick Suite (slides)
+0:00–0:08  Abertura + visão geral Amazon Quick (slides)
 0:08–0:13  Tour rápido da interface (live, 5 min)
 0:13–0:27  DEMO 1 (~14 min)
 0:27–0:41  DEMO 2 (~14 min)

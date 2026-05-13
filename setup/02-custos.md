@@ -122,7 +122,7 @@ Premissas para um cliente médio que adota a Demo X em produção:
 2. **Infra fee de $250/conta** é o item que pega cliente pequeno desprevenido. Vale destacar.
 3. **Research é o componente que mais gera overage** — explicar que é compute-intensivo.
 4. **Para demos com grande headcount (RH)**, padrão recomendado é licenciar autores + expor agente em canal corporativo (Slack/Teams) — reduz licenças.
-5. **Comparação com QuickSight standalone (legado):** QuickSight Reader era $5/usuário, Author $24. Quick Suite Professional ($20) é mais caro que Reader mas inclui Chat/Research/Flows que antes não existiam — argumento de valor agregado.
+5. **Comparação com QuickSight standalone (legado):** QuickSight Reader era $5/usuário, Author $24. Amazon Quick Professional ($20) é mais caro que Reader mas inclui Chat/Research/Flows que antes não existiam — argumento de valor agregado.
 
 ## Cálculo rápido de ROI (slide opcional)
 
@@ -130,6 +130,6 @@ Para a demo de RH (mais escalável):
 
 - Custo médio HR helpdesk no Brasil: R$ 12/atendimento
 - 800 funcionários × 1,5 atendimento/mês = 1.200 atendimentos/mês = R$ 14.400/mês
-- Quick Suite captura 50% (autoatendimento): economia R$ 7.200/mês
+- Amazon Quick captura 50% (autoatendimento): economia R$ 7.200/mês
 - Custo Quick (otimizado, 50 licenças + embed): R$ 6.250/mês
 - **Payback: imediato. Margem mensal: R$ 950 + tempo liberado do RH.**

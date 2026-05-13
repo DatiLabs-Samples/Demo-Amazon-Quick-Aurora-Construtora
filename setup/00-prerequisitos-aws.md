@@ -1,13 +1,13 @@
 # Setup AWS — pré-requisitos para gravar/apresentar as demos
 
-## 1. Ativação do Quick Suite
+## 1. Ativação do Amazon Quick
 
 1. Conta AWS com permissão de admin (ou ao menos `IAMFullAccess` + `quicksuite:*`).
-2. Console AWS → buscar **Amazon Quick Suite** → **Get Started**.
+2. Console AWS → buscar **Amazon Quick** → **Get Started**.
 3. Escolher plano **Enterprise** (USD 40/usuário/mês, ou trial 30 dias).
    - Enterprise é necessário para **Quick Automate authoring** e **autoria de Quick Sight**.
    - Trial: até 25 usuários, fee de infra (USD 250) é waived.
-4. Região: usar **us-east-1** ou **us-west-2** (todos os recursos disponíveis). **sa-east-1 ainda não tem Quick Suite completo** (verificar em [aws.amazon.com/quick/faqs](https://aws.amazon.com/quick/faqs/)).
+4. Região: usar **us-east-1** ou **us-west-2** (todos os recursos disponíveis). **sa-east-1 ainda não tem Amazon Quick completo** (verificar em [aws.amazon.com/quick/faqs](https://aws.amazon.com/quick/faqs/)).
 
 ## 2. Identidade (escolher uma)
 
@@ -19,9 +19,9 @@
 Para o webinar, **IAM Identity Center** dá uma demo mais convincente — usuários "fulano@empresa.com" em vez de IDs IAM.
 
 Setup mínimo:
-1. Habilitar IAM Identity Center na mesma região do Quick Suite.
+1. Habilitar IAM Identity Center na mesma região do Amazon Quick.
 2. Criar 4 usuários teste: `juridico-demo@`, `comercial-demo@`, `rh-demo@`, `financeiro-demo@`.
-3. Atribuir cada um a uma **Automation Group** correspondente no Quick Suite (isola dados por área).
+3. Atribuir cada um a uma **Automation Group** correspondente no Amazon Quick (isola dados por área).
 
 ## 3. Conectores necessários por demo
 
@@ -34,34 +34,34 @@ Setup mínimo:
 
 ### Como adicionar conector S3 (todas as demos precisam)
 
-1. Quick Suite → **Data sources** → **Add data source** → **Amazon S3**.
+1. Amazon Quick → **Data sources** → **Add data source** → **Amazon S3**.
 2. Apontar para o bucket `quick-demo-{area}-{conta}` (criar um por área).
 3. IAM role: o wizard cria automaticamente; revisar policy pra dar `s3:GetObject` apenas no bucket específico.
 
 ### Conector HubSpot (Demo 02)
 
-HubSpot é **conector nativo** do Quick Suite:
+HubSpot é **conector nativo** do Amazon Quick:
 
-1. Criar conta HubSpot Free em [free.hubspot.com](https://free.hubspot.com)
+1. Criar conta HubSpot Free em [[br.hubspot.com](https://br.hubspot.com/)]
 2. Customizar pipeline (renomear stages para Discovery, Qualification, Proposal, Negotiation, Closed Won)
 3. Criar custom properties: `Health Score` (deal), `Last Activity Days` (deal), `CSAT Score` (company), `Open Tickets` (company)
 4. Importar 8 deals + 8 companies (CSVs em [01-dados-sinteticos.md](01-dados-sinteticos.md))
-5. Quick Suite → **Actions & Integrations** → **HubSpot** → **Connect**
+5. Amazon Quick → **Actions & Integrations** → **HubSpot** → **Connect**
 6. OAuth com escopos: `crm.objects.deals.read/write`, `crm.objects.companies.read/write`, `crm.engagements.notes.write`, `crm.engagements.tasks.write`
 
 ### Conector ClickUp (Demo 03)
 
-ClickUp **não está na lista de conectores nativos** do Quick Suite. Duas opções:
+ClickUp **não está na lista de conectores nativos** do Amazon Quick. Duas opções:
 
-**Opção A — MCP (recomendada)**
+**Opção A — MCP**
 
 1. Gerar Personal Token em ClickUp → Settings → Apps → **Generate**
-2. Quick Suite → **Settings** → **Actions & Integrations** → **Add MCP server**
+2. Amazon Quick → **Settings** → **Actions & Integrations** → **Add MCP server**
 3. URL: `https://api.clickup.com/mcp` (ou self-hosted via [github.com/clickup/mcp-server-clickup](https://github.com/clickup/mcp-server-clickup))
 4. Auth: Personal Token
 5. Testar com prompt: `liste as tasks da list Onboarding TI`
 
-**Opção B — Custom OpenAPI connector**
+**Opção B — Custom OpenAPI connector (recomendada)**
 
 1. Baixar spec OpenAPI da [ClickUp API v2](https://clickup.com/api)
 2. **Actions & Integrations** → **Custom action** → upload spec

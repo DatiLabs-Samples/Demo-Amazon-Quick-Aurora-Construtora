@@ -13,7 +13,7 @@ Controller pergunta "como fechou o Q1?" e em 3 minutos tem: dashboard de orçado
 ## Componentes Quick usados (cobre os 5)
 
 - **Quick Sight** — dashboard budget vs. actual
-- **Quick Index** — CSVs + PDFs de mercado e ata
+- **Knowledge Base** — CSVs + PDFs de mercado e ata
 - **Quick Research** — agente que explica desvios citando fontes
 - **Custom Chat Agent** "FP&A Copilot Aurora"
 - **Quick Flow** "Variance Brief Semanal" — alerta Slack `#financeiro-leadership`

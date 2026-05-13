@@ -302,7 +302,7 @@ def main():
     print()
 
     print("🎉 Setup concluído!\n")
-    print("📍 Para usar nos próximos passos (Quick Suite Flow):")
+    print("📍 Para usar nos próximos passos (Amazon Quick Flow):")
     print(f"   Workspace ID:  {team['id']}")
     print(f"   Space ID:      {space['id']}")
     print(f"   List ID:       {list_id}")

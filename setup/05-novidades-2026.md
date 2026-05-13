@@ -81,7 +81,7 @@ Quick chat invoca agentes especializados de Box, Canva, PagerDuty.
 
 **Impacto:** Q&A — "agente de Canva pra gerar slide do resumo executivo direto da conversa".
 
-## 09/10/2025 — Rebrand QuickSight → Quick Suite
+## 09/10/2025 — Rebrand QuickSight → Amazon Quick
 
 Lançamento da família agentic. Histórico — base do que estamos demonstrando.
 

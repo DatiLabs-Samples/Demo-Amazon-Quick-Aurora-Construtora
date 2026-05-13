@@ -62,7 +62,7 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
   aws sts get-caller-identity --profile quick-dev
   ```
   Esperado: `"Account": "123456789012"`
-- [ ] Validar Quick Suite ativo
+- [ ] Validar Amazon Quick ativo
   ```bash
   aws quicksight describe-account-subscription \
       --aws-account-id 123456789012 \
@@ -85,7 +85,7 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 
 ---
 
-## D-3 — Setup Quick Suite (~30 min)
+## D-3 — Setup Amazon Quick (~30 min)
 
 ### Login
 
@@ -134,12 +134,12 @@ Lista cronometrada da preparação até o webinar. Marque cada item ao concluir.
 
 ### Conector Slack
 
-- [ ] Quick Suite → **Integrations** → aba **Actions** → **Slack** → **Connect**
+- [ ] Amazon Quick → **Integrations** → aba **Actions** → **Slack** → **Connect**
 - [ ] Browser abre página do Slack → escolher workspace `aurora-construtora-demo`
-- [ ] Autorizar app Quick Suite (permissões: postar em canais, ler workspace)
-- [ ] Voltar ao Quick Suite, confirmar status `Connected`
+- [ ] Autorizar app Amazon Quick (permissões: postar em canais, ler workspace)
+- [ ] Voltar ao Amazon Quick, confirmar status `Connected`
 - [ ] No Agent `Assistente Jurídico Aurora` → **Actions** → habilitar Slack
-- [ ] Convidar o bot Quick Suite no canal `#juridico-aurora` (no Slack: `/invite @Quick`)
+- [ ] Convidar o bot Amazon Quick no canal `#juridico-aurora` (no Slack: `/invite @Quick`)
 
 ### Quick Flow
 
@@ -246,7 +246,7 @@ Se o agente não pegar a Cláusula 12:
 
 ### Pré-aquecimento (30 min antes)
 
-- [ ] Login no Quick Suite em janela anônima
+- [ ] Login no Amazon Quick em janela anônima
 - [ ] Pré-abrir abas:
   - Tab 1: Quick chat com agente `Assistente Jurídico Aurora`
   - Tab 2: Slack workspace `aurora-construtora-demo` no canal `#juridico-aurora`

@@ -2,11 +2,11 @@
 
 ## Conceito-chave: dois tipos de conector
 
-O Quick Suite distingue duas categorias:
+O Amazon Quick distingue duas categorias:
 
 | Tipo | Função | Exemplos |
 |---|---|---|
-| **Knowledge sources** | Indexar conteúdo no Quick Index para o agente *ler* e responder | S3, SharePoint, Google Drive, Confluence, Notion, HubSpot |
+| **Knowledge sources** | Indexar conteúdo no Knowledge Base para o agente *ler* e responder | S3, SharePoint, Google Drive, Confluence, Notion, HubSpot |
 | **Action connectors** | Permitir o agente *executar* ações em sistemas externos | Outlook, HubSpot, Slack, ServiceNow, ClickUp |
 
 Vários conectores são **dual-purpose** (lêem e escrevem), ex.: ClickUp, ServiceNow, SharePoint.
@@ -33,7 +33,7 @@ Vários conectores são **dual-purpose** (lêem e escrevem), ex.: ClickUp, Servi
 | Integração | Para quê | Permissões |
 |---|---|---|
 | **S3** | Armazenar PDFs de contratos | IAM role com `s3:GetObject` no bucket |
-| **IAM Identity Center** | Login do usuário `juridico-demo@` | Permission set Quick Suite |
+| **IAM Identity Center** | Login do usuário `juridico-demo@` | Permission set Amazon Quick |
 
 ### Usadas no roteiro
 
@@ -77,7 +77,7 @@ Vários conectores são **dual-purpose** (lêem e escrevem), ex.: ClickUp, Servi
 
 ### HubSpot é conector nativo
 
-Sem MCP, sem OpenAPI custom — listado em [aws.amazon.com/quick/sales](https://aws.amazon.com/quick/sales/) ao lado de Salesforce. Setup é OAuth direto no Quick Suite.
+Sem MCP, sem OpenAPI custom — listado em [aws.amazon.com/quick/sales](https://aws.amazon.com/quick/sales/) ao lado de Salesforce. Setup é OAuth direto no Amazon Quick.
 
 ### Alternativas
 
@@ -94,7 +94,7 @@ Sem MCP, sem OpenAPI custom — listado em [aws.amazon.com/quick/sales](https://
 1. Conta HubSpot Free (10 min — só email, sem cartão)
 2. Customizar pipeline (5 stages) + criar 4 custom properties (5 min)
 3. Importar 8 deals + 8 companies via CSV (5 min)
-4. Conectar HubSpot no Quick Suite via OAuth (5 min)
+4. Conectar HubSpot no Amazon Quick via OAuth (5 min)
 5. Slack workspace com canal `#sales-alerts`
 6. Dashboard Quick Sight via NL prompt
 
@@ -183,7 +183,7 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 
 - **Repositórios de arquivo:** Amazon S3, SharePoint Online, OneDrive, Google Drive, Box, Dropbox Business
 - **Wikis:** Confluence, Notion, Coda, Quip
-- **Comunicação:** Outlook, Outlook, Slack, Teams (mensagens indexáveis)
+- **Comunicação:** Outlook, Slack, Teams (mensagens indexáveis)
 - **CRM/ERP:** Salesforce, HubSpot, Dynamics 365, SAP, ServiceNow, Workday
 - **Data warehouses:** Redshift, Snowflake, Databricks, BigQuery
 - **Marketing/Analytics:** Adobe Analytics, Google Analytics
@@ -192,7 +192,7 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 ### Action connectors
 
 - **Tickets/PM:** ServiceNow, Asana, Linear, Monday, Jira Cloud (nativo) | ClickUp (via MCP)
-- **Email:** Outlook, Outlook
+- **Email:** Outlook
 - **Mensageria:** Slack, Teams, Webex
 - **CRM (write):** Salesforce, HubSpot, Pipedrive
 - **HR:** Workday, BambooHR, ADP
@@ -224,7 +224,7 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 - [ ] OAuth Outlook autorizado e testado (enviar email manualmente via Quick chat)
 - [ ] OAuth Slack autorizado e bot adicionado nos canais
 - [ ] HubSpot configurado com pipeline + custom properties + 8 deals/companies importados
-- [ ] OAuth HubSpot autorizado no Quick Suite e custom properties visíveis no agente
+- [ ] OAuth HubSpot autorizado no Amazon Quick e custom properties visíveis no agente
 - [ ] ClickUp Workspace + List "Onboarding TI" configurada
 - [ ] Personal Token ClickUp gerado
 - [ ] Conector ClickUp (MCP ou OpenAPI) testado com criação de task de teste
@@ -246,19 +246,19 @@ Personal Token **não expira automaticamente**, mas é revogado se a senha do us
 
 ```
 Demo 01 — Jurídico
-S3 (PDFs) ──► Quick Index ──► Chat Agent ──► Quick Flow ──► Outlook
+S3 (PDFs) ──► Knowledge Base ──► Chat Agent ──► Quick Flow ──► Outlook
 
 Demo 02 — Comercial (HubSpot CRM real)
-HubSpot (deals+companies) ──► Quick Index ──► Chat Agent ──► Quick Flow ──┬─► HubSpot (note + task + property)
+HubSpot (deals+companies) ──► Knowledge Base ──► Chat Agent ──► Quick Flow ──┬─► HubSpot (note + task + property)
 S3 snapshot (opcional) ──► Quick Sight ──┘                                  ├─► Outlook
                                                                               └─► Slack
 
 Demo 03 — RH
-S3 (PDFs) ──► Quick Index ──► Chat Agent ──► Quick Flow ──┬─► ClickUp (criar task)
+S3 (PDFs) ──► Knowledge Base ──► Chat Agent ──► Quick Flow ──┬─► ClickUp (criar task)
                                                             └─► Outlook
 
 Demo 04 — Financeiro
-S3 (CSVs+PDFs) ──► Quick Sight + Quick Index ──► Chat Agent ──┬─► Quick Research
+S3 (CSVs+PDFs) ──► Quick Sight + Knowledge Base ──► Chat Agent ──┬─► Quick Research
                                                                 ├─► Quick Flow ──► Outlook
                                                                 └─► Quick Flow ──► Slack
 ```
